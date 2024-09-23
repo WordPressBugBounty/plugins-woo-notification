@@ -1,0 +1,1042 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Notification Premium\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-07 04:58+0000\n"
+"PO-Revision-Date: 2022-09-12 10:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: Tiếng Việt\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.2; wp-6.0.2"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:893
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1112
+msgid "a few seconds"
+msgstr "vài giây"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1001
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1103
+msgid "About"
+msgstr "Về"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1680
+msgid "Add New"
+msgstr "Thêm Mới"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:760
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1001
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1104
+msgid "ago"
+msgstr "trước đó"
+
+#. Author of the plugin
+msgid "Andy Ha (villatheme.com)"
+msgstr "Andy Ha (villatheme.com)"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:319
+msgid "Assign"
+msgstr "Chỉ định"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:764
+msgid "Auto Detect"
+msgstr "Tự Động Tìm Kiếm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1008
+msgid "Background color"
+msgstr "Màu nền"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1094
+msgid "Bottom left"
+msgstr "Dưới trái"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1107
+msgid "Bottom right"
+msgstr "Dưới phải"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1259
+msgid "bounceIn"
+msgstr "bounceIn"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1261
+msgid "bounceInDown"
+msgstr "bounceInDown"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1263
+msgid "bounceInLeft"
+msgstr "bounceInLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1265
+msgid "bounceInRight"
+msgstr "bounceInRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1267
+msgid "bounceInUp"
+msgstr "bounceInUp"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1352
+msgid "bounceOut"
+msgstr "bounceOut"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1354
+msgid "bounceOutDown"
+msgstr "bounceOutDown"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1356
+msgid "bounceOutLeft"
+msgstr "bounceOutLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1358
+msgid "bounceOutRight"
+msgstr "bounceOutRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1360
+msgid "bounceOutUp"
+msgstr "bounceOutUp"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1832
+msgid "Cart page"
+msgstr "Trang Giỏ hàng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1822
+msgid "Checkout page"
+msgstr "Trang Thanh toán"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1202
+msgid "Close icon color"
+msgstr "Màu biểu tượng Đóng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1842
+msgid "Conditional Tags"
+msgstr "Thẻ Điều Kiện"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:951
+msgid "Current product"
+msgstr "Sản phẩm hiện tại"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1721
+msgid "Custom"
+msgstr "Tùy chỉnh"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1436
+msgid "Custom CSS"
+msgstr "CSS tùy chỉnh"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1157
+msgid "Custom Rounded corner"
+msgstr "Tùy chỉnh góc tròn"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1689
+msgid "Customer's city"
+msgstr "Địa chỉ thành phố khách hàng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1697
+msgid "Customer's country"
+msgstr "Quốc gia của khách hàng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1685
+msgid "Customer's first name"
+msgstr "Tên khách hàng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1693
+msgid "Customer's state"
+msgstr "Bang của khách hàng"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:869
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1105
+msgid "day"
+msgstr "ngày"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:597
+msgid "Days"
+msgstr "Ngày"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:867
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1106
+msgid "days"
+msgstr "ngày"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:301
+msgid "Design"
+msgstr "Thiết kế"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1557
+msgid "Display time"
+msgstr "Thời gian hiển thị"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:332
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1575
+msgid "Enable"
+msgstr "Bật"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:444
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:510
+msgid "Exclude Products"
+msgstr "Loại Trừ Sản Phẩm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:567
+msgid "External link"
+msgstr "Liên kết bên ngoài"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1271
+msgid "fadeIn"
+msgstr "fadeIn"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1273
+msgid "fadeInDown"
+msgstr "fadeInDown"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1275
+msgid "fadeInDownBig"
+msgstr "fadeInDownBig"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1277
+msgid "fadeInLeft"
+msgstr "fadeInLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1279
+msgid "fadeInLeftBig"
+msgstr "fadeInLeftBig"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1281
+msgid "fadeInRight"
+msgstr "fadeInRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1283
+msgid "fadeInRightBig"
+msgstr "fadeInRightBig"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1285
+msgid "fadeInUp"
+msgstr "fadeInUp"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1287
+msgid "fadeInUpBig"
+msgstr "fadeInUpBig"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1364
+msgid "fadeOut"
+msgstr "fadeOut"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1366
+msgid "fadeOutDown"
+msgstr "fadeOutDown"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1368
+msgid "fadeOutDownBig"
+msgstr "fadeOutDownBig"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1370
+msgid "fadeOutLeft"
+msgstr "fadeOutLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1372
+msgid "fadeOutLeftBig"
+msgstr "fadeOutLeftBig"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1374
+msgid "fadeOutRight"
+msgstr "fadeOutRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1376
+msgid "fadeOutRightBig"
+msgstr "fadeOutRightBig"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1378
+msgid "fadeOutUp"
+msgstr "fadeOutUp"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1380
+msgid "fadeOutUpBig"
+msgstr "fadeOutUpBig"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1291
+msgid "flipInX"
+msgstr "flipInX"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1293
+msgid "flipInY"
+msgstr "flipInY"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1384
+msgid "flipOutX"
+msgstr "flipOutX"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1386
+msgid "flipOutY"
+msgstr "flipOutY"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1024
+msgid "Gap between product image and notification's border"
+msgstr "Khoảng cách giữa ảnh sản phẩm và viền thông báo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:298
+msgid "General"
+msgstr "Chung"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:379
+msgid "Get from Billing"
+msgstr "Lấy từ Thanh Toán"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:985
+msgid "Highlight color"
+msgstr "Màu nổi bật"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1870
+msgid "History time"
+msgstr "Thời hạn lưu"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1812
+msgid "Home page"
+msgstr "Trang chủ"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:878
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1107
+msgid "hour"
+msgstr "giờ"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:595
+msgid "Hours"
+msgstr "Giờ"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:752
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1195
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:876
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1108
+msgid "hours"
+msgstr "giờ"
+
+#. Author URI of the plugin
+msgid "http://villatheme.com"
+msgstr "http://villatheme.com"
+
+#. URI of the plugin
+msgid "https://villatheme.com/extensions/woocommerce-notification-boost-sales/"
+msgstr ""
+"https://villatheme.com/extensions/woocommerce-notification-boost-sales/"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1019
+msgid "Image padding"
+msgstr "Lề trong (Padding) ảnh"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1066
+msgid "Image Position"
+msgstr "Vị trí ảnh"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1215
+msgid "Image redirect"
+msgstr "Chuyển hướng ảnh"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:901
+msgid "Image size will get form your WordPress site."
+msgstr "Kích thước ảnh sẽ được lấy từ website WordPress."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:956
+msgid ""
+"In product single page, Notification can only display current product or "
+"other products in the same category."
+msgstr ""
+"Trên trang sản phẩm, thông báo chỉ hiển thị sản phẩm hiện tại hoặc các sản "
+"phẩm trong cùng danh mục."
+
+#. Description of the plugin
+msgid ""
+"Increase conversion rate by highlighting other customers that have bought "
+"products."
+msgstr ""
+"Khuyến khích mua hàng bằng cách làm nổi bật những khách hàng đã mua sản phẩm."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1546
+msgid "Initial delay"
+msgstr "Thời gian trì hoãn"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1526
+msgid "Initial time random"
+msgstr "Thời gian khởi tạo ngẫu nhiên"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1531
+msgid "Initial time will be random from 0 to current value."
+msgstr "Thời gian khởi tạo được lấy ngẫu nhiên từ 0 đến giá trị hiện tại."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:383
+msgid "Latest Products"
+msgstr "Sản Phẩm Mới Nhất"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1072
+msgid "Left"
+msgstr "Trái"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1848
+msgid "Let you adjust which pages will appear using WP's conditional tags."
+msgstr ""
+"Cho phép chỉ định trang nào được hiển thị thông báo bằng cách dùng thẻ điều "
+"kiện của WordPress. "
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1297
+msgid "lightSpeedIn"
+msgstr "lightSpeedIn"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1390
+msgid "lightSpeedOut"
+msgstr "lightSpeedOut"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1232
+msgid "Link target"
+msgstr "Mục tiêu liên kết"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:916
+msgid ""
+"Load popup will not use ajax. Your site will be load faster. It creates "
+"cache. It is not working with Get product from Billing feature and options "
+"of Product detail tab."
+msgstr ""
+"Tải popup không dùng đến ajax. Trang web được tải nhanh hơn và tạo bộ nhớ "
+"đệm. Hiện tại không hoạt động với tính năng Lấy sản phẩm từ Thanh toán và "
+"các tùy chọn trong thẻ Chi tiết sản phẩm."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1496
+msgid "Loop"
+msgstr "Vòng lặp"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1792
+msgid "Max number"
+msgstr "Giá trị Tối Đa"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/system.php:70
+msgid "Memory Limit"
+msgstr "Giới Hạn Bộ Nhớ"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1250
+msgid "Message display effect"
+msgstr "Hiệu ứng hiển thị nội dung"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1343
+msgid "Message hidden effect"
+msgstr "Hiệu ứng ẩn nội dung"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1603
+msgid "Message purchased"
+msgstr "Nội dung thông báo đã mua"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1152
+msgid "Message will be rounded and product image is round instead of square"
+msgstr ""
+"Nội dung thông báo sẽ được làm tròn và ảnh sản phẩm hình tròn thay vì hình "
+"vuông"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:304
+msgid "Messages"
+msgstr "Nội dung thông báo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1782
+msgid "Min Number"
+msgstr "Giá trị Tối Thiểu"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1536
+msgid "Minimum initial delay time"
+msgstr "Thời gian trì hoãn tối thiểu"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:887
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1109
+msgid "minute"
+msgstr "phút"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:599
+msgid "Minutes"
+msgstr "Phút"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:885
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1110
+msgid "minutes"
+msgstr "phút"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:348
+msgid "Mobile"
+msgstr "Điện thoại"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1505
+msgid "Next time display"
+msgstr "Thời gian hiển thị tiếp theo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:906
+msgid "Non Ajax"
+msgstr "Không Ajax"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1039
+msgid "None"
+msgstr "Không có"
+
+#. Name of the plugin
+#: D:/git/free-version/woo-notification/woo-notification/admin/admin.php:201
+msgid "Notification for WooCommerce"
+msgstr "Notification for WooCommerce"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/report.php:23
+msgid "Notification for WooCommerce Reporting"
+msgstr "Báo Cáo Notification for WooCommerce"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:292
+msgid "Notification for WooCommerce Settings"
+msgstr "Cài Đặt Notification for WooCommerce"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1515
+#| msgid "Notifications per page"
+msgid "Notification per page"
+msgstr "Notification per page"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:944
+msgid "Notification show"
+msgstr "Thông báo hiển thị"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:939
+msgid ""
+"Notification will only display current product in product detail page that "
+"they are viewing."
+msgstr ""
+"Thông báo chỉ hiển thị với sản phẩm hiện tại trên trang chi tiết sản phẩm mà "
+"khách hàng đang xem."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:359
+msgid "Notification will show on mobile and responsive."
+msgstr "Thông báo được hiển thị trên điện thoại."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1521
+msgid "Number of notifications on a page."
+msgstr "Số lượng thông báo trên một trang."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1799
+msgid "Number will random from Min number to Max number"
+msgstr ""
+"Giá trị shortcode {number} sẽ lấy ngẫu nhiên từ Giá trị Tối Thiểu tới Giá "
+"trị Tối Đa"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1243
+msgid "Open link on new tab."
+msgstr "Mở liên kết trong thẻ mới."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:608
+msgid "Order Status"
+msgstr "Trạng Thái Đơn Hàng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:582
+msgid "Order Time"
+msgstr "Thời Gian Đặt Hàng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:395
+msgid "Out-of-stock products"
+msgstr "Sản phẩm hết hàng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/system.php:65
+msgid "PHP Max Input Vars"
+msgstr "PHP Max Input Vars"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/system.php:61
+msgid "PHP Time Limit"
+msgstr "PHP Time Limit"
+
+#: D:/git/free-version/woo-notification/woo-notification/woo-notification.php:49
+msgid ""
+"Please install and activate WooCommerce to use Notification for WooCommerce "
+"plugin."
+msgstr ""
+"Vui lòng cài đặt và kích hoạt WooCommerce để sử dụng Notification for "
+"WooCommerce."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:419
+msgid "Please select category"
+msgstr "Vui lòng chọn danh mục"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:451
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:517
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:641
+msgid "Please select products"
+msgstr "Vui lòng chọn sản phẩm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1590
+msgid "Please select sound. Notification rings when show."
+msgstr "Vui lòng chọn âm thanh. Thông báo sẽ đổ chuông khi hiển thị. "
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1080
+msgid "Position"
+msgstr "Vị trí"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:310
+msgid "Product Detail"
+msgstr "Chi tiết sản phẩm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:883
+msgid "Product image size"
+msgstr "Kích cỡ ảnh sản phẩm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:499
+msgid "Product limit"
+msgstr "Giới hạn sản phẩm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:505
+msgid "Product quantity will be got in list latest products."
+msgstr "Số lượng sản phẩm sẽ được lấy từ danh sách sản phẩm mới nhât."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1701
+msgid "Product title"
+msgstr "Tiêu đề sản phẩm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1705
+msgid "Product title with link"
+msgstr "Tiêu đề sản phẩm có liên kết"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:307
+msgid "Products"
+msgstr "Sản phẩm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:953
+msgid "Products in the same category"
+msgstr "Sản phẩm trong cùng danh mục"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:603
+msgid "Products in this recently time will get from order.  "
+msgstr "Sản phẩm trong khoảng thời gian này sẽ lấy từ đơn hàng. "
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1164
+msgid "px"
+msgstr "px"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:387
+#| msgid "Recently Viewed Products"
+msgid "Recent Viewed Products"
+msgstr "Sản Phẩm Được Xem Gần Đây"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1673
+msgid "Remove"
+msgstr "Xóa"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/report.php:33 
+#: D:/git/free-version/woo-notification/woo-notification/admin/report.php:34 
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:322
+msgid "Report"
+msgstr "Báo cáo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1074
+msgid "Right"
+msgstr "Phải"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1335
+msgid "rollIn"
+msgstr "rollIn"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1428
+msgid "rollOut"
+msgstr "rollOut"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1301
+msgid "rotateIn"
+msgstr "rotateIn"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1303
+msgid "rotateInDownLeft"
+msgstr "rotateInDownLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1305
+msgid "rotateInDownRight"
+msgstr "rotateInDownRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1307
+msgid "rotateInUpLeft"
+msgstr "rotateInUpLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1309
+msgid "rotateInUpRight"
+msgstr "rotateInUpRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1394
+msgid "rotateOut"
+msgstr "rotateOut"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1396
+msgid "rotateOutDownLeft"
+msgstr "rotateOutDownLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1398
+msgid "rotateOutDownRight"
+msgstr "rotateOutDownRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1400
+msgid "rotateOutUpLeft"
+msgstr "rotateOutUpLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1402
+msgid "rotateOutUpRight"
+msgstr "rotateOutUpRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1141
+msgid "Rounded corner style"
+msgstr "Kiểu làm tròn góc"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:929
+msgid "Run single product"
+msgstr "Sản phẩm đơn lẻ"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1883
+msgid "Save"
+msgstr "Lưu"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1861
+msgid "Save Logs"
+msgstr "Lưu Ghi Chép"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:890
+msgid "seconds"
+msgstr "giây"
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1111
+msgid "secs"
+msgstr "giây"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:385
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:411
+msgid "Select Categories"
+msgstr "Chọn Danh Mục"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:381
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:633
+msgid "Select Products"
+msgstr "Chọn Sản Phẩm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/admin.php:148
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:894
+msgid "shop_catalog"
+msgstr "shop_catalog"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:897
+msgid "shop_single"
+msgstr "shop_single"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:891
+msgid "shop_thumbnail"
+msgstr "shop_thumbnail"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1173
+msgid "Show Close Icon"
+msgstr "Hiển thị biểu tượng Đóng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:373
+msgid "Show Products"
+msgstr "Hiện Sản Phẩm"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:961
+msgid "Show variation"
+msgstr "Hiện biến thể"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:971
+msgid "Show variation instead of product variable."
+msgstr "Hiện biến thể thay vì sản phẩm biến thể."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1315
+msgid "slideInDown"
+msgstr "slideInDown"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1317
+msgid "slideInLeft"
+msgstr "slideInLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1319
+msgid "slideInRight"
+msgstr "slideInRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1313
+msgid "slideInUp"
+msgstr "slideInUp"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1408
+msgid "slideOutDown"
+msgstr "slideOutDown"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1410
+msgid "slideOutLeft"
+msgstr "slideOutLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1412
+msgid "slideOutRight"
+msgstr "slideOutRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1406
+msgid "slideOutUp"
+msgstr "slideOutUp"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:316
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1584
+msgid "Sound"
+msgstr "Âm thanh"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/system.php:19 
+#: D:/git/free-version/woo-notification/woo-notification/admin/system.php:85 
+#: D:/git/free-version/woo-notification/woo-notification/admin/system.php:86
+msgid "System Status"
+msgstr "Trạng Thái Hệ Thống"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1029
+msgid "Templates"
+msgstr "Mẫu"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:996
+msgid "Text color"
+msgstr "Màu chữ"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:494
+msgid "These products will not display on notification."
+msgstr "Những sản phẩm này sẽ không được hiển thị trong thông báo."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:562
+msgid "These products will not show on notification."
+msgstr "Những sản phẩm này sẽ không hiện trong thông báo."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1729
+msgid "This is {custom} shortcode content."
+msgstr "Đây là nội dung của shortcode {custom}."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1167
+msgid "This option is used only if you do not select any background templates"
+msgstr "Tùy chọn này chỉ được sử dụng nếu không có mẫu nền nào được chọn"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:313
+msgid "Time"
+msgstr "Thời gian"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1709
+msgid "Time after purchase"
+msgstr "Thời gian sau khi mua"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1188
+msgid "Time close"
+msgstr "Thời gian đóng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1510
+msgid "Time to show next notification "
+msgstr "Thời gian hiện thông báo tiếp theo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:755
+msgid "Time will auto get random in this time threshold ago."
+msgstr ""
+"Tự động lấy khoảng thời gian khách mua hàng trước bao lâu trong ngưỡng này. "
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1541
+msgid "Time will be random from Initial delay time min to Initial time."
+msgstr ""
+"Lấy ngẫu nhiên giá trị từ thời gian trì hoãn tối thiểu tới thời gian khởi "
+"tạo."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1562
+msgid "Time your notification display."
+msgstr "Thời gian thông báo được hiển thị."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1119
+msgid "Top left"
+msgstr "Trên trái"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1131
+msgid "Top right"
+msgstr "Trên phải"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1837
+#| msgid "Turn on to hide notification on Cart page"
+msgid "Turn on is hidden notification on Cart page"
+msgstr "Bật để ẩn thông báo trên trang Giỏ hàng"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1827
+#| msgid "Turn on to hide notification on Checkout page"
+msgid "Turn on is hidden notification on Checkout page"
+msgstr "Bật để ẩn thông báo trên trang Thanh toán"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1817
+#| msgid "Turn on to hide notification on Home page"
+msgid "Turn on is hidden notification on Home page"
+msgstr "Bật để ẩn thông báo trên Trang chủ"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:405
+msgid "Turn on to show out-of-stock products on notifications."
+msgstr "Bật để hiện sản phẩm hết hàng trên thông báo."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/report.php:24 
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:439
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:503
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:685
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1500
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1509
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1519
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1530
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1540
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1550
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1561
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1579
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1588
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1816
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1826
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1836
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1846
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1865
+#:  
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1874
+msgid "Update This Feature"
+msgstr "Cập Nhật Tính Năng Này"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1713
+msgid "Use custom shortcode"
+msgstr "Dùng shortcode tùy chỉnh"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:766
+msgid "Virtual"
+msgstr "Ảo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:774
+msgid "Virtual City"
+msgstr "Thành Phố Ảo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:782
+msgid ""
+"Virtual city name what will show on notification. Each city name on a line."
+msgstr "Tên thành phố ảo được hiển thị trên thông báo. Mỗi tên trên một dòng."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:829
+msgid "Virtual Country"
+msgstr "Quốc Gia Ảo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:835
+msgid "Virtual country name what will show on notification."
+msgstr "Tên quốc gia ảo được hiển thị trên thông báo."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:690
+msgid "Virtual First Name"
+msgstr "Tên Ảo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:699
+msgid ""
+"Virtual first name what will show on notification. Each first name on a line."
+msgstr "Tên khách hàng ảo được hiển thị trên thông báo. Mỗi tên trên một dòng."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:746
+msgid "Virtual Time"
+msgstr "Thời gian Ảo"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1226
+msgid "When click image, you will redirect to product single page."
+msgstr "Chuyển hướng đến trang sản phẩm khi ấn vào ảnh."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1551
+msgid "When your site loads, notifications will show after this amount of time"
+msgstr "Khi tải trang, thông báo sẽ hiện sau khoảng thời gian này."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/admin.php:201
+msgid "Woo Notification"
+msgstr "Woo Notification"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:577
+msgid "Working with  External/Affiliate product. Product link is product URL."
+msgstr ""
+"Hoạt động với sản phẩm Bên ngoài/Liên kết. Liên kết của sản phẩm là URL của "
+"sản phẩm."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:390
+msgid ""
+"You can arrange product order or special product which you want to up-sell."
+msgstr ""
+"Bạn có thể sắp xếp thứ tự sản phẩm hoặc sản phẩm đặc biệt mà bạn muốn bán "
+"thêm."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:769
+msgid "You can use auto detect address or make virtual address of customer."
+msgstr "Có thể tự động tìm kiếm địa chỉ hoặc thêm địa chỉ khách hàng ảo."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:437
+msgid "You only select 2 categories. Please upgrade to unlock unlimited."
+msgstr ""
+"Chỉ được chọn 2 danh mục sản phẩm. Vui lòng nâng cấp để mở khóa không giới "
+"hạn danh mục."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:683
+msgid "You only select 2 products. Please upgrade to unlock unlimited."
+msgstr ""
+"Chỉ được chọn 2 sản phẩm. Vui lòng nâng cấp để mở khóa không giới hạn sản "
+"phẩm."
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1323
+msgid "zoomIn"
+msgstr "zoomIn"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1325
+msgid "zoomInDown"
+msgstr "zoomInDown"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1327
+msgid "zoomInLeft"
+msgstr "zoomInLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1329
+msgid "zoomInRight"
+msgstr "zoomInRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1331
+msgid "zoomInUp"
+msgstr "zoomInUp"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1416
+msgid "zoomOut"
+msgstr "zoomOut"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1418
+msgid "zoomOutDown"
+msgstr "zoomOutDown"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1420
+msgid "zoomOutLeft"
+msgstr "zoomOutLeft"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1422
+msgid "zoomOutRight"
+msgstr "zoomOutRight"
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1424
+msgid "zoomOutUp"
+msgstr "zoomOutUp"
