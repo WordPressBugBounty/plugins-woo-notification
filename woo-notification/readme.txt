@@ -3,13 +3,14 @@ Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: boost sales ,recent sales popup,live sales, woocommerce notification, up sell
 Requires at least: 5.0
-Tested up to: 6.5
-WC tested up to: 8.7
-Stable tag: 1.2.17
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0
+Tested up to: 6.7
+WC tested up to: 9.4
+WC requires at least: 7.0
+Stable tag: trunk
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Increase conversion rate by highlighting other customers that have bought products.
+Display recent orders as popup notifications, boosting conversion rates by showing real-time purchase, creating urgency, and showcasing new products.
 
 == Description ==
 
@@ -245,6 +246,17 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 5. Front end
 
 == Changelog ==
+
+/*1.3.0 - 2024.11.21**/
+- Fixed: Image padding not effected in setting design
+- Fixed: Position of notification
+- Updated: VillaTheme_Support
+- Updated: Setting UI
+- Updated: Notification template design
+- Updated: Compatibility with WC6.7 and WP 9.4
+- Update: support class
+- Added: Rounded background image corner style
+
 /**1.2.17 - 2024.05.06**/
 - Fixed: Wrong plugin name checking
 

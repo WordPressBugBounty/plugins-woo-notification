@@ -9,8 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class VI_WNOTIFICATION_F_Data
  */
 class VI_WNOTIFICATION_F_Data {
-    protected static $instance;
-    private $params;
+    
+    public static $instance;
+    public $params;
     
     public static function get_instance( $new = false ) {
         if ( $new || null === self::$instance ) {
@@ -41,16 +42,16 @@ class VI_WNOTIFICATION_F_Data {
             'background_image'               => 0,
             'image_position'                 => 0,
             'position'                       => 0,
-            'border_radius'                  => '0',
-            'image_border_radius'            => '0',
-            'show_close_icon'                => 0,
+            'border_radius'                  => '6',
+            'image_border_radius'            => 0,
+            'show_close_icon'                => 1,
             'time_close'                     => 0,
             'image_redirect'                 => 0,
             'image_redirect_target'          => 0,
             'message_display_effect'         => 'bounceIn',
             'message_hidden_effect'          => 'bounceOutDown',
             'custom_css'                     => '',
-            'message_purchased'              => array('Someone in {city} purchased a {product_with_link} {time_ago}', '{product_with_link} {custom}'),
+            'message_purchased'              => array( 'Someone in {city} purchased a {product_with_link} {time_ago}', '{product_with_link} {custom}' ),
             'custom_shortcode'               => '{number} people seeing this product right now',
             'min_number'                     => '100',
             'max_number'                     => '200',
@@ -78,7 +79,7 @@ class VI_WNOTIFICATION_F_Data {
             'loop_session_duration'          => 1,
             'loop_session_duration_unit'     => 'h',
             'loop_session_total'             => '60',
-            'image_padding'                  => '0',
+            'image_padding'                  => 0,
             'close_icon_color'               => '#000000',
             'notification_product_show_type' => '0',
         );

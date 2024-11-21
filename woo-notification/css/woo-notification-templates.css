@@ -4,11 +4,6 @@
     height: 96px;
 }
 
-#message-purchased .wn-notification-image-wrapper {
-    vertical-align: middle;
-    box-sizing: border-box;
-}
-
 #message-purchased.wn-extended > img {
     margin: 5px 5px 5px 0;
     padding: 0;
@@ -18,11 +13,11 @@
     right: 0;
     position: absolute;
     top: 0;
-    content: " ";
-    bottom: 0;
+    content: "";
+    bottom: -1px;
     left: 0;
     background-repeat: no-repeat;
-    background-position: top right;
+    background-position: bottom right;
 }
 
 #message-purchased.wn-extended .message-purchase-main > * {

@@ -42,9 +42,9 @@ if ( ! function_exists( 'vi_include_folder' ) ) {
 }
 if ( ! function_exists( 'woocommerce_notification_prefix' ) ) {
 	function woocommerce_notification_prefix() {
-		$prefix = get_option( '_woocommerce_notification_prefix', date( "Ymd" ) );
+		$prefix = get_option( '_woocommerce_notification_prefix', gmdate( "Ymd" ) );
 
-		return $prefix . '_products_' . date( "Ymd" );
+		return $prefix . '_products_' . gmdate( "Ymd" );
 	}
 }
 
@@ -62,28 +62,29 @@ if ( ! function_exists( 'woocommerce_notification_background_images' ) ) {
 	function woocommerce_notification_background_images( $key = false ) {
 		$prefix   = $key ? 'bg_' : '';
 		$b_images = array(
-			'black'        => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'black.png',
-			'red'          => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'red.png',
-			'pink'         => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'pink.png',
-			'yellow'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'yellow.png',
-			'violet'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'violet.png',
-			'blue'         => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'blue.png',
-			'grey'         => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'grey.png',
-			'orange'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'orange.png',
-			'spring'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'spring.png',
-			'summer'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'summer.png',
-			'autumn'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'autumn.png',
-			'winter'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'winter.png',
-			'black_friday' => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'black_friday.png',
-			'new_year'     => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'new_year.png',
-			'valentine'    => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'valentine.png',
-			'halloween'    => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'halloween.png',
-			'kids'         => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'kids.png',
-			'father_day'   => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'father_day.png',
-			'mother_day'   => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'mother_day.png',
-			'shoes'        => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'shoes.png',
-			't_shirt'      => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 't_shirt.png',
-			'christmas'    => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'christmas.png',
+            'none'         => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'none.png',
+            'black'        => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'black.png',
+            'red'          => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'red.png',
+            'pink'         => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'pink.png',
+            'yellow'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'yellow.png',
+            'violet'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'violet.png',
+            'blue'         => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'blue.png',
+            'grey'         => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'grey.png',
+            'orange'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'orange.png',
+            'spring'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'spring.png',
+            'summer'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'summer.png',
+            'autumn'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'autumn.png',
+            'winter'       => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'winter.png',
+            'black_friday' => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'black_friday.png',
+            'new_year'     => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'new_year.png',
+            'valentine'    => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'valentine.png',
+            'halloween'    => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'halloween.png',
+            'kids'         => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'kids.png',
+            'father_day'   => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'father_day.png',
+            'mother_day'   => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'mother_day.png',
+            'shoes'        => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'shoes.png',
+            't_shirt'      => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 't_shirt.png',
+            'christmas'    => VI_WNOTIFICATION_F_BACKGROUND_IMAGES . $prefix . 'christmas.png',
 		);
 		if ( $key ) {
 			return isset( $b_images[ $key ] ) ? $b_images[ $key ] : false;

@@ -9,7 +9,6 @@ define( 'VI_WNOTIFICATION_F_LANGUAGES', VI_WNOTIFICATION_F_DIR . "languages" . D
 define( 'VI_WNOTIFICATION_F_INCLUDES', VI_WNOTIFICATION_F_DIR . "includes" . DIRECTORY_SEPARATOR );
 define( 'VI_WNOTIFICATION_F_TEMPLATES', VI_WNOTIFICATION_F_DIR . "templates" . DIRECTORY_SEPARATOR );
 $plugin_url = plugins_url( 'woo-notification' );
-//$plugin_url = plugins_url( '', __FILE__ );
 $plugin_url = str_replace( '/includes', '', $plugin_url );
 define( 'VI_WNOTIFICATION_F_CSS', $plugin_url . "/css/" );
 define( 'VI_WNOTIFICATION_F_CSS_DIR', VI_WNOTIFICATION_F_DIR . "css" . DIRECTORY_SEPARATOR );

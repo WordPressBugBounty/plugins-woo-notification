@@ -8,6 +8,8 @@ jQuery(document).ready(function ($) {
     /*Setup tab*/
     var tabs,
         tabEvent = false,
+        wnTemplatesSlider = false,
+        templateModal = $('.wn-all-tmpl-modal'),
         initialTab = 'general',
         navSelector = '.vi-ui.menu',
         panelSelector = '.vi-ui.tab',
@@ -18,6 +20,67 @@ jQuery(document).ready(function ($) {
                 jQuery(this).attr('href', '#' + $(this).attr('title').replace(/ /g, '_'));
             });
         };
+    $('#woocommerce-notification-custom-css').appendTo(document.body)
+
+     // Templates slider
+    let initSlider = function () {
+
+        jQuery('.wn-slider-wrapper').viwn_flexslider({
+            namespace: 'wn-slider-',
+            selector: '.wn-slider-slides .wn-slider-item',
+            animation: 'slide',
+            animationLoop: 1,
+            itemWidth: 145,
+            itemMargin: 30,
+            controlNav: false,
+            maxItems: 3,
+            minItems: 3,
+            prevText: '',
+            nextText: '',
+            touch: true,
+            slideshow: false,
+            start: function (slider) {
+                wnTemplatesSlider = slider
+                /* Move to the template activated*/
+                slider.slides.each(function (index, el) {
+                    if ($(el).find('input:checked').length > 0) {
+                        let slidePos = Math.floor(index / slider.move)
+                        slider.flexAnimate(slidePos)
+                    }
+                })
+            },
+        })
+    }
+
+     // Slider has wrong width when design tab is not opened
+    if (window.location.hash.indexOf('design') !== -1) {
+        initSlider()
+    } else {
+        window.onhashchange = function () {
+            if (window.location.hash.indexOf('design') !== -1 && !wnTemplatesSlider) {
+                initSlider()
+            }
+        }
+    }
+
+     // Select template when it changed in modal
+    $('.wn-slider-item', templateModal).on('click', function () {
+        $(this).addClass('active')
+        let index = $(this).index()
+        let slidePos = Math.floor(index / wnTemplatesSlider.move)
+        wnTemplatesSlider.flexAnimate(slidePos)
+        $(templateModal).find('.wn-slider-item').not(this).removeClass('active')
+    })
+
+     // View all templates
+    $('.wn-view-all-tmpl').on('click', function () {
+        templateModal.modal('show', function () {
+            $('.content', templateModal).animate({
+                scrollTop: $('.wn-slider-item.active').position().top,
+            }, 250)
+        })
+    })
+
     // Initializes plugin features
     jQuery.address.strict(false).wrap(true);
 
@@ -126,8 +189,9 @@ jQuery(document).ready(function ($) {
         minimumInputLength: 1
     });
     /*Save Submit button*/
-    jQuery('.wn-submit').one('click', function () {
+    jQuery('.wn-submit').one('click', function (e) {
         jQuery(this).addClass('loading');
+
     });
     /*Add field depend*/
     /*Products*/
@@ -146,6 +210,14 @@ jQuery(document).ready(function ($) {
                 checked: true
             }
         });
+    }
+    if (jQuery('.image_border_radius').length > 0) {
+
+        jQuery('.image_border_radius').dependsOn({
+            'input[name="wnotification_params[rounded_corner]"]': {
+                checked: false,
+            },
+        })
     }
     if (jQuery('.latest-product-select-categories').length > 0) {
 
@@ -238,7 +310,7 @@ jQuery(document).ready(function ($) {
         border: true
     }).click(function () {
         jQuery('.iris-picker').hide();
-        jQuery(this).closest('td').find('.iris-picker').show();
+        jQuery(this).closest('.field').find('.iris-picker').show();
     });
 
     jQuery('body').click(function () {
@@ -247,7 +319,12 @@ jQuery(document).ready(function ($) {
     jQuery('.color-picker').click(function (event) {
         event.stopPropagation();
     });
-    jQuery('input[name="wnotification_params[position]"]').on('change', function () {
+
+    jQuery('textarea[name="wnotification_params[custom_css]"]').on('input', function () {
+        jQuery('#woocommerce-notification-custom-css').html($(this).val())
+    })
+
+    jQuery('select[name="wnotification_params[position]"]').on('change', function () {
         var data = jQuery(this).val();
         if (data == 1) {
             jQuery('#message-purchased').removeClass('top_left top_right').addClass('bottom_right');
@@ -515,38 +592,30 @@ jQuery(document).ready(function ($) {
     }
 
     jQuery('input[name="wnotification_params[border_radius]"]').on('change', function () {
-        var data = parseInt(jQuery('input[name="wnotification_params[background_image]"]').val());
-        var image_padding = parseInt(jQuery('input[name="wnotification_params[image_padding]"]').val());
-        if (parseInt(data) == 0) {
-            jQuery('.message-purchase-main').css({'border-radius': jQuery(this).val() + 'px'});
-            if(image_padding){
-                jQuery('.wn-notification-image').css({'border-radius': jQuery(this).val() + 'px'});
-            }else{
-                jQuery('.wn-notification-image').css({'border-radius': '0'});
-            }
-        } else {
-            console.log(data)
-        }
+        jQuery('.message-purchase-main').css({ 'border-radius': jQuery(this).val() + 'px' })
     });
+
+    jQuery('input[name="wnotification_params[image_border_radius]"]').on('change', function () {
+        jQuery('.wn-notification-image').css({ 'border-radius': jQuery(this).val() + 'px' })
+    })
 
     jQuery('input[name="wnotification_params[image_padding]"]').on('change', function () {
         var data = parseInt(jQuery(this).val());
-        var border_radius = parseInt(jQuery('input[name="wnotification_params[border_radius]"]').val());
-        var p_padding = 20 - data;
+        var p_padding = 15 - data;
         jQuery('.wn-notification-image-wrapper').css({'padding': data + 'px'});
         if(jQuery('body').hasClass('rtl')){
             jQuery('.wn-notification-message-container').css({'padding-right': p_padding + 'px'})
         }else{
             jQuery('.wn-notification-message-container').css({'padding-left': p_padding + 'px'})
         }
-        if(data>0){
-            jQuery('.wn-notification-image').css({'border-radius': border_radius + 'px'});
-        }else{
-            jQuery('.wn-notification-image').css({'border-radius': '0'});
-        }
     });
     jQuery('input[name="wnotification_params[background_image]"]').on('change', function () {
-        var data = jQuery(this).val();
+        var bg_url = jQuery(this).val()
+        var data = bg_url
+        /* remove version tag*/
+        if (data.indexOf('_v') !== -1) {
+            data = data.slice(0, -3)
+        }
         var init_data = {
             'black': {
                 'hightlight': '#ffffff',
@@ -665,13 +734,18 @@ jQuery(document).ready(function ($) {
             jQuery('input[name="wnotification_params[highlight_color]"]').val('#212121').trigger('change');
             jQuery('input[name="wnotification_params[text_color]"]').val('#212121').trigger('change');
             jQuery('input[name="wnotification_params[backgroundcolor]"]').val('#ffffff').trigger('change');
+            jQuery('input[name="wnotification_params[close_icon_color]"]').val('#212121').trigger('change');
         } else {
             jQuery('#message-purchased').addClass('wn-extended');
-            jQuery('#woo-notification-background-image').html('#message-purchased .message-purchase-main::before {background-image: url(../wp-content/plugins/woo-notification/images/background/bg_'+data+'.png);');
+            jQuery('#woo-notification-background-image').html('#message-purchased .message-purchase-main::before {background-image: url(../wp-content/plugins/woo-notification/images/background/bg_'+ bg_url +'.png);');
             jQuery('input[name="wnotification_params[highlight_color]"]').val(init_data[data]['hightlight']).trigger('change');
             jQuery('input[name="wnotification_params[text_color]"]').val(init_data[data]['text']).trigger('change');
-        }
+            jQuery('input[name="wnotification_params[close_icon_color]"]').val(init_data[data]['text']).trigger('change');
 
+            let background_color = jQuery('input[name="wnotification_params[background_color]"]')
+            background_color.val(background_color.attr('value')).trigger('change')
+        }
+        $(templateModal).find('.wn-slider-item:has(label[for="background_image_' + bg_url + '"])').trigger('click')
     });
     let depending = $('.wn-rounded-conner-depending');
     if ($('input[name="wnotification_params[rounded_corner]"]').prop('checked')) {
