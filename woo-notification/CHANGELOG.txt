@@ -1,3 +1,9 @@
+/*1.3.1 - 2025.01.13**/
+- Fixed: Setting UI save functionality
+- Fixed: Security
+- Updated: Compatibility with WC6.7.1 and WP 9.5.2
+- Update: support class
+
 /*1.3.0 - 2024.11.21**/
 - Fixed: Image padding not effected in setting design
 - Fixed: Position of notification

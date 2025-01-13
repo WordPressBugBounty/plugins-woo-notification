@@ -175,7 +175,10 @@ class VI_WNOTIFICATION_F_Admin_Settings {
         update_option( '_woocommerce_notification_prefix', substr( md5( gmdate( "YmdHis" ) ), 0, 10 ) );
         
         $data = wc_clean( $_POST['wnotification_params'] );
-        
+        $data['enable'] = $data['enable'] ?? 0;
+        $data['enable_mobile'] = $data['enable_mobile'] ?? 0;
+        $data['non_ajax'] = $data['non_ajax'] ?? 0;
+        $data['show_close_icon'] = $data['show_close_icon'] ?? 0;
         /* Because name contain slashes, need to handle separately*/
         $args = array(
             'virtual_name',

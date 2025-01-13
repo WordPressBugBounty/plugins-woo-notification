@@ -319,16 +319,16 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
                                         $orders = $this->get_orders_by_product( $product_id );
                                         if ( is_array( $orders ) && count( $orders ) ) {
                                             foreach ( $orders as $order ) {
-                                                $order_id    = $order->get_id();
-                                                $order_infor = array(
-                                                    'time'       => $this->time_substract( $order->get_date_created()->date_i18n( "Y-m-d H:i:s" ) ),
-                                                    'time_org'   => $order->get_date_created()->date_i18n( "Y-m-d H:i:s" ),
-                                                    'first_name' => base64_encode( ucfirst( get_post_meta( $order_id, '_billing_first_name', true ) ) ),
-                                                    'last_name'  => base64_encode( ucfirst( get_post_meta( $order_id, '_billing_last_name', true ) ) ),
-                                                    'city'       => base64_encode( ucfirst( get_post_meta( $order_id, '_billing_city', true ) ) ),
-                                                    'state'      => base64_encode( ucfirst( get_post_meta( $order_id, '_billing_state', true ) ) ),
-                                                    'country'    => base64_encode( ucfirst( WC()->countries->countries[ get_post_meta( $order_id, '_billing_country', true ) ] ) ),
-                                                );
+                                                $order_date_created = $order->get_date_created();
+                                                $order_infor = [
+                                                    'time' => $this->time_substract($order_date_created->date_i18n("Y-m-d H:i:s")),
+                                                    'time_org' => $order_date_created->date_i18n("Y-m-d H:i:s"),
+                                                    'first_name' => base64_encode(ucfirst($order->get_billing_first_name())),
+                                                    'last_name' => base64_encode(ucfirst($order->get_billing_last_name())),
+                                                    'city' => base64_encode(ucfirst($order->get_billing_city())),
+                                                    'state' => base64_encode(ucfirst($order->get_billing_state())),
+                                                    'country' => base64_encode(ucfirst(WC()->countries->countries[$order->get_billing_country()])),
+                                                ];
                                                 $products[]  = array_merge( $product_tmp, $order_infor );
                                             }
                                         }
@@ -358,16 +358,16 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
                             $orders = $this->get_orders_by_product( $product_id );
                             if ( is_array( $orders ) && count( $orders ) ) {
                                 foreach ( $orders as $order ) {
-                                    $order_id    = $order->get_id();
-                                    $order_infor = array(
-                                        'time'       => $this->time_substract( $order->get_date_created()->date_i18n( "Y-m-d H:i:s" ) ),
-                                        'time_org'   => $order->get_date_created()->date_i18n( "Y-m-d H:i:s" ),
-                                        'first_name' => base64_encode( ucfirst( get_post_meta( $order_id, '_billing_first_name', true ) ) ),
-                                        'last_name'  => base64_encode( ucfirst( get_post_meta( $order_id, '_billing_last_name', true ) ) ),
-                                        'city'       => base64_encode( ucfirst( get_post_meta( $order_id, '_billing_city', true ) ) ),
-                                        'state'      => base64_encode( ucfirst( get_post_meta( $order_id, '_billing_state', true ) ) ),
-                                        'country'    => base64_encode( ucfirst( WC()->countries->countries[ get_post_meta( $order_id, '_billing_country', true ) ] ) ),
-                                    );
+                                    $order_date_created = $order->get_date_created();
+                                    $order_infor = [
+                                        'time' => $this->time_substract($order_date_created->date_i18n("Y-m-d H:i:s")),
+                                        'time_org' => $order_date_created->date_i18n("Y-m-d H:i:s"),
+                                        'first_name' => base64_encode(ucfirst($order->get_billing_first_name())),
+                                        'last_name' => base64_encode(ucfirst($order->get_billing_last_name())),
+                                        'city' => base64_encode(ucfirst($order->get_billing_city())),
+                                        'state' => base64_encode(ucfirst($order->get_billing_state())),
+                                        'country' => base64_encode(ucfirst(WC()->countries->countries[$order->get_billing_country()])),
+                                    ];
                                     $products[]  = array_merge( $product_tmp, $order_infor );
                                 }
                             }
