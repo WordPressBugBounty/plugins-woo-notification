@@ -78,7 +78,8 @@ class VI_WNOTIFICATION_F_Admin_Admin {
             wp_enqueue_style( 'woo-notification-tab', VI_WNOTIFICATION_F_CSS . 'tab.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_style( 'woo-notification-button', VI_WNOTIFICATION_F_CSS . 'button.min.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_style( 'woo-notification-grid', VI_WNOTIFICATION_F_CSS . 'grid.min.css', array(), VI_WNOTIFICATION_F_VERSION );
-            wp_enqueue_style( 'woo-notification-front', VI_WNOTIFICATION_F_CSS . 'woo-notification.css', array(), VI_WNOTIFICATION_F_VERSION );
+			wp_enqueue_style( 'woo-notification-accordion', VI_WNOTIFICATION_F_CSS . 'accordion.min.css', array(), VI_WNOTIFICATION_F_VERSION );
+			wp_enqueue_style( 'woo-notification-front', VI_WNOTIFICATION_F_CSS . 'woo-notification.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_style( 'woo-notification-admin', VI_WNOTIFICATION_F_CSS . 'woo-notification-admin.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_style( 'woo-notification-admin-templates', VI_WNOTIFICATION_F_CSS . 'woo-notification-templates.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_style( 'select2', VI_WNOTIFICATION_F_CSS . 'select2.min.css', array(), VI_WNOTIFICATION_F_VERSION );
@@ -88,6 +89,7 @@ class VI_WNOTIFICATION_F_Admin_Admin {
             wp_enqueue_script( 'woo-notification-transition', VI_WNOTIFICATION_F_JS . 'transition.min.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
             wp_enqueue_script( 'woo-notification-dimmer', VI_WNOTIFICATION_F_JS . 'dimmer.min.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
             wp_enqueue_script( 'woo-notification-modal', VI_WNOTIFICATION_F_JS . 'modal.min.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
+            wp_enqueue_script( 'woo-notification-accordion', VI_WNOTIFICATION_F_JS . 'accordion.min.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
             wp_enqueue_script( 'woo-notification-dropdown', VI_WNOTIFICATION_F_JS . 'dropdown.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
             wp_enqueue_script( 'woo-notification-checkbox', VI_WNOTIFICATION_F_JS . 'checkbox.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
             wp_enqueue_script( 'woo-notification-tab', VI_WNOTIFICATION_F_JS . 'tab.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );

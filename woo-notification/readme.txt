@@ -246,6 +246,9 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 5. Front end
 
 == Changelog ==
+/*1.3.3 - 2025.02.21 **/
+- Update: support class
+
 /*1.3.2 - 2025.02.14 **/
 - Fixed: Get data with orrder refunded
 - Updated: Compatibility with WC6.7.2 and WP 9.6.2

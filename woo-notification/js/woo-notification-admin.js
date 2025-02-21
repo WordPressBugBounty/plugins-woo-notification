@@ -21,7 +21,9 @@ jQuery(document).ready(function ($) {
             });
         };
     $('#woocommerce-notification-custom-css').appendTo(document.body)
-
+    if ($('.vi-ui.accordion').length) {
+        $('.vi-ui.accordion:not(.woonotification-accordion-init)').addClass('woonotification-accordion-init').vi_accordion('refresh');
+    }
      // Templates slider
     let initSlider = function () {
 

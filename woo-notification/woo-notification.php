@@ -3,7 +3,7 @@
  * Plugin Name: Notification for WooCommerce
  * Plugin URI: https://villatheme.com/extensions/woocommerce-notification-boost-sales/
  * Description: Display recent orders as popup notifications, boosting conversion rates by showing real-time purchase, creating urgency, and showcasing new products.
- * Version: 1.3.2
+ * Version: 1.3.3
  * Author: Andy Ha (villatheme.com)
  * Author URI: http://villatheme.com
  * License: GPLv2
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('VI_WNOTIFICATION_F_VERSION', '1.3.2');
+define('VI_WNOTIFICATION_F_VERSION', '1.3.3');
 
 /**
  * Class VI_WNOTIFICATION_F

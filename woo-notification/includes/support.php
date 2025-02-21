@@ -949,7 +949,7 @@ if ( ! class_exists( 'VillaTheme_Require_Environment' ) ) {
 					if (!defined($plugin['defined_version'])){
 						$msg = sprintf('%s is <a href="%s" target="_blank">installed and activated.</a>', esc_html( $plugin_name ), network_admin_url( "plugin-install.php?s={$plugin_slug}&tab=search&type=term" ) );
 						$this->notices[] = $msg;
-					}elseif (  ! version_compare( constant($plugin['defined_version']), $plugin_version, '>=' )) {
+					}elseif ($plugin_version &&   ! version_compare( constant($plugin['defined_version']), $plugin_version, '>=' )) {
 						$this->notices[] = sprintf( "%s version at least %s.", esc_html( $plugin_name ) ,esc_html( $plugin_version ) );
 					}
 				}
