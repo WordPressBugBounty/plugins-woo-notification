@@ -291,6 +291,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                     <div class="item" data-tab="logs"><a href="#logs"><?php esc_html_e('Report', 'woo-notification') ?></a></div>
                     <div class="item" data-tab="ai-engine"><a href="#ai-engine"><?php esc_html_e('AI Engine', 'woo-notification') ?></a></div>
                 </div>
+                <!--General-->
                 <div class="vi-ui bottom attached tab segment active" data-tab="general">
                     <!-- Tab Content !-->
                     <table class="optiontable form-table">
