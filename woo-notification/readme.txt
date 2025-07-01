@@ -3,8 +3,8 @@ Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: boost sales ,recent sales popup,live sales, woocommerce notification, up sell
 Requires at least: 5.0
-Tested up to: 6.7.2
-WC tested up to: 9.7.1
+Tested up to: 6.8.1
+WC tested up to: 9.9.5
 WC requires at least: 7.0
 Stable tag: trunk
 License: GPL v2 or later
@@ -24,9 +24,13 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 >[Try the Demo](http://new2new.com/?item=woocommerce-notification "Demo Notification for WooCommerce") | [Documents](http://docs.villatheme.com/?item=woocommerce-notification "Documents") | [Pro Version](https://1.envato.market/djEZj "Premium Version") | [Facebook group](https://www.facebook.com/groups/villatheme "VillaTheme")
 
+### Preview WooCommerce Notification plugin.
+
+[youtube https://www.youtube.com/watch?v=CbHBYtqM45w]
+
 ### Let’s go through this video on how to use the WooCommerce Notification plugin.
 
-[youtube https://youtu.be/fqgmxYqZL58]
+[youtube https://youtu.be/GrZXP68boSU]
 
 ### IMPORTANT NOTICE
 
@@ -234,6 +238,8 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 [Coupon Box for WooCommerce](https://wordpress.org/plugins/woo-coupon-box)
 
+[VARGAL - Additional Variation Gallery for Woo](https://wordpress.org/plugins/vargal-additional-variation-gallery-for-woo/)
+
 ### Documentation
 
 - [Getting Started](http://docs.villatheme.com/?item=woocommerce-notification)
@@ -257,13 +263,17 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 == Frequently Asked Questions ==
 
 == Screenshots ==
-1. Settings general
+1. AI Engine
 2. Settings design
 3. Settings messages
-4. Settings products
-5. Front end
+4. Notification on shop page
+5. Notification on single product page
 
 == Changelog ==
+/*1.3.5 - 2025.07.01 **/
+- Updated: Compatibility with WC6.8.1 and WP 9.9.5
+- Update: support class
+
 /*1.3.4 - 2025.03.21 **/
 - Update: support class
 
