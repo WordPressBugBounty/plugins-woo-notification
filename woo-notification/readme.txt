@@ -3,8 +3,8 @@ Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: boost sales ,recent sales popup,live sales, woocommerce notification, up sell
 Requires at least: 5.0
-Tested up to: 6.8.1
-WC tested up to: 9.9.5
+Tested up to: 6.8.2
+WC tested up to: 10.0.3
 WC requires at least: 7.0
 Stable tag: trunk
 License: GPL v2 or later
@@ -270,6 +270,12 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 5. Notification on single product page
 
 == Changelog ==
+/*1.3.6 - 2025.07.26**/
+- Fixed: Fixed issue with translate plugin
+- Updated: Show alt image
+- Updated: Compatibility with WC6.8.1 and WP 10.0.3
+- Updated: support class
+
 /*1.3.5 - 2025.07.01 **/
 - Updated: Compatibility with WC6.8.1 and WP 9.9.5
 - Update: support class
