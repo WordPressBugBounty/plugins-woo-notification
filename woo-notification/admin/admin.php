@@ -11,9 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class VI_WNOTIFICATION_F_Admin_Admin {
-    
+
     protected $settings;
-    
+
     function __construct() {
         $this->settings = new VI_WNOTIFICATION_F_Data();
         add_filter( 'plugin_action_links_woo-notification/woo-notification.php', array(
@@ -24,14 +24,14 @@ class VI_WNOTIFICATION_F_Admin_Admin {
         add_action( 'admin_menu', array( $this, 'menu_page' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 99999 );
     }
-    
+
     public function admin_print_styles() {
         $background_image   = $this->settings->get_background_image();
         $custom_css_setting = $this->settings->get_custom_css();
         $custom_css         = '';
         if ( $background_image ) {
             $background_image_url = woocommerce_notification_background_images( $background_image );
-            
+
             $custom_css .= "#message-purchased .message-purchase-main::before{
 				background-image: url('{$background_image_url}');  
 				 border-radius:0;
@@ -43,7 +43,7 @@ class VI_WNOTIFICATION_F_Admin_Admin {
         <style id="woocommerce-notification-custom-css"><?php echo wp_kses_post( $custom_css_setting ) ?></style>
         <?php
     }
-    
+
     /**
      * Init Script in Admin
      */
@@ -51,6 +51,7 @@ class VI_WNOTIFICATION_F_Admin_Admin {
         $this->settings = new VI_WNOTIFICATION_F_Data();
         $page           = isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if ( $page == 'woo-notification' ) {
+            $src_min = WP_DEBUG ? '' : '.min';
             add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
             global $wp_scripts;
             $scripts = $wp_scripts->registered;
@@ -60,7 +61,7 @@ class VI_WNOTIFICATION_F_Admin_Admin {
                     wp_dequeue_script( $script->handle );
                 }
             }
-            
+
             /*Stylesheet*/
             wp_enqueue_style( 'woo-notification-close-icon', VI_WNOTIFICATION_F_CSS . 'icons-close.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_style( 'woo-notification-image', VI_WNOTIFICATION_F_CSS . 'image.min.css', array(), VI_WNOTIFICATION_F_VERSION );
@@ -78,10 +79,10 @@ class VI_WNOTIFICATION_F_Admin_Admin {
             wp_enqueue_style( 'woo-notification-tab', VI_WNOTIFICATION_F_CSS . 'tab.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_style( 'woo-notification-button', VI_WNOTIFICATION_F_CSS . 'button.min.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_style( 'woo-notification-grid', VI_WNOTIFICATION_F_CSS . 'grid.min.css', array(), VI_WNOTIFICATION_F_VERSION );
-			wp_enqueue_style( 'woo-notification-accordion', VI_WNOTIFICATION_F_CSS . 'accordion.min.css', array(), VI_WNOTIFICATION_F_VERSION );
-			wp_enqueue_style( 'woo-notification-front', VI_WNOTIFICATION_F_CSS . 'woo-notification.css', array(), VI_WNOTIFICATION_F_VERSION );
-            wp_enqueue_style( 'woo-notification-admin', VI_WNOTIFICATION_F_CSS . 'woo-notification-admin.css', array(), VI_WNOTIFICATION_F_VERSION );
-            wp_enqueue_style( 'woo-notification-admin-templates', VI_WNOTIFICATION_F_CSS . 'woo-notification-templates.css', array(), VI_WNOTIFICATION_F_VERSION );
+            wp_enqueue_style( 'woo-notification-accordion', VI_WNOTIFICATION_F_CSS . 'accordion.min.css', array(), VI_WNOTIFICATION_F_VERSION );
+            wp_enqueue_style( 'woo-notification-front', VI_WNOTIFICATION_F_CSS . 'woo-notification' . $src_min . '.css', array(), VI_WNOTIFICATION_F_VERSION );
+            wp_enqueue_style( 'woo-notification-admin', VI_WNOTIFICATION_F_CSS . 'woo-notification-admin' . $src_min . '.css', array(), VI_WNOTIFICATION_F_VERSION );
+            wp_enqueue_style( 'woo-notification-admin-templates', VI_WNOTIFICATION_F_CSS . 'woo-notification-templates' . $src_min . '.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_style( 'select2', VI_WNOTIFICATION_F_CSS . 'select2.min.css', array(), VI_WNOTIFICATION_F_VERSION );
             wp_enqueue_script( 'select2' );
             /*Script*/
@@ -95,11 +96,11 @@ class VI_WNOTIFICATION_F_Admin_Admin {
             wp_enqueue_script( 'woo-notification-tab', VI_WNOTIFICATION_F_JS . 'tab.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
             wp_enqueue_script( 'woo-notification-address', VI_WNOTIFICATION_F_JS . 'address-1.6.min.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
             wp_enqueue_script( 'woo-notification-flexslider', VI_WNOTIFICATION_F_JS . 'flexslider.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
-            wp_enqueue_script( 'woo-notification-admin', VI_WNOTIFICATION_F_JS . 'woo-notification-admin.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
-            
+            wp_enqueue_script( 'woo-notification-admin', VI_WNOTIFICATION_F_JS . 'woo-notification-admin' . $src_min . '.js', array( 'jquery' ), VI_WNOTIFICATION_F_VERSION, true );
+
             /*Color picker*/
             wp_enqueue_script( 'iris', admin_url( 'js/iris.min.js' ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), false, true ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters
-            
+
             /*Custom*/
             $highlight_color     = $this->settings->get_highlight_color();
             $text_color          = $this->settings->get_text_color();
@@ -116,7 +117,7 @@ class VI_WNOTIFICATION_F_Admin_Admin {
                 overflow:hidden;}
                
                 .tab.segment #message-purchased a, #message-purchased p span{color:{$highlight_color};}";
-            
+
             $is_rtl = is_rtl();
             if ( $image_padding ) {
                 $padding_right = 15 - $image_padding;
@@ -136,12 +137,16 @@ class VI_WNOTIFICATION_F_Admin_Admin {
                 }
                 $custom_css .= "#message-purchased .wn-notification-image{border-radius:{$image_border_radius}px;}";
             }
-            
+
             wp_add_inline_style( 'woo-notification-admin', $custom_css );
-            
+            wp_localize_script( 'woo-notification-admin', 'woo_notifi_admin_params', array(
+                'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
+                'nonce'     => wp_create_nonce( 'woo_notifi_admin_nonce' ),
+                'warning_mask_customer_info' => __( 'Are you sure you want to disable this option? . Disabling it may expose customer names and cities to the public.', 'woocommerce-notification' )
+            ) );
         }
     }
-    
+
     /**
      * Link to Settings
      *
@@ -152,17 +157,17 @@ class VI_WNOTIFICATION_F_Admin_Admin {
     public function settings_link( $links ) {
         $settings_link = '<a href="admin.php?page=woo-notification" title="' . esc_html__( 'Settings', 'woo-notification' ) . '">' . esc_html__( 'Settings', 'woo-notification' ) . '</a>';
         array_unshift( $links, $settings_link );
-        
+
         return $links;
     }
-    
+
     /**
      * Function init when run plugin+
      */
     function init() {
         /*Register post type*/
-        
-        load_plugin_textdomain( 'woo-notification' );
+
+//        load_plugin_textdomain( 'woo-notification' );
         $this->load_plugin_textdomain();
         if ( class_exists( 'VillaTheme_Support' ) ) {
             new VillaTheme_Support( array(
@@ -179,7 +184,7 @@ class VI_WNOTIFICATION_F_Admin_Admin {
             ) );
         }
     }
-    
+
     /**
      * load Language translate
      */
@@ -189,12 +194,12 @@ class VI_WNOTIFICATION_F_Admin_Admin {
         if ( is_admin() ) {
             load_textdomain( 'woo-notification', VI_WNOTIFICATION_F_LANGUAGES . "woo-notification-$locale.mo" );
         }
-        
+
         // Global + Frontend Locale
         load_textdomain( 'woo-notification', VI_WNOTIFICATION_F_LANGUAGES . "woo-notification-$locale.mo" );
-        load_plugin_textdomain( 'woo-notification', false, VI_WNOTIFICATION_F_LANGUAGES );
+//        load_plugin_textdomain( 'woo-notification', false, VI_WNOTIFICATION_F_LANGUAGES );
     }
-    
+
     /**
      * Register a custom menu page.
      */
@@ -204,5 +209,5 @@ class VI_WNOTIFICATION_F_Admin_Admin {
             'page_callback',
         ), 'dashicons-megaphone', 2 );
     }
-    
+
 }

@@ -7,278 +7,284 @@ Author URI: http://villatheme.com
 Copyright 2016-2018 villatheme.com. All rights reserved.
 */
 if (!defined('ABSPATH')) {
-	exit;
+    exit;
 }
 
 class VI_WNOTIFICATION_F_Admin_Settings {
 
-	public static $setting;
+    public static $setting;
 
-	public function __construct() {
-		self::$setting = VI_WNOTIFICATION_F_Data::get_instance();
-		add_action('admin_init', array($this, 'save_meta_boxes'));
-		add_action('wp_ajax_wcn_search_product', array($this, 'search_product'));
-		add_action('wp_ajax_wcn_search_cate', array($this, 'search_cate'));
-	}
+    public function __construct() {
+        self::$setting = VI_WNOTIFICATION_F_Data::get_instance();
+        add_action('admin_init', array($this, 'save_meta_boxes'));
+        add_action('wp_ajax_wcn_search_product', array($this, 'search_product'));
+        add_action('wp_ajax_wcn_search_cate', array($this, 'search_cate'));
+    }
 
-	/**
-	 * Search product category ajax
-	 */
-	public function search_cate() {
-		if (!current_user_can('manage_options')) {
-			return;
-		}
+    /**
+     * Search product category ajax
+     */
+    public function search_cate() {
+        if ( ! check_ajax_referer( 'woo_notifi_admin_nonce', 'nonce', false ) ) {
+            wp_send_json_error( 'invalid_nonce' );
+        }
+        if (!current_user_can('manage_options')) {
+            return;
+        }
 
-		ob_start();
+        ob_start();
 
-		$keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
+        $keyword = isset($_GET['keyword']) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
 
-		if (empty($keyword)) {
-			die();
-		}
-		$categories = get_terms(array(
-			'taxonomy' => 'product_cat',
-			'orderby'  => 'name',
-			'order'    => 'ASC',
-			'search'   => $keyword,
-			'number'   => 100,
-		));
-		$items      = array();
-		if (count($categories)) {
-			foreach ($categories as $category) {
-				$item    = array(
-					'id'   => $category->term_id,
-					'text' => $category->name,
-				);
-				$items[] = $item;
-			}
-		}
-		wp_send_json($items);
-		die;
-	}
+        if (empty($keyword)) {
+            die();
+        }
+        $categories = get_terms(array(
+            'taxonomy' => 'product_cat',
+            'orderby'  => 'name',
+            'order'    => 'ASC',
+            'search'   => $keyword,
+            'number'   => 100,
+        ));
+        $items      = array();
+        if (count($categories)) {
+            foreach ($categories as $category) {
+                $item    = array(
+                    'id'   => $category->term_id,
+                    'text' => $category->name,
+                );
+                $items[] = $item;
+            }
+        }
+        wp_send_json($items);
+        die;
+    }
 
-	/*Ajax Product Search*/
-	public function search_product( $x = '', $post_types = array('product') ) {
-		if (!current_user_can('manage_options')) {
-			return;
-		}
+    /*Ajax Product Search*/
+    public function search_product( $x = '', $post_types = array('product') ) {
+        if ( ! check_ajax_referer( 'woo_notifi_admin_nonce', 'nonce', false ) ) {
+            wp_send_json_error( 'invalid_nonce' );
+        }
+        if (!current_user_can('manage_options')) {
+            return;
+        }
 
-		ob_start();
+        ob_start();
 
-		$keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
+        $keyword = isset($_GET['keyword']) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
 
-		if (empty($keyword)) {
-			die();
-		}
-		$arg            = array(
-			'post_status'    => 'publish',
-			'post_type'      => $post_types,
-			'posts_per_page' => 50,
-			's'              => $keyword,
+        if (empty($keyword)) {
+            die();
+        }
+        $arg            = array(
+            'post_status'    => 'publish',
+            'post_type'      => $post_types,
+            'posts_per_page' => 50,
+            's'              => $keyword,
 
-		);
-		$the_query      = new WP_Query($arg);
-		$found_products = array();
-		if ($the_query->have_posts()) {
-			while ($the_query->have_posts()) {
-				$the_query->the_post();
-				$prd = wc_get_product(get_the_ID());
+        );
+        $the_query      = new WP_Query($arg);
+        $found_products = array();
+        if ($the_query->have_posts()) {
+            while ($the_query->have_posts()) {
+                $the_query->the_post();
+                $prd = wc_get_product(get_the_ID());
 
-				if ($prd->has_child() && $prd->is_type('variable')) {
-					$product_children = $prd->get_children();
-					if (count($product_children)) {
-						foreach ($product_children as $product_child) {
-							if (woocommerce_version_check()) {
-								$product = array(
-									'id'   => $product_child,
-									'text' => get_the_title($product_child),
-								);
-							} else {
-								$child_wc  = wc_get_product($product_child);
-								$get_atts  = $child_wc->get_variation_attributes();
-								$attr_name = array_values($get_atts)[0];
-								$product   = array(
-									'id'   => $product_child,
-									'text' => get_the_title() . ' - ' . $attr_name,
-								);
-							}
-							$found_products[] = $product;
-						}
-					}
-				} else {
-					$product_id    = get_the_ID();
-					$product_title = get_the_title();
-					$the_product   = new WC_Product($product_id);
-					if (!$the_product->is_in_stock()) {
-						$product_title .= ' (out-of-stock)';
-					}
-					$product          = array(
-						'id'   => $product_id,
-						'text' => $product_title,
-					);
-					$found_products[] = $product;
-				}
-			}
-		}
-		wp_send_json($found_products);
-		die;
-	}
+                if ($prd->has_child() && $prd->is_type('variable')) {
+                    $product_children = $prd->get_children();
+                    if (count($product_children)) {
+                        foreach ($product_children as $product_child) {
+                            if (woocommerce_version_check()) {
+                                $product = array(
+                                    'id'   => $product_child,
+                                    'text' => get_the_title($product_child),
+                                );
+                            } else {
+                                $child_wc  = wc_get_product($product_child);
+                                $get_atts  = $child_wc->get_variation_attributes();
+                                $attr_name = array_values($get_atts)[0];
+                                $product   = array(
+                                    'id'   => $product_child,
+                                    'text' => get_the_title() . ' - ' . $attr_name,
+                                );
+                            }
+                            $found_products[] = $product;
+                        }
+                    }
+                } else {
+                    $product_id    = get_the_ID();
+                    $product_title = get_the_title();
+                    $the_product   = new WC_Product($product_id);
+                    if (!$the_product->is_in_stock()) {
+                        $product_title .= ' (out-of-stock)';
+                    }
+                    $product          = array(
+                        'id'   => $product_id,
+                        'text' => $product_title,
+                    );
+                    $found_products[] = $product;
+                }
+            }
+        }
+        wp_send_json($found_products);
+        die;
+    }
 
-	/**
-	 * Get files in directory
-	 *
-	 * @param $dir
-	 *
-	 * @return array|bool
-	 */
-	static private function scan_dir( $dir ) {
-		$ignored = array('.', '..', '.svn', '.htaccess', 'test-log.log');
+    /**
+     * Get files in directory
+     *
+     * @param $dir
+     *
+     * @return array|bool
+     */
+    static private function scan_dir( $dir ) {
+        $ignored = array('.', '..', '.svn', '.htaccess', 'test-log.log');
 
-		$files = array();
-		foreach (scandir($dir) as $file) {
-			if (in_array($file, $ignored)) {
-				continue;
-			}
-			$files[$file] = filemtime($dir . '/' . $file);
-		}
-		arsort($files);
-		$files = array_keys($files);
+        $files = array();
+        foreach (scandir($dir) as $file) {
+            if (in_array($file, $ignored)) {
+                continue;
+            }
+            $files[$file] = filemtime($dir . '/' . $file);
+        }
+        arsort($files);
+        $files = array_keys($files);
 
-		return ($files) ? $files : false;
-	}
+        return ($files) ? $files : false;
+    }
 
-	private function stripslashes_deep( $value ) {
-		$value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
+    private function stripslashes_deep( $value ) {
+        $value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
 
-		return $value;
-	}
+        return $value;
+    }
 
-	/**
-	 * Save post meta
-	 *
-	 * @param $post
-	 *
-	 * @return bool
-	 */
-	public function save_meta_boxes() {
-		global $woocommerce_notification_settings;
-		if (!isset($_POST['_wnotification_nonce']) || !isset($_POST['wnotification_params'])) {
-			return false;
-		}
-		if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wnotification_nonce'])), 'wnotification_save_email_settings')) {
-			return false;
-		}
-		if (!current_user_can('manage_options')) {
-			return false;
-		}
+    /**
+     * Save post meta
+     *
+     * @param $post
+     *
+     * @return bool
+     */
+    public function save_meta_boxes() {
+        global $woocommerce_notification_settings;
+        if (!isset($_POST['_wnotification_nonce']) || !isset($_POST['wnotification_params'])) {
+            return false;
+        }
+        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wnotification_nonce'])), 'wnotification_save_email_settings')) {
+            return false;
+        }
+        if (!current_user_can('manage_options')) {
+            return false;
+        }
 
-		update_option('_woocommerce_notification_prefix', substr(md5(gmdate("YmdHis")), 0, 10));
+        update_option('_woocommerce_notification_prefix', substr(md5(gmdate("YmdHis")), 0, 10));
 
-		$data                    = wc_clean($_POST['wnotification_params']);
-		$data['enable']          = $data['enable'] ?? 0;
-		$data['enable_mobile']   = $data['enable_mobile'] ?? 0;
-		$data['non_ajax']        = $data['non_ajax'] ?? 0;
-		$data['show_close_icon'] = $data['show_close_icon'] ?? 0;
-		/* Because name contain slashes, need to handle separately*/
-		$args = array(
-			'virtual_name',
-			'conditional_tags',
-			'virtual_city',
-			'custom_css',
-			'virtual_country',
-		);
-		if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
-			$languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
+        $data                    = wc_clean( $_POST['wnotification_params'] );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+        $data['enable']          = $data['enable'] ?? 0;
+        $data['enable_mobile']   = $data['enable_mobile'] ?? 0;
+        $data['non_ajax']        = $data['non_ajax'] ?? 0;
+        $data['show_close_icon'] = $data['show_close_icon'] ?? 0;
+        /* Because name contain slashes, need to handle separately*/
+        $args = array(
+            'virtual_name',
+            'conditional_tags',
+            'virtual_city',
+            'custom_css',
+            'virtual_country',
+        );
+        if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+            $languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
 
-			if (count($languages)) {
-				foreach ($languages as $key => $language) {
-					if ($language['active']) {
-						continue;
-					}
-					$args[] = 'virtual_name_' . $key;
-					$args[] = 'virtual_city_' . $key;
-					$args[] = 'virtual_country_' . $key;
-				}
-			}
-		} /*Polylang*/ elseif (class_exists('Polylang')) {
-			$languages = pll_languages_list();
+            if (count($languages)) {
+                foreach ($languages as $key => $language) {
+                    if ($language['active']) {
+                        continue;
+                    }
+                    $args[] = 'virtual_name_' . $key;
+                    $args[] = 'virtual_city_' . $key;
+                    $args[] = 'virtual_country_' . $key;
+                }
+            }
+        } /*Polylang*/ elseif (class_exists('Polylang')) {
+            $languages = pll_languages_list();
 
-			foreach ($languages as $language) {
-				$default_lang = pll_default_language('slug');
+            foreach ($languages as $language) {
+                $default_lang = pll_default_language('slug');
 
-				if ($language == $default_lang) {
-					continue;
-				}
-				$args[] = 'virtual_name_' . $language;
-				$args[] = 'virtual_city_' . $language;
-				$args[] = 'virtual_country_' . $language;
-			}
-		}
+                if ($language == $default_lang) {
+                    continue;
+                }
+                $args[] = 'virtual_name_' . $language;
+                $args[] = 'virtual_city_' . $language;
+                $args[] = 'virtual_country_' . $language;
+            }
+        }
 
-		foreach ($args as $field) {
-			$data[$field] = isset($_POST['wnotification_params'][$field]) ? $this->stripslashes_deep($_POST['wnotification_params'][$field]) : "";
-		}
+        foreach ($args as $field) {
+            $data[$field] = isset($_POST['wnotification_params'][$field]) ? $this->stripslashes_deep($_POST['wnotification_params'][$field]) : "";// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+        }
 
-		update_option('wnotification_params', $data);
-		if (is_plugin_active('wp-fastest-cache/wpFastestCache.php')) {
-			$cache = new WpFastestCache();
-			$cache->deleteCache(true);
-		}
-		$woocommerce_notification_settings = $data;
-	}
+        update_option('wnotification_params', $data);
+        if (is_plugin_active('wp-fastest-cache/wpFastestCache.php')) {
+            $cache = new WpFastestCache();
+            $cache->deleteCache(true);
+        }
+        $woocommerce_notification_settings = $data;
+    }
 
-	/**
-	 * Set Nonce
-	 *
-	 * @return string
-	 */
-	protected static function set_nonce() {
-		return wp_nonce_field('wnotification_save_email_settings', '_wnotification_nonce');
-	}
+    /**
+     * Set Nonce
+     *
+     * @return string
+     */
+    protected static function set_nonce() {
+        return wp_nonce_field('wnotification_save_email_settings', '_wnotification_nonce');
+    }
 
-	/**
-	 * Set field in meta box
-	 *
-	 * @param      $field
-	 * @param bool $multi
-	 *
-	 * @return string
-	 */
-	protected static function set_field( $field, $multi = false ) {
-		if ($field) {
-			if ($multi) {
-				return 'wnotification_params[' . $field . '][]';
-			} else {
-				return 'wnotification_params[' . $field . ']';
-			}
-		} else {
-			return '';
-		}
-	}
+    /**
+     * Set field in meta box
+     *
+     * @param      $field
+     * @param bool $multi
+     *
+     * @return string
+     */
+    protected static function set_field( $field, $multi = false ) {
+        if ($field) {
+            if ($multi) {
+                return 'wnotification_params[' . $field . '][]';
+            } else {
+                return 'wnotification_params[' . $field . ']';
+            }
+        } else {
+            return '';
+        }
+    }
 
-	/**
-	 * Get Post Meta
-	 *
-	 * @param $field
-	 *
-	 * @return bool
-	 */
-	public static function get_field( $field, $default = '' ) {
-		return self::$setting->get_params($field, $default);
-	}
+    /**
+     * Get Post Meta
+     *
+     * @param $field
+     *
+     * @return bool
+     */
+    public static function get_field( $field, $default = '' ) {
+        return self::$setting->get_params($field, $default);
+    }
 
-	/**
-	 * Get list shortcode
-	 *
-	 * @return array
-	 */
-	public static function page_callback() {
-		self::$setting = VI_WNOTIFICATION_F_Data::get_instance(true);
-		?>
+    /**
+     * Get list shortcode
+     *
+     * @return array
+     */
+    public static function page_callback() {
+        self::$setting = VI_WNOTIFICATION_F_Data::get_instance(true);
+        ?>
         <div class="wrap woo-notification">
             <h2><?php esc_attr_e('Notification for WooCommerce Settings', 'woo-notification') ?></h2>
             <form method="post" action="" class="vi-ui form" id="wn-notification-form">
-				<?php echo wp_kses_post(ent2ncr(self::set_nonce())) ?>
+                <?php echo wp_kses_post(ent2ncr(self::set_nonce())) ?>
                 <div class="vi-ui attached tabular menu">
                     <div class="item active" data-tab="general"><a href="#general"><?php esc_html_e('General', 'woo-notification') ?></a></div>
                     <div class="item" data-tab="design"><a href="#design"><?php esc_html_e('Design', 'woo-notification') ?></a></div>
@@ -299,7 +305,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                         <tr valign="top">
                             <th scope="row">
                                 <label for="<?php echo esc_attr(self::set_field('enable')) ?>">
-									<?php esc_html_e('Enable', 'woo-notification') ?>
+                                    <?php esc_html_e('Enable', 'woo-notification') ?>
                                 </label>
                             </th>
                             <td>
@@ -315,7 +321,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                         <tr valign="top">
                             <th scope="row">
                                 <label for="<?php echo esc_attr(self::set_field('enable_mobile')) ?>">
-									<?php esc_html_e('Mobile', 'woo-notification') ?>
+                                    <?php esc_html_e('Mobile', 'woo-notification') ?>
                                 </label>
                             </th>
                             <td>
@@ -360,29 +366,48 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <p class="description"><?php esc_html_e('You can arrange product order or special product which you want to up-sell.', 'woo-notification') ?></p>
                             </td>
                         </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label><?php esc_html_e( 'Mask Customer Info', 'woocommerce-notification' ) ?></label>
+                            </th>
+                            <td>
+                                <div class="vi-ui toggle checkbox">
+                                    <input id="<?php echo esc_attr( self::set_field( 'mask_customer_info' ) ) ?>"
+                                           type="checkbox" <?php checked( self::get_field( 'mask_customer_info' ), 1 ) ?>
+                                           tabindex="0" class="vi_hidden" value="1"
+                                           name="<?php echo esc_attr( self::set_field( 'mask_customer_info' ) ) ?>"/>
+                                    <label></label>
+                                </div>
+                                <p class="description">
+                                    <?php esc_html_e( 'Enable this option to partially mask sensitive order information such as customer name and address using the * character. Example: admin => ad**n.', 'woocommerce-notification' ); ?>
+                                </p>
+                            </td>
+                        </tr>
+
                         <tr valign="top" class="get_from_billing vi_hidden">
                             <th scope="row">
                                 <label><?php esc_html_e('From order', 'woo-notification') ?></label>
                             </th>
                             <td>
-								<?php
-								$order_statuses = self::get_field('order_statuses', ['wc-completed']);
-								$statuses       = wc_get_order_statuses();
+                                <?php
+                                $order_statuses = self::get_field('order_statuses', ['wc-completed']);
+                                $statuses       = wc_get_order_statuses();
 
-								?>
+                                ?>
                                 <div class="vi-ui field">
                                     <select multiple="multiple"
                                             name="<?php echo esc_attr(self::set_field('order_statuses', true)) ?>"
                                             class="vi-ui fluid dropdown">
-										<?php foreach ($statuses as $k => $status) {
-											$selected = '';
-											if (in_array($k, $order_statuses)) {
-												$selected = 'selected="selected"';
-											}
-											?>
+                                        <?php foreach ($statuses as $k => $status) {
+                                            $selected = '';
+                                            if (in_array($k, $order_statuses)) {
+                                                $selected = 'selected="selected"';
+                                            }
+                                            ?>
                                             <option <?php echo esc_attr($selected); ?>
                                                     value="<?php echo esc_attr($k) ?>"><?php echo esc_html($status) ?></option>
-										<?php } ?>
+                                        <?php } ?>
                                     </select>
                                     <p class="description"><?php esc_html_e('Order status', 'woo-notification') ?></p>
                                 </div>
@@ -412,52 +437,52 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label><?php esc_html_e('Select Products', 'woo-notification') ?></label>
                             </th>
                             <td>
-								<?php
-								$products_ach = self::get_field('archive_products', array()); ?>
+                                <?php
+                                $products_ach = self::get_field('archive_products', array()); ?>
                                 <select multiple="multiple"
                                         name="<?php echo esc_attr(self::set_field('archive_products', true)) ?>"
                                         class="product-search"
                                         placeholder="<?php esc_attr_e('Please select products', 'woo-notification') ?>">
-									<?php if (count($products_ach)) {
-										$args_p      = array(
-											'post_type'      => array('product', 'product_variation'),
-											'post_status'    => 'publish',
-											'post__in'       => $products_ach,
-											'posts_per_page' => 2,
-										);
-										$the_query_p = new WP_Query($args_p);
-										if ($the_query_p->have_posts()) {
-											$products_ach = $the_query_p->posts;
-											foreach ($products_ach as $product_ach) {
-												$data_ach = wc_get_product($product_ach);
-												if (woocommerce_version_check()) {
-													if ($data_ach->get_type() == 'variation') {
-														$name_prd = $data_ach->get_name();
-													} else {
-														$name_prd = $data_ach->get_title();
-													}
-													if (!$data_ach->is_in_stock()) {
-														$name_prd .= ' (out-of-stock)';
-													}
-												} else {
-													$prd_var_title = $data_ach->post->post_title;
-													if ($data_ach->get_type() == 'variation') {
-														$prd_var_attr = $data_ach->get_variation_attributes();
-														$attr_name1   = array_values($prd_var_attr)[0];
-														$name_prd     = $prd_var_title . ' - ' . $attr_name1;
-													} else {
-														$name_prd = $prd_var_title;
-													}
-												}
-												if ($data_ach) { ?>
+                                    <?php if (count($products_ach)) {
+                                        $args_p      = array(
+                                            'post_type'      => array('product', 'product_variation'),
+                                            'post_status'    => 'publish',
+                                            'post__in'       => $products_ach,
+                                            'posts_per_page' => 2,
+                                        );
+                                        $the_query_p = new WP_Query($args_p);
+                                        if ($the_query_p->have_posts()) {
+                                            $products_ach = $the_query_p->posts;
+                                            foreach ($products_ach as $product_ach) {
+                                                $data_ach = wc_get_product($product_ach);
+                                                if (woocommerce_version_check()) {
+                                                    if ($data_ach->get_type() == 'variation') {
+                                                        $name_prd = $data_ach->get_name();
+                                                    } else {
+                                                        $name_prd = $data_ach->get_title();
+                                                    }
+                                                    if (!$data_ach->is_in_stock()) {
+                                                        $name_prd .= ' (out-of-stock)';
+                                                    }
+                                                } else {
+                                                    $prd_var_title = $data_ach->post->post_title;
+                                                    if ($data_ach->get_type() == 'variation') {
+                                                        $prd_var_attr = $data_ach->get_variation_attributes();
+                                                        $attr_name1   = array_values($prd_var_attr)[0];
+                                                        $name_prd     = $prd_var_title . ' - ' . $attr_name1;
+                                                    } else {
+                                                        $name_prd = $prd_var_title;
+                                                    }
+                                                }
+                                                if ($data_ach) { ?>
                                                     <option selected="selected"
                                                             value="<?php echo esc_attr($data_ach->get_id()); ?>"><?php echo esc_html($name_prd); ?></option>
-												<?php }
-											}
-										}
-										// Reset Post Data
-										wp_reset_postdata();
-									} ?>
+                                                <?php }
+                                            }
+                                        }
+                                        // Reset Post Data
+                                        wp_reset_postdata();
+                                    } ?>
                                 </select>
                                 <p class="description"><?php esc_html_e('You only select 2 products. Please upgrade to unlock unlimited.', 'woo-notification') ?></p>
                                 <a class="vi-ui button" target="_blank"
@@ -470,45 +495,45 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
 
                             <td>
-								<?php
-								$additional_image_sizes = wp_get_additional_image_sizes();
-								$default_image_sizes    = array('thumbnail', 'medium', 'medium_large', 'large');
-								$image_sizes            = array();
+                                <?php
+                                $additional_image_sizes = wp_get_additional_image_sizes();
+                                $default_image_sizes    = array('thumbnail', 'medium', 'medium_large', 'large');
+                                $image_sizes            = array();
 
-								foreach ($default_image_sizes as $size) {
-									$image_sizes[$size] = array(
-										'width'  => (int)get_option($size . '_size_w'),
-										'height' => (int)get_option($size . '_size_h'),
-										'crop'   => (bool)get_option($size . '_crop'),
-									);
-								}
+                                foreach ($default_image_sizes as $size) {
+                                    $image_sizes[$size] = array(
+                                        'width'  => (int)get_option($size . '_size_w'),
+                                        'height' => (int)get_option($size . '_size_h'),
+                                        'crop'   => (bool)get_option($size . '_crop'),
+                                    );
+                                }
 
-								if ($additional_image_sizes) {
-									$image_sizes = array_merge($image_sizes, $additional_image_sizes);
-								}
+                                if ($additional_image_sizes) {
+                                    $image_sizes = array_merge($image_sizes, $additional_image_sizes);
+                                }
 
-								$image_sizes['full'] = array();
-								?>
+                                $image_sizes['full'] = array();
+                                ?>
                                 <select name="<?php echo esc_attr(self::set_field('product_sizes')) ?>"
                                         class="vi-ui fluid dropdown">
-									<?php
-									$selected_product_sizes = self::get_field('product_sizes');
-									$mapping                = [
-										'shop_thumbnail' => 'woocommerce_thumbnail',
-										'shop_catalog'   => 'woocommerce_gallery_thumbnail',
-										'shop_single'    => 'woocommerce_single',
-									];
-									if (isset($mapping[$selected_product_sizes])) {
-										$selected_product_sizes = $mapping[$selected_product_sizes];
-									}
+                                    <?php
+                                    $selected_product_sizes = self::get_field('product_sizes');
+                                    $mapping                = [
+                                        'shop_thumbnail' => 'woocommerce_thumbnail',
+                                        'shop_catalog'   => 'woocommerce_gallery_thumbnail',
+                                        'shop_single'    => 'woocommerce_single',
+                                    ];
+                                    if (isset($mapping[$selected_product_sizes])) {
+                                        $selected_product_sizes = $mapping[$selected_product_sizes];
+                                    }
 
-									foreach ($image_sizes as $slug => $info) {
-										$display_size = !empty($info['width']) ? " - {$info['width']}" : '';
-										$display_size .= !empty($info['height']) ? "x{$info['height']}" : '';
+                                    foreach ($image_sizes as $slug => $info) {
+                                        $display_size = !empty($info['width']) ? " - {$info['width']}" : '';
+                                        $display_size .= !empty($info['height']) ? "x{$info['height']}" : '';
 
-										printf("<option value='%s' %s>%s</option>", esc_attr($slug), selected($selected_product_sizes, $slug, false), esc_html($slug . $display_size));
-									}
-									?>
+                                        printf("<option value='%s' %s>%s</option>", esc_attr($slug), selected($selected_product_sizes, $slug, false), esc_html($slug . $display_size));
+                                    }
+                                    ?>
                                 </select>
 
                                 <p class="description"><?php esc_html_e('Image size will get form your WordPress site.', 'woo-notification') ?></p>
@@ -519,26 +544,26 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label><?php esc_html_e('Select Categories', 'woo-notification') ?></label>
                             </th>
                             <td>
-								<?php
-								$cates = self::get_field('select_categories', array()); ?>
+                                <?php
+                                $cates = self::get_field('select_categories', array()); ?>
                                 <select multiple="multiple"
                                         name="<?php echo esc_attr(self::set_field('select_categories', true)) ?>"
                                         class="category-search"
                                         placeholder="<?php esc_attr_e('Please select category', 'woo-notification') ?>">
-									<?php
-									if (count($cates)) {
-										$categories = get_terms(array(
-											'taxonomy' => 'product_cat',
-											'include'  => $cates,
-										));
-										if (count($categories)) {
-											foreach ($categories as $category) { ?>
+                                    <?php
+                                    if (count($cates)) {
+                                        $categories = get_terms(array(
+                                            'taxonomy' => 'product_cat',
+                                            'include'  => $cates,
+                                        ));
+                                        if (count($categories)) {
+                                            foreach ($categories as $category) { ?>
                                                 <option selected="selected"
                                                         value="<?php echo esc_attr($category->term_id) ?>"><?php echo esc_html($category->name) ?></option>
-												<?php
-											}
-										}
-									} ?>
+                                                <?php
+                                            }
+                                        }
+                                    } ?>
                                 </select>
                                 <p class="description"><?php esc_html_e('You only select 2 categories. Please upgrade to unlock unlimited.', 'woo-notification') ?></p>
                                 <a class="vi-ui button" target="_blank"
@@ -550,51 +575,51 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label><?php esc_html_e('Exclude Products', 'woo-notification') ?></label>
                             </th>
                             <td>
-								<?php $products = self::get_field('cate_exclude_products', array()); ?>
+                                <?php $products = self::get_field('cate_exclude_products', array()); ?>
                                 <select multiple="multiple"
                                         name="<?php echo esc_attr(self::set_field('cate_exclude_products', true)) ?>"
                                         class="product-search"
                                         placeholder="<?php esc_attr_e('Please select products', 'woo-notification') ?>">
-									<?php if (count($products)) {
-										$args_p      = array(
-											'post_type'      => array('product'),
-											'post_status'    => 'publish',
-											'post__in'       => $products,
-											'posts_per_page' => -1,
-										);
-										$the_query_p = new WP_Query($args_p);
-										if ($the_query_p->have_posts()) {
-											$products = $the_query_p->posts;
-											foreach ($products as $product) {
-												$data = wc_get_product($product);
-												if (woocommerce_version_check()) {
-													if ($data->get_type() == 'variation') {
-														continue;
-													} else {
-														$name_prd = $data->get_title();
-													}
-													if (!$data->is_in_stock()) {
-														$name_prd .= ' (out-of-stock)';
-													}
-												} else {
-													$prd_var_title = $data->post->post_title;
-													if ($data->get_type() == 'variation') {
-														continue;
-													} else {
-														$name_prd = $prd_var_title;
-													}
-												}
-												if ($data) {
-													?>
+                                    <?php if (count($products)) {
+                                        $args_p      = array(
+                                            'post_type'      => array('product'),
+                                            'post_status'    => 'publish',
+                                            'post__in'       => $products,
+                                            'posts_per_page' => -1,
+                                        );
+                                        $the_query_p = new WP_Query($args_p);
+                                        if ($the_query_p->have_posts()) {
+                                            $products = $the_query_p->posts;
+                                            foreach ($products as $product) {
+                                                $data = wc_get_product($product);
+                                                if (woocommerce_version_check()) {
+                                                    if ($data->get_type() == 'variation') {
+                                                        continue;
+                                                    } else {
+                                                        $name_prd = $data->get_title();
+                                                    }
+                                                    if (!$data->is_in_stock()) {
+                                                        $name_prd .= ' (out-of-stock)';
+                                                    }
+                                                } else {
+                                                    $prd_var_title = $data->post->post_title;
+                                                    if ($data->get_type() == 'variation') {
+                                                        continue;
+                                                    } else {
+                                                        $name_prd = $prd_var_title;
+                                                    }
+                                                }
+                                                if ($data) {
+                                                    ?>
                                                     <option selected="selected"
                                                             value="<?php echo esc_attr($data->get_id()) ?>"><?php echo esc_html($name_prd) ?></option>
-													<?php
-												}
-											}
-										}
-										// Reset Post Data
-										wp_reset_postdata();
-									} ?>
+                                                    <?php
+                                                }
+                                            }
+                                        }
+                                        // Reset Post Data
+                                        wp_reset_postdata();
+                                    } ?>
                                 </select>
 
                                 <p class="description"><?php esc_html_e('These products will not display on notification.', 'woo-notification') ?></p>
@@ -694,53 +719,53 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label><?php esc_html_e('Exclude Products', 'woo-notification') ?></label>
                             </th>
                             <td>
-								<?php $products = self::get_field('exclude_products', array()); ?>
+                                <?php $products = self::get_field('exclude_products', array()); ?>
                                 <select multiple="multiple"
                                         name="<?php echo esc_attr(self::set_field('exclude_products', true)) ?>"
                                         class="product-search"
                                         placeholder="<?php esc_attr_e('Please select products', 'woo-notification') ?>">
-									<?php if (count($products)) {
-										$args_p      = array(
-											'post_type'      => array('product', 'product_variation'),
-											'post_status'    => 'publish',
-											'post__in'       => $products,
-											'posts_per_page' => -1,
-										);
-										$the_query_p = new WP_Query($args_p);
-										if ($the_query_p->have_posts()) {
-											$products = $the_query_p->posts;
-											foreach ($products as $product) {
-												$data = wc_get_product($product);
-												if (woocommerce_version_check()) {
-													if ($data->get_type() == 'variation') {
-														$name_prd = $data->get_name();
-													} else {
-														$name_prd = $data->get_title();
-													}
-													if (!$data->is_in_stock()) {
-														$name_prd .= ' (out-of-stock)';
-													}
-												} else {
-													$prd_var_title = $data->post->post_title;
-													if ($data->get_type() == 'variation') {
-														$prd_var_attr = $data->get_variation_attributes();
-														$attr_name1   = array_values($prd_var_attr)[0];
-														$name_prd     = $prd_var_title . ' - ' . $attr_name1;
-													} else {
-														$name_prd = $prd_var_title;
-													}
-												}
-												if ($data) {
-													?>
+                                    <?php if (count($products)) {
+                                        $args_p      = array(
+                                            'post_type'      => array('product', 'product_variation'),
+                                            'post_status'    => 'publish',
+                                            'post__in'       => $products,
+                                            'posts_per_page' => -1,
+                                        );
+                                        $the_query_p = new WP_Query($args_p);
+                                        if ($the_query_p->have_posts()) {
+                                            $products = $the_query_p->posts;
+                                            foreach ($products as $product) {
+                                                $data = wc_get_product($product);
+                                                if (woocommerce_version_check()) {
+                                                    if ($data->get_type() == 'variation') {
+                                                        $name_prd = $data->get_name();
+                                                    } else {
+                                                        $name_prd = $data->get_title();
+                                                    }
+                                                    if (!$data->is_in_stock()) {
+                                                        $name_prd .= ' (out-of-stock)';
+                                                    }
+                                                } else {
+                                                    $prd_var_title = $data->post->post_title;
+                                                    if ($data->get_type() == 'variation') {
+                                                        $prd_var_attr = $data->get_variation_attributes();
+                                                        $attr_name1   = array_values($prd_var_attr)[0];
+                                                        $name_prd     = $prd_var_title . ' - ' . $attr_name1;
+                                                    } else {
+                                                        $name_prd = $prd_var_title;
+                                                    }
+                                                }
+                                                if ($data) {
+                                                    ?>
                                                     <option selected="selected"
                                                             value="<?php echo esc_attr($data->get_id()) ?>"><?php echo esc_html($name_prd) ?></option>
-													<?php
-												}
-											}
-										}
-										// Reset Post Data
-										wp_reset_postdata();
-									} ?>
+                                                    <?php
+                                                }
+                                            }
+                                        }
+                                        // Reset Post Data
+                                        wp_reset_postdata();
+                                    } ?>
                                 </select>
 
                                 <p class="description"><?php esc_html_e('These products will not show on notification.', 'woo-notification') ?></p>
@@ -751,54 +776,54 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label><?php esc_html_e('Virtual First Name', 'woo-notification') ?></label>
                             </th>
                             <td>
-								<?php
-								$first_names = self::get_field('virtual_name')
-								?>
+                                <?php
+                                $first_names = self::get_field('virtual_name')
+                                ?>
                                 <textarea
                                         name="<?php echo esc_attr(self::set_field('virtual_name')) ?>"><?php echo esc_html($first_names) ?></textarea>
 
                                 <p class="description"><?php esc_html_e('Virtual first name what will show on notification. Each first name on a line.', 'woo-notification') ?></p>
-								<?php
-								/*WPML.org*/
-								if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
-									$languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
+                                <?php
+                                /*WPML.org*/
+                                if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+                                    $languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
 
-									if (count($languages)) {
-										foreach ($languages as $key => $language) {
-											if ($language['active']) {
-												continue;
-											}
-											$wpml_name = self::get_field('virtual_name_' . $key);
-											if (!$wpml_name) {
-												$wpml_name = $first_names;
-											}
-											?>
+                                    if (count($languages)) {
+                                        foreach ($languages as $key => $language) {
+                                            if ($language['active']) {
+                                                continue;
+                                            }
+                                            $wpml_name = self::get_field('virtual_name_' . $key);
+                                            if (!$wpml_name) {
+                                                $wpml_name = $first_names;
+                                            }
+                                            ?>
                                             <h4><?php echo esc_html($language['native_name']) ?></h4>
                                             <textarea
                                                     name="<?php echo esc_attr(self::set_field('virtual_name_' . $key)) ?>"><?php echo esc_html($wpml_name) ?></textarea>
-										<?php }
-									}
-								} /*Polylang*/ elseif (class_exists('Polylang')) {
-									$languages = pll_languages_list();
+                                        <?php }
+                                    }
+                                } /*Polylang*/ elseif (class_exists('Polylang')) {
+                                    $languages = pll_languages_list();
 
-									foreach ($languages as $language) {
-										$default_lang = pll_default_language('slug');
+                                    foreach ($languages as $language) {
+                                        $default_lang = pll_default_language('slug');
 
-										if ($language == $default_lang) {
-											continue;
-										}
-										$wpml_name = self::get_field('virtual_name_' . $language);
-										if (!$wpml_name) {
-											$wpml_name = $first_names;
-										}
-										?>
+                                        if ($language == $default_lang) {
+                                            continue;
+                                        }
+                                        $wpml_name = self::get_field('virtual_name_' . $language);
+                                        if (!$wpml_name) {
+                                            $wpml_name = $first_names;
+                                        }
+                                        ?>
                                         <h4><?php echo esc_html($language) ?></h4>
                                         <textarea
                                                 name="<?php echo esc_attr(self::set_field('virtual_name_' . $language)) ?>"><?php echo esc_html($wpml_name) ?></textarea>
-										<?php
-									}
-								}
-								?>
+                                        <?php
+                                    }
+                                }
+                                ?>
                             </td>
                         </tr>
                         <tr valign="top" class="select_product hidden">
@@ -820,106 +845,106 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             <th scope="row">
                                 <label><?php esc_html_e('Virtual City', 'woo-notification') ?></label></th>
                             <td>
-								<?php
-								$virtual_city = self::get_field('virtual_city');
-								?>
+                                <?php
+                                $virtual_city = self::get_field('virtual_city');
+                                ?>
                                 <textarea
                                         name="<?php echo esc_attr(self::set_field('virtual_city')) ?>"><?php echo esc_attr($virtual_city) ?></textarea>
 
                                 <p class="description"><?php esc_html_e('Virtual city name what will show on notification. Each city name on a line.', 'woo-notification') ?></p>
-								<?php
-								/*WPML.org*/
-								if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
-									$languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
+                                <?php
+                                /*WPML.org*/
+                                if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+                                    $languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
 
-									if (count($languages)) {
-										foreach ($languages as $key => $language) {
-											if ($language['active']) {
-												continue;
-											}
-											$wpml_city = self::get_field('virtual_city_' . $key);
-											if (!$wpml_city) {
-												$wpml_city = $virtual_city;
-											}
-											?>
+                                    if (count($languages)) {
+                                        foreach ($languages as $key => $language) {
+                                            if ($language['active']) {
+                                                continue;
+                                            }
+                                            $wpml_city = self::get_field('virtual_city_' . $key);
+                                            if (!$wpml_city) {
+                                                $wpml_city = $virtual_city;
+                                            }
+                                            ?>
                                             <h4><?php echo esc_html($language['native_name']) ?></h4>
                                             <textarea
                                                     name="<?php echo esc_attr(self::set_field('virtual_city_' . $key)) ?>"><?php echo esc_html($wpml_city) ?></textarea>
-										<?php }
-									}
-								} /*Polylang*/ elseif (class_exists('Polylang')) {
-									$languages = pll_languages_list();
+                                        <?php }
+                                    }
+                                } /*Polylang*/ elseif (class_exists('Polylang')) {
+                                    $languages = pll_languages_list();
 
-									foreach ($languages as $language) {
-										$default_lang = pll_default_language('slug');
+                                    foreach ($languages as $language) {
+                                        $default_lang = pll_default_language('slug');
 
-										if ($language == $default_lang) {
-											continue;
-										}
+                                        if ($language == $default_lang) {
+                                            continue;
+                                        }
 
-										$wpml_city = self::get_field('virtual_city_' . $language);
-										if (!$wpml_city) {
-											$wpml_city = $virtual_city;
-										}
-										?>
+                                        $wpml_city = self::get_field('virtual_city_' . $language);
+                                        if (!$wpml_city) {
+                                            $wpml_city = $virtual_city;
+                                        }
+                                        ?>
                                         <h4><?php echo esc_html($language) ?></h4>
                                         <textarea
                                                 name="<?php echo esc_attr(self::set_field('virtual_city_' . $language)) ?>"><?php echo esc_html($wpml_city) ?></textarea>
-										<?php
-									}
-								} ?>
+                                        <?php
+                                    }
+                                } ?>
                             </td>
                         </tr>
                         <tr valign="top" class="virtual_address hidden">
                             <th scope="row">
                                 <label><?php esc_html_e('Virtual Country', 'woo-notification') ?></label></th>
                             <td>
-								<?php $virtual_country = self::get_field('virtual_country') ?>
+                                <?php $virtual_country = self::get_field('virtual_country') ?>
                                 <input type="text" name="<?php echo esc_attr(self::set_field('virtual_country')) ?>"
                                        value="<?php echo esc_attr($virtual_country) ?>"/>
 
                                 <p class="description"><?php esc_html_e('Virtual country name what will show on notification.', 'woo-notification') ?></p>
-								<?php /*WPML.org*/
-								if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
-									$languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
+                                <?php /*WPML.org*/
+                                if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+                                    $languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
 
-									if (count($languages)) {
-										foreach ($languages as $key => $language) {
-											if ($language['active']) {
-												continue;
-											}
-											$wpml_country = self::get_field('virtual_country_' . $key);
-											if (!$wpml_country) {
-												$wpml_country = $virtual_country;
-											}
-											?>
+                                    if (count($languages)) {
+                                        foreach ($languages as $key => $language) {
+                                            if ($language['active']) {
+                                                continue;
+                                            }
+                                            $wpml_country = self::get_field('virtual_country_' . $key);
+                                            if (!$wpml_country) {
+                                                $wpml_country = $virtual_country;
+                                            }
+                                            ?>
                                             <label><?php echo esc_html($language['native_name']) ?></label>
                                             <input type="text"
                                                    name="<?php echo esc_attr(self::set_field('virtual_country_' . $key)) ?>"
                                                    value="<?php echo esc_attr($wpml_country) ?>"/>
-										<?php }
-									}
-								} elseif (class_exists('Polylang')) {
-									$languages = pll_languages_list();
+                                        <?php }
+                                    }
+                                } elseif (class_exists('Polylang')) {
+                                    $languages = pll_languages_list();
 
-									foreach ($languages as $language) {
-										$default_lang = pll_default_language('slug');
+                                    foreach ($languages as $language) {
+                                        $default_lang = pll_default_language('slug');
 
-										if ($language == $default_lang) {
-											continue;
-										}
-										$wpml_country = self::get_field('virtual_country_' . $language);
-										if (!$wpml_country) {
-											$wpml_country = $virtual_country;
-										}
-										?>
+                                        if ($language == $default_lang) {
+                                            continue;
+                                        }
+                                        $wpml_country = self::get_field('virtual_country_' . $language);
+                                        if (!$wpml_country) {
+                                            $wpml_country = $virtual_country;
+                                        }
+                                        ?>
                                         <h4><?php echo esc_html($language) ?></h4>
                                         <input type="text"
                                                name="<?php echo esc_attr(self::set_field('virtual_country_' . $language)) ?>"
                                                value="<?php echo esc_attr($wpml_country) ?>"/>
-										<?php
-									}
-								} ?>
+                                        <?php
+                                    }
+                                } ?>
                             </td>
                         </tr>
                         <tr valign="top">
@@ -948,7 +973,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                         <tr valign="top">
                             <th scope="row">
                                 <label for="<?php echo esc_attr(self::set_field('enable_single_product')) ?>">
-									<?php esc_html_e('Run single product', 'woo-notification') ?></label>
+                                    <?php esc_html_e('Run single product', 'woo-notification') ?></label>
                             </th>
                             <td>
                                 <div class="vi-ui toggle checkbox">
@@ -1010,14 +1035,14 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             <td>
                                 <div class="wn-slider-wrapper">
                                     <div class="wn-slider-slides">
-										<?php
-										$b_images = woocommerce_notification_background_images();
-										foreach ($b_images as $k => $b_image) {
-											$value = $k;
-											if ('none' === $k) {
-												$value = 0;
-											}
-											?>
+                                        <?php
+                                        $b_images = woocommerce_notification_background_images();
+                                        foreach ($b_images as $k => $b_image) {
+                                            $value = $k;
+                                            if ('none' === $k) {
+                                                $value = 0;
+                                            }
+                                            ?>
                                             <div class="wn-slider-item">
                                                 <input id="<?php echo esc_attr('background_image_' . $k) ?>"
                                                        type="radio" <?php echo checked(self::get_field('background_image', 0), $value) ?>
@@ -1035,14 +1060,14 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                                     </div>
                                                 </label>
                                             </div>
-											<?php
-										}
-										?>
+                                            <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="wn-all-templates">
                                     <div class="wn-view-all-tmpl">
-										<?php esc_html_e('See all', 'woo-notification') ?>
+                                        <?php esc_html_e('See all', 'woo-notification') ?>
                                     </div>
                                     <div class="vi-ui modal wn-all-tmpl-modal">
                                         <span class="close wn-close-all-tmpl-modal"></span>
@@ -1050,14 +1075,14 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <div class="content">
                                             <div class="vi-ui three column grid">
                                                 <div class="row">
-													<?php
-													$b_images = woocommerce_notification_background_images();
-													foreach ($b_images as $k => $b_image) {
-														$value = $k;
-														if ('none' === $k) {
-															$value = '0';
-														}
-														?>
+                                                    <?php
+                                                    $b_images = woocommerce_notification_background_images();
+                                                    foreach ($b_images as $k => $b_image) {
+                                                        $value = $k;
+                                                        if ('none' === $k) {
+                                                            $value = '0';
+                                                        }
+                                                        ?>
                                                         <div class="wn-slider-item column <?php echo self::get_field('background_image') === $value ? 'active' : '' ?>">
                                                             <label class="vi-ui center aligned wn-slider-item__info" for="<?php echo esc_attr('background_image_' . $k) ?>">
                                                                 <div class="wn-slider-item__info-bg">
@@ -1070,9 +1095,9 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                                                 </div>
                                                             </label>
                                                         </div>
-														<?php
-													}
-													?>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -1282,7 +1307,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                         <tr valign="top">
                             <th scope="row">
                                 <label for="<?php echo esc_attr(self::set_field('rounded_corner')) ?>">
-									<?php esc_html_e('Style', 'woo-notification') ?>
+                                    <?php esc_html_e('Style', 'woo-notification') ?>
                                 </label>
                             </th>
                             <td>
@@ -1312,7 +1337,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <div class="field">
                                             <div class="vi-ui labeled input">
                                                 <div class="vi-ui label">
-													<?php esc_html_e('Background', 'woo-notification') ?>
+                                                    <?php esc_html_e('Background', 'woo-notification') ?>
                                                 </div>
                                                 <input style="background-color: <?php echo esc_attr(self::get_field('background_color', '#ffffff')) ?>"
                                                        data-ele="backgroundcolor" type="text" class="color-picker"
@@ -1323,7 +1348,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <div class="field">
                                             <div class="vi-ui labeled input">
                                                 <div class="vi-ui label">
-													<?php esc_html_e('Text message', 'woo-notification') ?>
+                                                    <?php esc_html_e('Text message', 'woo-notification') ?>
                                                 </div>
                                                 <input data-ele="textcolor"
                                                        style="background-color: <?php echo esc_attr(self::get_field('text_color', '#000000')) ?>"
@@ -1335,7 +1360,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <div class="field">
                                             <div class="vi-ui labeled input">
                                                 <div class="vi-ui label">
-													<?php esc_html_e('Product name', 'woo-notification') ?>
+                                                    <?php esc_html_e('Product name', 'woo-notification') ?>
                                                 </div>
                                                 <input data-ele="highlight" type="text" class="color-picker"
                                                        name="<?php echo esc_attr(self::set_field('highlight_color')) ?>"
@@ -1411,7 +1436,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                         <tr valign="top">
                             <th scope="row">
                                 <label for="<?php echo esc_attr(self::set_field('show_close_icon')) ?>">
-									<?php esc_html_e('Show Close Icon', 'woo-notification') ?>
+                                    <?php esc_html_e('Show Close Icon', 'woo-notification') ?>
                                 </label>
                             </th>
                             <td>
@@ -1448,7 +1473,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                         <tr valign="top">
                             <th scope="row">
                                 <label for="<?php echo esc_attr(self::set_field('custom_css')) ?>">
-									<?php esc_html_e('Custom CSS', 'woo-notification') ?>
+                                    <?php esc_html_e('Custom CSS', 'woo-notification') ?>
                                 </label>
                             </th>
                             <td>
@@ -1458,34 +1483,34 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                         </tr>
                         </tbody>
                     </table>
-					<?php
-					$class = array();
-					switch (self::get_field('position')) {
-						case 1:
-							$class[] = 'bottom_right';
-							break;
-						case 2:
-							$class[] = 'top_left';
-							break;
-						case 3:
-							$class[] = 'top_right';
-							break;
-						default:
-							$class[] = '';
-					}
-					$background_image = self::get_field('background_image');
-					if ($background_image) {
-						$class[] = 'wn-extended';
-						$class[] = 'wn-' . $background_image;
-					}
-					$class[] = 'vi-wn-show';
+                    <?php
+                    $class = array();
+                    switch (self::get_field('position')) {
+                        case 1:
+                            $class[] = 'bottom_right';
+                            break;
+                        case 2:
+                            $class[] = 'top_left';
+                            break;
+                        case 3:
+                            $class[] = 'top_right';
+                            break;
+                        default:
+                            $class[] = '';
+                    }
+                    $background_image = self::get_field('background_image');
+                    if ($background_image) {
+                        $class[] = 'wn-extended';
+                        $class[] = 'wn-' . $background_image;
+                    }
+                    $class[] = 'vi-wn-show';
 
-					if (self::get_field('rounded_corner')) {
-						$class[] = 'wn-rounded-corner';
-					}
-					$class[] = 'wn-product-with-image';
-					$class[] = self::get_field('image_position') ? 'img-right' : '';
-					?>
+                    if (self::get_field('rounded_corner')) {
+                        $class[] = 'wn-rounded-corner';
+                    }
+                    $class[] = 'wn-product-with-image';
+                    $class[] = self::get_field('image_position') ? 'img-right' : '';
+                    ?>
                     <div class="<?php echo esc_attr(implode(' ', $class)) ?>"
                          id="message-purchased"
                          data-effect_display="<?php echo esc_attr(self::get_field('message_display_effect')); ?>"
@@ -1620,75 +1645,75 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <table class="vi-ui message-purchased optiontable form-table">
-									<?php $messages = self::get_field('message_purchased');
-									if (!$messages) {
-										$messages = array('Someone in {city}, {country} purchased a {product_with_link} {time_ago}');
-									} elseif (!is_array($messages) && $messages) {
-										$messages = array($messages);
-									}
+                                    <?php $messages = self::get_field('message_purchased');
+                                    if (!$messages) {
+                                        $messages = array('Someone in {city}, {country} purchased a {product_with_link} {time_ago}');
+                                    } elseif (!is_array($messages) && $messages) {
+                                        $messages = array($messages);
+                                    }
 
-									if (count($messages)) {
-										foreach ($messages as $k => $message) {
-											?>
+                                    if (count($messages)) {
+                                        foreach ($messages as $k => $message) {
+                                            ?>
                                             <tr>
                                                 <td width="90%">
 
                                                     <textarea
                                                             name="<?php echo esc_attr(self::set_field('message_purchased', 1)) ?>"><?php echo wp_kses_post(wp_strip_all_tags($message)) ?></textarea>
 
-													<?php
-													/*WPML.org*/
-													if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
-														$languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
+                                                    <?php
+                                                    /*WPML.org*/
+                                                    if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+                                                        $languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
 
-														if (count($languages)) {
-															foreach ($languages as $key => $language) {
-																if ($language['active']) {
-																	continue;
-																}
-																$wpml_messages = self::get_field('message_purchased_' . $key);
-																if (!$wpml_messages) {
-																	$wpml_messages = array('Someone in {city}, {country} purchased a {product_with_link} {time_ago}');
-																} elseif (!is_array($wpml_messages) && $wpml_messages) {
-																	$wpml_messages = array($wpml_messages);
-																}
-																?>
+                                                        if (count($languages)) {
+                                                            foreach ($languages as $key => $language) {
+                                                                if ($language['active']) {
+                                                                    continue;
+                                                                }
+                                                                $wpml_messages = self::get_field('message_purchased_' . $key);
+                                                                if (!$wpml_messages) {
+                                                                    $wpml_messages = array('Someone in {city}, {country} purchased a {product_with_link} {time_ago}');
+                                                                } elseif (!is_array($wpml_messages) && $wpml_messages) {
+                                                                    $wpml_messages = array($wpml_messages);
+                                                                }
+                                                                ?>
                                                                 <h4><?php echo esc_html($language['native_name']) ?></h4>
                                                                 <textarea
                                                                         name="<?php echo esc_attr(self::set_field('message_purchased_' . $key, 1)) ?>"><?php echo wp_kses_post(isset($wpml_messages[$k]) ? wp_strip_all_tags($wpml_messages[$k]) : $message) ?></textarea>
-															<?php }
-														}
-													} /*Polylang*/ elseif (class_exists('Polylang')) {
-														$languages = pll_languages_list();
+                                                            <?php }
+                                                        }
+                                                    } /*Polylang*/ elseif (class_exists('Polylang')) {
+                                                        $languages = pll_languages_list();
 
-														foreach ($languages as $language) {
-															$default_lang = pll_default_language('slug');
+                                                        foreach ($languages as $language) {
+                                                            $default_lang = pll_default_language('slug');
 
-															if ($language == $default_lang) {
-																continue;
-															}
-															$wpml_messages = self::get_field('message_purchased_' . $language);
-															if (!$wpml_messages) {
-																$wpml_messages = array('Someone in {city}, {country} purchased a {product_with_link} {time_ago}');
-															} elseif (!is_array($wpml_messages) && $wpml_messages) {
-																$wpml_messages = array($wpml_messages);
-															}
-															?>
+                                                            if ($language == $default_lang) {
+                                                                continue;
+                                                            }
+                                                            $wpml_messages = self::get_field('message_purchased_' . $language);
+                                                            if (!$wpml_messages) {
+                                                                $wpml_messages = array('Someone in {city}, {country} purchased a {product_with_link} {time_ago}');
+                                                            } elseif (!is_array($wpml_messages) && $wpml_messages) {
+                                                                $wpml_messages = array($wpml_messages);
+                                                            }
+                                                            ?>
                                                             <h4><?php echo esc_html($language) ?></h4>
                                                             <textarea
                                                                     name="<?php echo esc_attr(self::set_field('message_purchased_' . $language, 1)) ?>"><?php echo wp_kses_post(isset($wpml_messages[$k]) ? wp_strip_all_tags($wpml_messages[$k]) : $message) ?></textarea>
-															<?php
-														}
-													}
-													?>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
 
                                                 </td>
                                                 <td>
                                                     <span class="vi-ui button remove-message red"><?php esc_html_e('Remove', 'woo-notification') ?></span>
                                                 </td>
                                             </tr>
-										<?php }
-									} ?>
+                                        <?php }
+                                    } ?>
                                 </table>
                                 <p>
                                     <span class="vi-ui button add-message green"><?php esc_html_e('Add New', 'woo-notification') ?></span>
@@ -1735,60 +1760,60 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label for="<?php echo esc_attr(self::set_field('custom_shortcode')) ?>"><?php esc_html_e('Custom', 'woo-notification') ?></label>
                             </th>
                             <td>
-								<?php $custom_shortcode = self::get_field('custom_shortcode', esc_attr('{number} people seeing this product right now')); ?>
+                                <?php $custom_shortcode = self::get_field('custom_shortcode', esc_attr('{number} people seeing this product right now')); ?>
                                 <input id="<?php echo esc_attr(self::set_field('custom_shortcode')) ?>" type="text"
                                        tabindex="0"
                                        value="<?php echo esc_attr($custom_shortcode) ?>"
                                        name="<?php echo esc_attr(self::set_field('custom_shortcode')) ?>"/>
 
                                 <p class="description"><?php esc_html_e('This is {custom} shortcode content.', 'woo-notification') ?></p>
-								<?php
-								/*WPML.org*/
-								if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
-									$languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
+                                <?php
+                                /*WPML.org*/
+                                if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+                                    $languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
 
-									if (count($languages)) {
-										foreach ($languages as $key => $language) {
-											if ($language['active']) {
-												continue;
-											}
-											$wpml_custom_shortcode = self::get_field('custom_shortcode_' . $key);
-											if (!$wpml_custom_shortcode) {
-												$wpml_custom_shortcode = $custom_shortcode;
-											}
-											?>
+                                    if (count($languages)) {
+                                        foreach ($languages as $key => $language) {
+                                            if ($language['active']) {
+                                                continue;
+                                            }
+                                            $wpml_custom_shortcode = self::get_field('custom_shortcode_' . $key);
+                                            if (!$wpml_custom_shortcode) {
+                                                $wpml_custom_shortcode = $custom_shortcode;
+                                            }
+                                            ?>
                                             <h4><?php echo esc_html($language['native_name']) ?></h4>
                                             <input id="<?php echo esc_attr(self::set_field('custom_shortcode_' . $key)) ?>"
                                                    type="text"
                                                    tabindex="0"
                                                    value="<?php echo esc_attr($wpml_custom_shortcode) ?>"
                                                    name="<?php echo esc_attr(self::set_field('custom_shortcode_' . $key)) ?>"/>
-										<?php }
-									}
-								} /*Polylang*/ elseif (class_exists('Polylang')) {
-									$languages = pll_languages_list();
+                                        <?php }
+                                    }
+                                } /*Polylang*/ elseif (class_exists('Polylang')) {
+                                    $languages = pll_languages_list();
 
-									foreach ($languages as $language) {
-										$default_lang = pll_default_language('slug');
+                                    foreach ($languages as $language) {
+                                        $default_lang = pll_default_language('slug');
 
-										if ($language == $default_lang) {
-											continue;
-										}
-										$wpml_custom_shortcode = self::get_field('custom_shortcode_' . $language);
-										if (!$wpml_custom_shortcode) {
-											$wpml_custom_shortcode = $custom_shortcode;
-										}
-										?>
+                                        if ($language == $default_lang) {
+                                            continue;
+                                        }
+                                        $wpml_custom_shortcode = self::get_field('custom_shortcode_' . $language);
+                                        if (!$wpml_custom_shortcode) {
+                                            $wpml_custom_shortcode = $custom_shortcode;
+                                        }
+                                        ?>
                                         <h4><?php echo esc_html($language) ?></h4>
                                         <input id="<?php echo esc_attr(self::set_field('custom_shortcode_' . $language)) ?>"
                                                type="text"
                                                tabindex="0"
                                                value="<?php echo esc_attr($wpml_custom_shortcode) ?>"
                                                name="<?php echo esc_attr(self::set_field('custom_shortcode_' . $language)) ?>"/>
-										<?php
-									}
-								}
-								?>
+                                        <?php
+                                    }
+                                }
+                                ?>
                             </td>
                         </tr>
                         <tr valign="top">
@@ -1855,7 +1880,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                         </tr>
                         <tr valign="top">
                             <th scope="row">
-								<?php esc_html_e('Conditional Tags', 'woo-notification') ?>
+                                <?php esc_html_e('Conditional Tags', 'woo-notification') ?>
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
@@ -1957,30 +1982,33 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <td>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('<strong>Follow these steps to get API:</strong>', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            printf('<strong>%s</strong>', esc_html__( 'Follow these steps to get API:',  'woo-notification' ) );
+                                            ?>
                                         </p>
                                         <ol class="description">
                                             <li>
-												<?php
-												echo wp_kses_post(sprintf(__('Go to <a href="https://ai.google.dev/gemini-api">https://ai.google.dev/gemini-api</a>', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-												?>
+                                                <?php
+                                                printf( '%1$s <a href="%2$s">%3$s</a>',
+                                                    esc_html__( 'Go to', 'woo-notification' ),
+                                                    esc_url( 'https://ai.google.dev/gemini-api' ),
+                                                    esc_html__( 'https://ai.google.dev/gemini-api', 'woo-notification' ) );
+                                                ?>
                                             </li>
                                             <li>
-												<?php
-												echo wp_kses_post(sprintf(__('Select "Get an API key from Google AI Studio"', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-												?>
+                                                <?php
+                                                esc_html_e('Select "Get an API key from Google AI Studio"', 'woo-notification' );// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
+                                                ?>
                                             </li>
                                             <li>
-												<?php
-												echo wp_kses_post(sprintf(__('Click "Create API key"', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-												?>
+                                                <?php
+                                                esc_html_e('Click "Create API key"', 'woo-notification');
+                                                ?>
                                             </li>
                                             <li>
-												<?php
-												echo wp_kses_post(sprintf(__('Then, configure your key. And copy the key and paste it to this field', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-												?>
+                                                <?php
+                                                esc_html_e('Then, configure your key. And copy the key and paste it to this field', 'woo-notification');// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
+                                                ?>
                                             </li>
                                         </ol>
                                     </td>
@@ -1997,9 +2025,12 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         </select>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('API version supported by Gemini. Read more details of each version in <a href="https://ai.google.dev/gemini-api/docs/api-versions">this article</a>', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            printf( '%1$s <a href="%2$s">%3$s</a>',
+                                                esc_html__( 'API version supported by Gemini. Read more details of each version in', 'woo-notification' ),
+                                                esc_url( 'https://ai.google.dev/gemini-api/docs/api-versions' ),
+                                                esc_html__( 'this article', 'woo-notification' ) );
+                                            ?>
                                         </p>
                                     </td>
                                 </tr>
@@ -2012,9 +2043,12 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <a class="vi-ui button" target="_blank"
                                            href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('Choose a model. Gemini models are designed for multimodal applications, processing prompts with both text and images to generate text responses. Read more details in <a href="https://ai.google.dev/gemini-api/docs/models/gemini">this article.</a>', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            printf( '%1$s <a href="%2$s">%3$s</a>',
+                                                esc_html__( 'Choose a model. Gemini models are designed for multimodal applications, processing prompts with both text and images to generate text responses. Read more details in', 'woo-notification' ),
+                                                esc_url( 'https://ai.google.dev/gemini-api/docs/models/gemini' ),
+                                                esc_html__( 'this article.', 'woo-notification' ) );
+                                            ?>
                                         </p>
                                     </td>
                                 </tr>
@@ -2026,9 +2060,9 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <td>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('Provide your prompt or specific instructions for the AI to generate messages in the \'Message Purchased\' input field under Messages. Ex:', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            esc_html_e('Provide your prompt or specific instructions for the AI to generate messages in the \'Message Purchased\' input field under Messages. Ex:', 'woo-notification');
+                                            ?>
                                         </p>
                                         <ol class="description">
                                             <li><?php echo esc_html__('Generate notification sentences that simulate recent purchases, product views, or inquiries, using numbers and locations, without urgency or exclamation marks', 'woo-notification');// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
@@ -2047,9 +2081,9 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <td>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('Provide your prompt or specific instructions for the AI to generate customers\' names in the \'Virtual First Name\' input field under Products', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            esc_html_e('Provide your prompt or specific instructions for the AI to generate customers\' names in the \'Virtual First Name\' input field under Products', 'woo-notification');
+                                            ?>
                                         </p>
                                         <ol class="description">
                                             <li><?php echo esc_html__('Shortcode {MIN_CHARACTERS} : is min characters', 'woo-notification');// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
@@ -2066,9 +2100,9 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <td>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('Provide your prompt or specific instructions for the AI to generate cities in the \'Virtual City\' input field under Products', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            esc_html_e('Provide your prompt or specific instructions for the AI to generate cities in the \'Virtual City\' input field under Products', 'woo-notification');
+                                            ?>
                                         </p>
                                         <ol class="description">
                                             <li><?php echo esc_html__('Shortcode {MIN_CHARACTERS} : is min characters', 'woo-notification');// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
@@ -2094,25 +2128,31 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <td>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('<strong>Follow these steps to get API:</strong>', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            printf('<strong>%s</strong>', esc_html__( 'Follow these steps to get API:', 'woo-notification' ) );
+                                            ?>
                                         </p>
                                         <ol class="description">
                                             <li>
-												<?php
-												echo wp_kses_post(sprintf(__('Sign up/Login at <a href="https://platform.openai.com/">OpenAI</a>', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-												?>
+                                                <?php
+                                                printf( '%1$s <a href="%2$s">%3$s</a>',
+                                                    esc_html__( 'Sign up/Login at', 'woo-notification' ),
+                                                    esc_url( 'https://platform.openai.com/' ),
+                                                    esc_html__( 'OpenAI', 'woo-notification' ) );
+                                                ?>
                                             </li>
                                             <li>
-												<?php
-												echo wp_kses_post(sprintf(__('Get an API Key from the <a href="https://platform.openai.com/account/api-keys">API Keys page.</a>', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-												?>
+                                                <?php
+                                                printf( '%1$s <a href="%2$s">%3$s</a>',
+                                                    esc_html__( 'Get an API Key from the', 'woo-notification' ),
+                                                    esc_url( 'https://platform.openai.com/account/api-keys' ),
+                                                    esc_html__( 'API Keys page.', 'woo-notification' ) );
+                                                ?>
                                             </li>
                                             <li>
-												<?php
-												echo wp_kses_post(sprintf(__('Then, configure your key. And copy the key and paste it to this field', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-												?>
+                                                <?php
+                                                esc_html_e('Then, configure your key. And copy the key and paste it to this field', 'woo-notification');
+                                                ?>
                                             </li>
                                         </ol>
                                     </td>
@@ -2124,9 +2164,12 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <td>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('Choose a model. OpenAI models are designed for multimodal applications, processing prompts with both text and images to generate text responses. Read more details in <a href="https://platform.openai.com/docs/models#models-overview">this article.</a>', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            printf( '%1$s <a href="%2$s">%3$s</a>',
+                                                esc_html__( 'Choose a model. OpenAI models are designed for multimodal applications, processing prompts with both text and images to generate text responses. Read more details in', 'woo-notification' ),
+                                                esc_url( 'https://platform.openai.com/docs/models#models-overview' ),
+                                                esc_html__( 'this article.', 'woo-notification' ) );
+                                            ?>
                                         </p>
                                     </td>
                                 </tr>
@@ -2138,13 +2181,13 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <td>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('Provide your prompt or specific instructions for the AI to generate messages in the \'Message Purchased\' input field under Messages. Ex:', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            esc_html_e('Provide your prompt or specific instructions for the AI to generate messages in the \'Message Purchased\' input field under Messages. Ex:', 'woo-notification' );
+                                            ?>
                                         </p>
                                         <ol class="description">
-                                            <li><?php echo wp_kses_post(sprintf(__('Generate notification sentences that simulate recent purchases, product views, or inquiries, using numbers and locations, without urgency or exclamation marks', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
-                                            <li><?php echo wp_kses_post(sprintf(__('Generate urgency-driven notification sentences, mentioning recent purchases, product views, inquiries, or popular demand, using numbers, locations, and a sense of immediacy', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
+                                            <li><?php esc_html_e('Generate notification sentences that simulate recent purchases, product views, or inquiries, using numbers and locations, without urgency or exclamation marks', 'woo-notification' ); ?></li>
+                                            <li><?php esc_html_e('Generate urgency-driven notification sentences, mentioning recent purchases, product views, inquiries, or popular demand, using numbers, locations, and a sense of immediacy', 'woo-notification' );?></li>
                                             <li><?php echo esc_html__('Shortcode {MIN_CHARACTERS} : is min characters', 'woo-notification');// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
                                             <li><?php echo esc_html__('Shortcode {MAX_CHARACTERS} : is max characters', 'woo-notification');// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
                                             <li><?php echo esc_html__('Shortcode {WRITING_STYLE} : is writing style', 'woo-notification');// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
@@ -2159,9 +2202,9 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <td>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('Provide your prompt or specific instructions for the AI to generate customers\' names in the \'Virtual First Name\' input field under Products', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            esc_html_e('Provide your prompt or specific instructions for the AI to generate customers\' names in the \'Virtual First Name\' input field under Products', 'woo-notification' );
+                                            ?>
                                         </p>
                                         <ol class="description">
                                             <li><?php echo esc_html__('Shortcode {MIN_CHARACTERS} : is min characters', 'woo-notification');// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
@@ -2178,9 +2221,9 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <td>
                                         <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
-											<?php
-											echo wp_kses_post(sprintf(__('Provide your prompt or specific instructions for the AI to generate cities in the \'Virtual City\' input field under Products', 'woo-notification')));// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-											?>
+                                            <?php
+                                            esc_html_e('Provide your prompt or specific instructions for the AI to generate cities in the \'Virtual City\' input field under Products', 'woo-notification' );
+                                            ?>
                                         </p>
                                         <ol class="description">
                                             <li><?php echo esc_html__('Shortcode {MIN_CHARACTERS} : is min characters', 'woo-notification');// phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment?></li>
@@ -2201,8 +2244,8 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                     </button>
                 </p>
             </form>
-			<?php do_action('villatheme_support_woo-notification') ?>
+            <?php do_action('villatheme_support_woo-notification') ?>
         </div>
-	<?php }
+    <?php }
 
 } ?>

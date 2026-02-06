@@ -24,7 +24,7 @@ jQuery(document).ready(function ($) {
     if ($('.vi-ui.accordion').length) {
         $('.vi-ui.accordion:not(.woonotification-accordion-init)').addClass('woonotification-accordion-init').vi_accordion('refresh');
     }
-     // Templates slider
+    // Templates slider
     let initSlider = function () {
 
         jQuery('.wn-slider-wrapper').viwn_flexslider({
@@ -54,7 +54,7 @@ jQuery(document).ready(function ($) {
         })
     }
 
-     // Slider has wrong width when design tab is not opened
+    // Slider has wrong width when design tab is not opened
     if (window.location.hash.indexOf('design') !== -1) {
         initSlider()
     } else {
@@ -65,7 +65,7 @@ jQuery(document).ready(function ($) {
         }
     }
 
-     // Select template when it changed in modal
+    // Select template when it changed in modal
     $('.wn-slider-item', templateModal).on('click', function () {
         $(this).addClass('active')
         let index = $(this).index()
@@ -74,7 +74,7 @@ jQuery(document).ready(function ($) {
         $(templateModal).find('.wn-slider-item').not(this).removeClass('active')
     })
 
-     // View all templates
+    // View all templates
     $('.wn-view-all-tmpl').on('click', function () {
         templateModal.modal('show', function () {
             $('.content', templateModal).animate({
@@ -121,6 +121,7 @@ jQuery(document).ready(function ($) {
             delay: 250,
             data: function (params) {
                 return {
+                    nonce: woo_notifi_admin_params.nonce,
                     keyword: params.term
                 };
             },
@@ -148,6 +149,7 @@ jQuery(document).ready(function ($) {
             delay: 250,
             data: function (params) {
                 return {
+                    nonce: woo_notifi_admin_params.nonce,
                     keyword: params.term
                 };
             },
@@ -175,6 +177,7 @@ jQuery(document).ready(function ($) {
             delay: 250,
             data: function (params) {
                 return {
+                    nonce: woo_notifi_admin_params.nonce,
                     keyword: params.term
                 };
             },
@@ -292,7 +295,7 @@ jQuery(document).ready(function ($) {
             }
         });
     }
-    
+
 // Color picker
     jQuery('.color-picker').iris({
         change: function (event, ui) {
@@ -612,8 +615,8 @@ jQuery(document).ready(function ($) {
         }
     });
     jQuery('input[name="wnotification_params[background_image]"]').on('change', function () {
-        var bg_url = jQuery(this).val()
-        var data = bg_url
+        var bg_url = jQuery(this).val();
+        var data = bg_url;
         /* remove version tag*/
         if (data.indexOf('_v') !== -1) {
             data = data.slice(0, -3)
@@ -777,6 +780,15 @@ jQuery(document).ready(function ($) {
             close_icon.show()
         } else {
             close_icon.hide()
+        }
+    });
+    $("#wnotification_params\\[mask_customer_info\\]").on("change", function () {
+        if (!$(this).is(":checked")) {
+            const confirmDisable = confirm(woocommerce_notification_admin_params.warning_mask_customer_info);
+            if (!confirmDisable) {
+                // Nếu bấm Cancel thì bật lại checkbox
+                $(this).prop("checked", true);
+            }
         }
     });
 

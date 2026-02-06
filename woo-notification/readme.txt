@@ -3,8 +3,8 @@ Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: boost sales ,recent sales popup,live sales, woocommerce notification, up sell
 Requires at least: 5.0
-Tested up to: 6.8.2
-WC tested up to: 10.0.4
+Tested up to: 6.8
+WC tested up to: 10.0
 WC requires at least: 7.0
 Stable tag: trunk
 License: GPL v2 or later
@@ -130,6 +130,11 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 - [GET PRO VERSION](https://1.envato.market/djEZj) or [http://codecanyon.net/item/woocommerce-notification-boost-your-sales/16586926](https://1.envato.market/djEZj)
 
 ### MAY BE YOU NEED
+
+[VISeek – Easy Custom Search](https://wordpress.org/plugins/viseek-easy-custom-search)
+
+[VARGAL - Additional Variation Gallery for Woo](https://wordpress.org/plugins/vargal-additional-variation-gallery-for-woo)
+
 [AFFI – Affiliate Marketing for WooCommerce](https://wordpress.org/plugins/affi-affiliate-marketing-for-woo)
 
 [9Map – Map Multi Locations](https://wordpress.org/plugins/9map-map-multi-locations)
@@ -238,8 +243,6 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 [Coupon Box for WooCommerce](https://wordpress.org/plugins/woo-coupon-box)
 
-[VARGAL - Additional Variation Gallery for Woo](https://wordpress.org/plugins/vargal-additional-variation-gallery-for-woo/)
-
 ### Documentation
 
 - [Getting Started](http://docs.villatheme.com/?item=woocommerce-notification)
@@ -270,6 +273,15 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 5. Notification on single product page
 
 == Changelog ==
+/*1.3.10 - 2025.10.15*/
+– Added: Privacy mask option for customer info
+
+/*1.3.9 - 2025.**/
+
+/*1.3.8 - 2025.08.13**/
+- Updated: Compatibility with WC6.8.2 and WP 10.0.4
+- Updated: support class
+
 /*1.3.7 - 2025.07.28**/
 - Fixed: Fixed issue with translate plugin with php 8.3
 
