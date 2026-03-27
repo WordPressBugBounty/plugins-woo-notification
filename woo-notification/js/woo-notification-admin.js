@@ -24,7 +24,7 @@ jQuery(document).ready(function ($) {
     if ($('.vi-ui.accordion').length) {
         $('.vi-ui.accordion:not(.woonotification-accordion-init)').addClass('woonotification-accordion-init').vi_accordion('refresh');
     }
-    // Templates slider
+     // Templates slider
     let initSlider = function () {
 
         jQuery('.wn-slider-wrapper').viwn_flexslider({
@@ -54,7 +54,7 @@ jQuery(document).ready(function ($) {
         })
     }
 
-    // Slider has wrong width when design tab is not opened
+     // Slider has wrong width when design tab is not opened
     if (window.location.hash.indexOf('design') !== -1) {
         initSlider()
     } else {
@@ -65,7 +65,7 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    // Select template when it changed in modal
+     // Select template when it changed in modal
     $('.wn-slider-item', templateModal).on('click', function () {
         $(this).addClass('active')
         let index = $(this).index()
@@ -74,7 +74,7 @@ jQuery(document).ready(function ($) {
         $(templateModal).find('.wn-slider-item').not(this).removeClass('active')
     })
 
-    // View all templates
+     // View all templates
     $('.wn-view-all-tmpl').on('click', function () {
         templateModal.modal('show', function () {
             $('.content', templateModal).animate({
@@ -295,7 +295,7 @@ jQuery(document).ready(function ($) {
             }
         });
     }
-
+    
 // Color picker
     jQuery('.color-picker').iris({
         change: function (event, ui) {

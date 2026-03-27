@@ -1,7 +1,11 @@
+/*1.4.0 - 2026.03.27*/
+- Updated: Optimize code
+
+/*1.3.11 - 2026.03.06*/
+- Updated: support class
+
 /*1.3.10 - 2025.10.15*/
 – Added: Privacy mask option for customer info
-
-/*1.3.9 - 2025.**/
 
 /*1.3.8 - 2025.08.13**/
 - Updated: Compatibility with WC6.8.2 and WP 10.0.4

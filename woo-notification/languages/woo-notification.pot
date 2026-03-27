@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Notification for WooCommerce Premium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-06 07:13+0000\n"
+"POT-Creation-Date: 2026-03-06 07:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,33 +14,238 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:863
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1075
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2058
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2179
+msgid "\"Message purchased\" prompt"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2098
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2219
+msgid "\"Virtual City\" prompt"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2079
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2200
+msgid "\"Virtual First Name\" prompt"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:938
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1151
 msgid "a few seconds"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:964
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1066
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1039
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1142
 msgid "About"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:964
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1067
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:431
+msgid ""
+"Actual products displayed on the notification will get from the orders "
+"placed within this period of time.  "
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1719
+msgid "Add New"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:831
+msgid "Address"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1039
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1143
 msgid "ago"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:298
+msgid "AI Engine"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1931
+msgid "AI Type"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1074
+msgid "All Templates"
 msgstr ""
 
 #. Author of the plugin
 msgid "Andy Ha (villatheme.com)"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:840
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1068
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1980
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2126
+msgid "API key"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2149
+msgid "API Keys page."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2040
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2162
+msgid "API model list"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2018
+msgid "API version"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2030
+msgid "API version supported by Gemini. Read more details of each version in"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:296
+msgid "Assign"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:836
+msgid "Auto Detect"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1340
+msgid "Background"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1119
+msgid "Bottom left"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1121
+msgid "Bottom right"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1134
+msgid "bounceIn"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1136
+msgid "bounceInDown"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1138
+msgid "bounceInLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1140
+msgid "bounceInRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1142
+msgid "bounceInUp"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1221
+msgid "bounceOut"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1223
+msgid "bounceOutDown"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1225
+msgid "bounceOutLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1227
+msgid "bounceOutRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1229
+msgid "bounceOutUp"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1873
+msgid "Cart page"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1863
+msgid "Checkout page"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2048
+msgid ""
+"Choose a model. Gemini models are designed for multimodal applications, "
+"processing prompts with both text and images to generate text responses. "
+"Read more details in"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2169
+msgid ""
+"Choose a model. OpenAI models are designed for multimodal applications, "
+"processing prompts with both text and images to generate text responses. "
+"Read more details in"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2005
+msgid "Click \"Create API key\""
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1467
+msgid "Close icon color"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1883
+msgid "Conditional Tags"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:642
+msgid "Current category"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:999
+msgid "Current product"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1760
+msgid "Custom"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1476
+msgid "Custom CSS"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1333
+msgid "Custom rounded corner"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1728
+msgid "Customer's city"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1736
+msgid "Customer's country"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1724
+msgid "Customer's first name"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1732
+msgid "Customer's state"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:915
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1144
 msgid "day"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:838
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1069
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:426
+msgid "Days"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:913
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1145
 msgid "days"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:290
+msgid "Design"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:645
+msgid "Display products in the same category with the being displayed product."
 msgstr ""
 
 #. Description of the plugin
@@ -49,13 +254,190 @@ msgid ""
 "showing real-time purchase, creating urgency, and showcasing new products."
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:849
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1070
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1598
+msgid "Display time"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:308
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1616
+msgid "Enable"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:698
+msgid "Enable to change the virtual time matched your site’s timezone."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:575
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:719
+msgid "Exclude Products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:661
+msgid "External link"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1146
+msgid "fadeIn"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1148
+msgid "fadeInDown"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1150
+msgid "fadeInDownBig"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1152
+msgid "fadeInLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1154
+msgid "fadeInLeftBig"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1156
+msgid "fadeInRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1158
+msgid "fadeInRightBig"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1160
+msgid "fadeInUp"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1162
+msgid "fadeInUpBig"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1233
+msgid "fadeOut"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1235
+msgid "fadeOutDown"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1237
+msgid "fadeOutDownBig"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1239
+msgid "fadeOutLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1241
+msgid "fadeOutLeftBig"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1243
+msgid "fadeOutRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1245
+msgid "fadeOutRightBig"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1247
+msgid "fadeOutUp"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1249
+msgid "fadeOutUpBig"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1166
+msgid "flipInX"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1168
+msgid "flipInY"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1253
+msgid "flipOutX"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1255
+msgid "flipOutY"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1986
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2132
+msgid "Follow these steps to get API:"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:390
+msgid "From order"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1408
+msgid "Gap between product image and notification's border"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1973
+msgid "Gemini"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:289
+msgid "General"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2068
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2189
+msgid ""
+"Generate notification sentences that simulate recent purchases, product "
+"views, or inquiries, using numbers and locations, without urgency or "
+"exclamation marks"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2069
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2190
+msgid ""
+"Generate urgency-driven notification sentences, mentioning recent purchases, "
+"product views, inquiries, or popular demand, using numbers, locations, and a "
+"sense of immediacy"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2147
+msgid "Get an API Key from the"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:355
+msgid "Get from Billing"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1993
+msgid "Go to"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1300
+msgid "Hide notification effect"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1914
+msgid "History time"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1853
+msgid "Home page"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1457
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:924
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1146
 msgid "hour"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:847
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1071
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:424
+msgid "Hours"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:686
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:922
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1147
 msgid "hours"
 msgstr ""
 
@@ -63,50 +445,749 @@ msgstr ""
 msgid "http://villatheme.com"
 msgstr ""
 
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1995
+msgid "https://ai.google.dev/gemini-api"
+msgstr ""
+
 #. URI of the plugin
 msgid "https://villatheme.com/extensions/woocommerce-notification-boost-sales/"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:858
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1072
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1377
+msgid "Image"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1390
+msgid "Image Position"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:539
+msgid "Image size will get form your WordPress site."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1004
+msgid ""
+"In product single page, Notification can only display current product or "
+"other products in the same category."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1587
+msgid "Initial delay"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1567
+msgid "Initial time random"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1572
+msgid "Initial time will be random from 0 to current value."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:359
+msgid "Latest Products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1386
+msgid "Left"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1889
+msgid "Let you control on which pages Notification will appear using "
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1172
+msgid "lightSpeedIn"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1259
+msgid "lightSpeedOut"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:962
+msgid ""
+"Load popup will not use ajax. Your site will be load faster. It creates "
+"cache. It is not working with Get product from Billing feature and options "
+"of Product detail tab."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1536
+msgid "Loop"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1947
+msgid "Max characters"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1832
+msgid "Max number"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1644
+msgid "Message purchased"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1324
+msgid "Message will be rounded and product image is round instead of square"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:291
+msgid "Messages"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1939
+msgid "Min characters"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1821
+msgid "Min Number"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1577
+msgid "Minimum initial delay time"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:933
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1148
 msgid "minute"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:856
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1073
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:428
+msgid "Minutes"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:931
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1149
 msgid "minutes"
 msgstr ""
 
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:324
+msgid "Mobile"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1545
+msgid "Next time display"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:952
+msgid "Non Ajax"
+msgstr ""
+
 #. Name of the plugin
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/admin/admin.php:200
+#: D:/git/free-version/woo-notification/woo-notification/admin/admin.php:207
 msgid "Notification for WooCommerce"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/admin/report.php:23
+#: D:/git/free-version/woo-notification/woo-notification/admin/report.php:23
 msgid "Notification for WooCommerce Reporting"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/admin/report.php:33
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/admin/report.php:34
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:285
+msgid "Notification for WooCommerce Settings"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1555
+msgid "Notification per page"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:992
+msgid "Notification show"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:986
+msgid ""
+"Notification will only display current product in product detail page that "
+"they are viewing."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:335
+msgid "Notification will show on mobile and responsive."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1561
+msgid "Number of notifications on a page."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1840
+msgid "Number will random from Min number to Max number"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2119
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2141
+msgid "OpenAI"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:412
+msgid "Order status"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:649
+msgid "Out-of-stock products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:552
+msgid "Please select category"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:445
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:582
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:726
+msgid "Please select products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1631
+msgid "Please select sound. Notification rings when show."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1110
+msgid "Position & effect"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:293
+msgid "Product Detail"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:494
+msgid "Product image size"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:708
+msgid "Product limit"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1363
+msgid "Product name"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:714
+msgid "Product quantity will be got in list latest products."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1740
+msgid "Product title"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1744
+msgid "Product title with link"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:292
+msgid "Products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1001
+msgid "Products in the same category"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:637
+msgid ""
+"Products which have this product visibility status will appear on "
+"Notification."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2104
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2225
+msgid ""
+"Provide your prompt or specific instructions for the AI to generate cities "
+"in the 'Virtual City' input field under Products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2085
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2206
+msgid ""
+"Provide your prompt or specific instructions for the AI to generate "
+"customers' names in the 'Virtual First Name' input field under Products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2064
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2185
+msgid ""
+"Provide your prompt or specific instructions for the AI to generate messages "
+"in the 'Message Purchased' input field under Messages. Ex:"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1331
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1397
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1406
+msgid "px"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:363
+msgid "Recent Viewed Products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1712
+msgid "Remove"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/report.php:33
+#: D:/git/free-version/woo-notification/woo-notification/admin/report.php:34
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:297
 msgid "Report"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:861
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1388
+msgid "Right"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1210
+msgid "rollIn"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1297
+msgid "rollOut"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1176
+msgid "rotateIn"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1178
+msgid "rotateInDownLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1180
+msgid "rotateInDownRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1182
+msgid "rotateInUpLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1184
+msgid "rotateInUpRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1263
+msgid "rotateOut"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1265
+msgid "rotateOutDownLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1267
+msgid "rotateOutDownRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1269
+msgid "rotateOutUpLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1271
+msgid "rotateOutUpRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:976
+msgid "Run single product"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2243
+msgid "Save"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1905
+msgid "Save Logs"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:936
 msgid "seconds"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/frontend/notify.php:1074
+#: D:/git/free-version/woo-notification/woo-notification/frontend/notify.php:1150
 msgid "secs"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/admin/admin.php:151
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1070
+msgid "See all"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2000
+msgid "Select \"Get an API key from Google AI Studio\""
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:361
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:544
+msgid "Select Categories"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:357
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:437
+msgid "Select Products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/admin.php:158
 msgid "Settings"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/admin/report.php:24
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2071
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2090
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2109
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2192
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2211
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2230
+msgid "Shortcode {MAX_CHARACTERS} : is max characters"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2070
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2089
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2108
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2191
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2210
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2229
+msgid "Shortcode {MIN_CHARACTERS} : is min characters"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2072
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2091
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2110
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2193
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2212
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2231
+msgid "Shortcode {WRITING_STYLE} : is writing style"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2073
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2092
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2111
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2194
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2213
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2232
+msgid "Shortcode {WRITING_TONE} : is writing tone"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1439
+msgid "Show Close Icon"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1213
+msgid "Show notification effect"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:349
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:631
+msgid "Show Products"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1009
+msgid "Show variation"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1019
+msgid "Show variation instead of product variable."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2139
+msgid "Sign up/Login at"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1190
+msgid "slideInDown"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1192
+msgid "slideInLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1194
+msgid "slideInRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1188
+msgid "slideInUp"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1277
+msgid "slideOutDown"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1279
+msgid "slideOutLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1281
+msgid "slideOutRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1275
+msgid "slideOutUp"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:295
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1625
+msgid "Sound"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1310
+msgid "Style"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1033
+msgid "Templates"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1351
+msgid "Text message"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1399
+msgid "The custom-rounded corner of the image"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2010
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2154
+msgid "Then, configure your key. And copy the key and paste it to this field"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:625
+msgid "These products will not display on notification."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:771
+msgid "These products will not show on notification."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2032
+msgid "this article"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2050
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2171
+msgid "this article."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1769
+msgid "This is {custom} shortcode content."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:294
+msgid "Time"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1748
+msgid "Time after purchase"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1459
+msgid "Time close"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1550
+msgid "Time to show next notification "
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1582
+msgid "Time will be random from Initial delay time min to Initial time."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1603
+msgid "Time your notification display."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1123
+msgid "Top left"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1125
+msgid "Top right"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1878
+msgid "Turn on is hidden notification on Cart page"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1868
+msgid "Turn on is hidden notification on Checkout page"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1858
+msgid "Turn on is hidden notification on Home page"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:657
+msgid "Turn on to show out-of-stock products on notifications."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/report.php:24
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:489
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:570
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:636
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:644
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:712
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1540
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1549
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1559
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1571
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1581
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1591
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1602
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1620
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1629
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1857
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1867
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1877
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1887
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1909
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1918
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1934
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1942
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1950
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1958
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1966
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1983
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2026
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2044
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2061
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2082
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2101
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2129
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2165
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2182
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2203
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2222
 msgid "Update This Feature"
 msgstr ""
 
-#: E:/villatheme-2024/FREE-VERSION/woo-notification/woo-notification/admin/admin.php:200
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1752
+msgid "Use custom shortcode"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2023
+msgid "V1"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:2024
+msgid "V1 Beta"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:838
+msgid "Virtual"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:846
+msgid "Virtual City"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:854
+msgid ""
+"Virtual city name what will show on notification. Each city name on a line."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:900
+msgid "Virtual Country"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:906
+msgid "Virtual country name what will show on notification."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:776
+msgid "Virtual First Name"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:785
+msgid ""
+"Virtual first name what will show on notification. Each first name on a line."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:676
+msgid "Virtual Time"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:688
+msgid "Virtual time will randomly get in this threshold."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1430
+msgid ""
+"When click image, you will be redirected to the product's single page on a "
+"new tab."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1420
+msgid "When click image, you will redirect to product single page."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1592
+msgid "When your site loads, notifications will show after this amount of time"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/admin.php:207
 msgid "Woo Notification"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1891
+msgid "Woo's conditional tags"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:669
+msgid "Working with  External/Affiliate product. Product link is product URL."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1890
+msgid "WP's conditional tags,"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1955
+msgid "Writing style"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1963
+msgid "Writing tone"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:366
+msgid ""
+"You can arrange product order or special product which you want to up-sell."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:841
+msgid "You can use auto detect address or make virtual address of customer."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:568
+msgid "You only select 2 categories. Please upgrade to unlock unlimited."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:487
+msgid "You only select 2 products. Please upgrade to unlock unlimited."
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1198
+msgid "zoomIn"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1200
+msgid "zoomInDown"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1202
+msgid "zoomInLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1204
+msgid "zoomInRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1206
+msgid "zoomInUp"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1285
+msgid "zoomOut"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1287
+msgid "zoomOutDown"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1289
+msgid "zoomOutLeft"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1291
+msgid "zoomOutRight"
+msgstr ""
+
+#: D:/git/free-version/woo-notification/woo-notification/admin/settings.php:1293
+msgid "zoomOutUp"
 msgstr ""

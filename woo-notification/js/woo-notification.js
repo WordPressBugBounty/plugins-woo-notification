@@ -92,6 +92,7 @@ jQuery(window).on('load', function () {
     notify.message_number_max = _woocommerce_notification_params.message_number_max
     notify.time_close = _woocommerce_notification_params.time_close
     notify.show_close = _woocommerce_notification_params.show_close
+    notify.nonce = _woocommerce_notification_params.nonce
     if (_woocommerce_notification_params.billing == 0 && _woocommerce_notification_params.detect == 0) {
         notify.cities = [notify.getCookie('wn_city')]
         notify.country = [notify.getCookie('wn_country')]
@@ -118,6 +119,7 @@ var woo_notification = {
     intel: 0,
     wn_popup: 0,
     id: 0,
+    nonce: '',
     messages: '',
     products: '',
     ajax_url: '',
@@ -177,7 +179,7 @@ var woo_notification = {
             }
             jQuery.ajax({
                 type: 'POST',
-                data: 'action=woonotification_get_product' + str_data,
+                data: 'action=woonotification_get_product' + str_data + '&nonce=' + woo_notification.nonce,
                 url: this.ajax_url,
                 success: function (data) {
                     var products = JSON.parse(data)
