@@ -3,8 +3,8 @@ Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: boost sales ,recent sales popup,live sales, woocommerce notification, up sell
 Requires at least: 5.0
-Tested up to: 6.9
-WC tested up to: 10.6
+Tested up to: 7.0
+WC tested up to: 10.8
 WC requires at least: 7.0
 Stable tag: trunk
 License: GPL v2 or later
@@ -14,7 +14,7 @@ Display recent orders as popup notifications, boosting conversion rates by showi
 
 == Description ==
 
-Notification for WooCommerce is a WooCommerce extension that helps you create social proof about a busy store. WooCommerce Notification displays recent orders on your storefront. It’s the online equivalent of a busy store and shows prospective customers that other people are buying your products.
+Notification for WooCommerce is a WooCommerce extension that helps you create social proof about a busy store. WooCommerce Notification displays recent orders on your storefront. It's the online equivalent of a busy store and shows prospective customers that other people are buying your products.
 
 - Increase conversion rate by highlighting other customers that have bought products.
 
@@ -28,7 +28,7 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 [youtube https://www.youtube.com/watch?v=CbHBYtqM45w]
 
-### Let’s go through this video on how to use the WooCommerce Notification plugin.
+### Let's go through this video on how to use the WooCommerce Notification plugin.
 
 [youtube https://youtu.be/GrZXP68boSU]
 
@@ -40,7 +40,7 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 ### FEATURES OF WOOCOMMERCE NOTIFICATION
 
-- **Display recent WooCommerce orders**: the plugin will take the information about WooCommerce orders to display. This is the “real order” options. You can select a time to pick up orders. In the last 30 days for example.
+- **Display recent WooCommerce orders**: the plugin will take the information about WooCommerce orders to display. This is the "real order" options. You can select a time to pick up orders. In the last 30 days for example.
 
 - **Display virtual orders**: Do you want to increase the sale of some specific products? Do you want to introduce some new product to customers? WooCommerce Notification may help you with the fake orders feature.
 
@@ -131,13 +131,13 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 ### MAY BE YOU NEED
 
-[VISeek – Easy Custom Search](https://wordpress.org/plugins/viseek-easy-custom-search)
+[VISeek - Easy Custom Search](https://wordpress.org/plugins/viseek-easy-custom-search)
 
 [VARGAL - Additional Variation Gallery for Woo](https://wordpress.org/plugins/vargal-additional-variation-gallery-for-woo)
 
-[AFFI – Affiliate Marketing for WooCommerce](https://wordpress.org/plugins/affi-affiliate-marketing-for-woo)
+[AFFI - Affiliate Marketing for WooCommerce](https://wordpress.org/plugins/affi-affiliate-marketing-for-woo)
 
-[9Map – Map Multi Locations](https://wordpress.org/plugins/9map-map-multi-locations)
+[9Map - Map Multi Locations](https://wordpress.org/plugins/9map-map-multi-locations)
 
 [TMDS - Dropshipping for TEMU and Woo](https://wordpress.org/plugins/tmds-dropshipping-for-temu-and-woo)
 
@@ -151,43 +151,43 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 [GIFT4U - Gift Cards All in One for Woo](https://wordpress.org/plugins/gift4u-gift-cards-all-in-one-for-woo)
 
-[SUBRE – Product Subscription for WooCommerce](https://wordpress.org/plugins/subre-product-subscription-for-woo)
+[SUBRE - Product Subscription for WooCommerce](https://wordpress.org/plugins/subre-product-subscription-for-woo)
 
 [Clear Autoptimize Cache Automatically](https://wordpress.org/plugins/clear-autoptimize-cache-automatically)
 
-[FEWC – WooCommerce Extra Checkout Fields](https://wordpress.org/plugins/fewc-extra-checkout-fields-for-woocommerce)
+[FEWC - WooCommerce Extra Checkout Fields](https://wordpress.org/plugins/fewc-extra-checkout-fields-for-woocommerce)
 
-[EPOW – Custom Product Options for WooCommerce](https://wordpress.org/plugins/epow-custom-product-options-for-woocommerce)
+[EPOW - Custom Product Options for WooCommerce](https://wordpress.org/plugins/epow-custom-product-options-for-woocommerce)
 
-[ChinaDS – Taobao Dropshipping for WooCommerce](https://wordpress.org/plugins/chinads-dropshipping-taobao-woocommerce)
+[ChinaDS - Taobao Dropshipping for WooCommerce](https://wordpress.org/plugins/chinads-dropshipping-taobao-woocommerce)
 
-[9MAIL – WordPress Email Templates Designer](https://wordpress.org/plugins/9mail-wp-email-templates-designer)
+[9MAIL - WordPress Email Templates Designer](https://wordpress.org/plugins/9mail-wp-email-templates-designer)
 
-[EPOI – WP Points and Rewards](https://wordpress.org/plugins/epoi-wp-points-and-rewards)
+[EPOI - WP Points and Rewards](https://wordpress.org/plugins/epoi-wp-points-and-rewards)
 
-[WebPOS – Point of Sale for WooCommerce](https://wordpress.org/plugins/webpos-point-of-sale-for-woocommerce)
+[WebPOS - Point of Sale for WooCommerce](https://wordpress.org/plugins/webpos-point-of-sale-for-woocommerce)
 
-[Jagif – WooCommerce Free Gift](https://wordpress.org/plugins/jagif-woo-free-gift)
+[Jagif - WooCommerce Free Gift](https://wordpress.org/plugins/jagif-woo-free-gift)
 
-[Coreem – Coupon Reminder for WooCommerce](https://wordpress.org/plugins/woo-coupon-reminder)
+[Coreem - Coupon Reminder for WooCommerce](https://wordpress.org/plugins/woo-coupon-reminder)
 
-[COMPE – WooCommerce Compare Products](https://wordpress.org/plugins/compe-woo-compare-products)
+[COMPE - WooCommerce Compare Products](https://wordpress.org/plugins/compe-woo-compare-products)
 
-[W2S – Migrate WooCommerce to Shopify](https://wordpress.org/plugins/w2s-migrate-woo-to-shopify)
+[W2S - Migrate WooCommerce to Shopify](https://wordpress.org/plugins/w2s-migrate-woo-to-shopify)
 
 [REDIS - WooCommerce Dynamic Pricing and Discounts](https://wordpress.org/plugins/redis-woo-dynamic-pricing-and-discounts)
 
-[EXMAGE – WordPress Image Links](https://wordpress.org/plugins/exmage-wp-image-links)
+[EXMAGE - WordPress Image Links](https://wordpress.org/plugins/exmage-wp-image-links)
 
-[Pofily – WooCommerce Product Filters](https://wordpress.org/plugins/pofily-woo-product-filters)
+[Pofily - WooCommerce Product Filters](https://wordpress.org/plugins/pofily-woo-product-filters)
 
 [Bopo - WooCommerce Product Bundle Builder](https://wordpress.org/plugins/bopo-woo-product-bundle-builder)
 
-[WPBulky – WordPress Bulk Edit Post Types](https://wordpress.org/plugins/wpbulky-wp-bulk-edit-post-types)
+[WPBulky - WordPress Bulk Edit Post Types](https://wordpress.org/plugins/wpbulky-wp-bulk-edit-post-types)
 
 [Bulky - Bulk Edit Products for WooCommerce](https://wordpress.org/plugins/bulky-bulk-edit-products-for-woo)
 
-[Catna – Woo Name Your Price and Offers](https://wordpress.org/plugins/catna-woo-name-your-price-and-offers)
+[Catna - Woo Name Your Price and Offers](https://wordpress.org/plugins/catna-woo-name-your-price-and-offers)
 
 [Product Size Chart For WooCommerce](https://wordpress.org/plugins/product-size-chart-for-woo)
 
@@ -239,7 +239,7 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 [Notification for WooCommerce](https://wordpress.org/plugins/woo-notification)
 
-[CURCY – Multi Currency for WooCommerce](https://wordpress.org/plugins/woo-multi-currency)
+[CURCY - Multi Currency for WooCommerce](https://wordpress.org/plugins/woo-multi-currency)
 
 [Coupon Box for WooCommerce](https://wordpress.org/plugins/woo-coupon-box)
 
@@ -273,6 +273,9 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 5. Notification on single product page
 
 == Changelog ==
+/**1.4.1 - 2026.06.20**/
+- Updated: VillaTheme support
+
 /*1.4.0 - 2026.03.27*/
 - Updated: Optimize code
 
@@ -280,7 +283,7 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 - Updated: support class
 
 /*1.3.10 - 2025.10.15*/
-– Added: Privacy mask option for customer info
+- Added: Privacy mask option for customer info
 
 /*1.3.8 - 2025.08.13**/
 - Updated: Compatibility with WC6.8.2 and WP 10.0.4
@@ -330,7 +333,7 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 - Fixed: Wrong plugin name checking
 
 /**1.2.16 - 2024.05.06**/
-– Fixed: Missing min Css support file
+- Fixed: Missing min Css support file
 
 /*1.2.15 - 2024.04.11**/
 - Updated: Updated support file
@@ -343,7 +346,7 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 - Fixed: default value for notification_product_show_type
 
 /**1.2.12 - 2023.07.03**/
-– Updated: Compatible with WooCommerce HPOS(COT)
+- Updated: Compatible with WooCommerce HPOS(COT)
 
 /**1.2.11 - 2023.06.12**/
 -Updated: Change image size slug
@@ -417,12 +420,12 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 /**1.2.2.4 - 2019.04.04**/
 - Updated: Make admin notices dismissible
 
-/**1.2.2.3 – 2018.12.07*/
+/**1.2.2.3 - 2018.12.07*/
 - Fixed: Auto detect with SSL
 - Updated: Class support
 
-/**1.2.2.2 – 2018.11.29*/
-– Fixed: Update minify js and css
+/**1.2.2.2 - 2018.11.29*/
+- Fixed: Update minify js and css
 
 /**1.2.2.1 - 2018.11.23*/
 - Fixed: Tab JS in backend
