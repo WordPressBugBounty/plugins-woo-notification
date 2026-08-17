@@ -3,7 +3,7 @@
 /*
 Class Name: VI_WNOTIFICATION_F_Admin_Report
 Author: Andy Ha (support@villatheme.com)
-Author URI: http://villatheme.com
+Author URI: https://villatheme.com
 Copyright 2015-2018 villatheme.com. All rights reserved.
 */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +21,7 @@ class VI_WNOTIFICATION_F_Admin_Report {
 	 */
 	public function page_callback() { ?>
 		<h2><?php esc_html_e( 'Notification for WooCommerce Reporting', 'woo-notification' ) ?></h2>
-		<a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e( 'Update This Feature', 'woo-notification' ) ?></a>
+		<a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e( 'Update This Feature', 'woo-notification' ) ?></a>
 	<?php }
 
 	/**

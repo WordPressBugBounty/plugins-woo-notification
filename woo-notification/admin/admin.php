@@ -3,7 +3,7 @@
 /*
 Class Name: VI_WNOTIFICATION_F_Admin_Admin
 Author: Andy Ha (support@villatheme.com)
-Author URI: http://villatheme.com
+Author URI: https://villatheme.com
 Copyright 2015-2018 villatheme.com. All rights reserved.
 */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -172,9 +172,9 @@ class VI_WNOTIFICATION_F_Admin_Admin {
         if ( class_exists( 'VillaTheme_Support' ) ) {
             new VillaTheme_Support( array(
                 'support'    => 'https://wordpress.org/support/plugin/woo-notification',
-                'docs'       => 'http://docs.villatheme.com/?item=woocommerce-notification',
+                'docs'       => 'https://docs.villatheme.com/?item=woocommerce-notification',
                 'review'     => 'https://wordpress.org/support/plugin/woo-notification/reviews/?rate=5#rate-response',
-                'pro_url'    => 'https://1.envato.market/djEZj',
+                'pro_url'    => 'https://villatheme.com/extensions/woocommerce-notification-boost-sales',
                 'css'        => VI_WNOTIFICATION_F_CSS,
                 'image'      => VI_WNOTIFICATION_F_IMAGES,
                 'slug'       => 'woo-notification',

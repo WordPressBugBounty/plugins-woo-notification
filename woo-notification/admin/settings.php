@@ -3,7 +3,7 @@
 /*
 Class Name: VI_WNOTIFICATION_F_Admin_Settings
 Author: Andy Ha (support@villatheme.com)
-Author URI: http://villatheme.com
+Author URI: https://villatheme.com
 Copyright 2016-2018 villatheme.com. All rights reserved.
 */
 if (!defined('ABSPATH')) {
@@ -486,7 +486,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 </select>
                                 <p class="description"><?php esc_html_e('You only select 2 products. Please upgrade to unlock unlimited.', 'woo-notification') ?></p>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         <tr valign="top">
@@ -567,7 +567,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 </select>
                                 <p class="description"><?php esc_html_e('You only select 2 categories. Please upgrade to unlock unlimited.', 'woo-notification') ?></p>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         <tr valign="top" class="hidden select-categories">
@@ -633,7 +633,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             <td>
                                 <div class="field">
                                     <a class="vi-ui button" target="_blank"
-                                       href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                       href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                     <p class="description"><?php esc_html_e('Products which have this product visibility status will appear on Notification.', 'woo-notification') ?></p>
                                 </div>
                                 <div class="vi-ui three fields">
@@ -641,7 +641,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label
                                                 for="<?php echo esc_attr(self::set_field('enable_current_category')) ?>"><?php esc_html_e('Current category', 'woo-notification') ?></label>
                                         <a class="vi-ui button" target="_blank"
-                                           href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                           href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description"><?php esc_html_e('Display products in the same category with the being displayed product.', 'woo-notification') ?></p>
                                     </div>
                                     <div class="field">
@@ -709,7 +709,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
 
                                 <p class="description"><?php esc_html_e('Product quantity will be got in list latest products.', 'woo-notification') ?></p>
                             </td>
@@ -1537,7 +1537,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         <tr valign="top">
@@ -1546,7 +1546,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                 <p class="description"><?php esc_html_e('Time to show next notification ', 'woo-notification') ?></p>
                             </td>
                         </tr>
@@ -1556,7 +1556,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
 
                                 <p class="description"><?php esc_html_e('Number of notifications on a page.', 'woo-notification') ?></p>
                             </td>
@@ -1568,7 +1568,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                 <p class="description"><?php esc_html_e('Initial time will be random from 0 to current value.', 'woo-notification') ?></p>
                             </td>
                         </tr>
@@ -1578,7 +1578,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                 <p class="description"><?php esc_html_e('Time will be random from Initial delay time min to Initial time.', 'woo-notification') ?></p>
                             </td>
                         </tr>
@@ -1588,7 +1588,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                 <p class="description"><?php esc_html_e('When your site loads, notifications will show after this amount of time', 'woo-notification') ?></p>
                             </td>
                         </tr>
@@ -1599,7 +1599,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                 <p class="description"><?php esc_html_e('Time your notification display.', 'woo-notification') ?></p>
                             </td>
                         </tr>
@@ -1617,7 +1617,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         <tr valign="top">
@@ -1626,7 +1626,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
 
                                 <p class="description"><?php echo esc_html__('Please select sound. Notification rings when show.', 'woo-notification') ?></p>
                             </td>
@@ -1854,7 +1854,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                 <p class="description"><?php esc_html_e('Turn on is hidden notification on Home page', 'woo-notification') ?></p>
                             </td>
                         </tr>
@@ -1864,7 +1864,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                 <p class="description"><?php esc_html_e('Turn on is hidden notification on Checkout page', 'woo-notification') ?></p>
                             </td>
                         </tr>
@@ -1874,7 +1874,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                 <p class="description"><?php esc_html_e('Turn on is hidden notification on Cart page', 'woo-notification') ?></p>
                             </td>
                         </tr>
@@ -1884,11 +1884,11 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
 
                                 <p class="description"><?php esc_html_e('Let you control on which pages Notification will appear using ', 'woo-notification') ?>
-                                    <a class="wn-notification-link" href="http://codex.wordpress.org/Conditional_Tags" target="_blank"><?php esc_html_e('WP\'s conditional tags,', 'woo-notification') ?></a>
-                                    <a class="wn-notification-link" href="http://developer.woocommerce.com/docs/conditional-tags-in-woocommerce/" target="_blank"><?php esc_html_e('Woo\'s conditional tags', 'woo-notification') ?></a>
+                                    <a class="wn-notification-link" href="https://codex.wordpress.org/Conditional_Tags" target="_blank"><?php esc_html_e('WP\'s conditional tags,', 'woo-notification') ?></a>
+                                    <a class="wn-notification-link" href="https://developer.woocommerce.com/docs/conditional-tags-in-woocommerce/" target="_blank"><?php esc_html_e('Woo\'s conditional tags', 'woo-notification') ?></a>
                                 </p>
                             </td>
                         </tr>
@@ -1906,7 +1906,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         <tr valign="top">
@@ -1915,7 +1915,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                             </th>
                             <td>
                                 <a class="vi-ui button" target="_blank"
-                                   href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                   href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         </tbody>
@@ -1931,7 +1931,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label for="<?php echo esc_attr(self::set_field('ai_type')) ?>"><?php esc_html_e('AI Type', 'woo-notification') ?></label>
                             </th>
                             <td>
-                                <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         <tr>
@@ -1939,7 +1939,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label><?php esc_html_e('Min characters', 'woo-notification') ?></label>
                             </th>
                             <td>
-                                <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         <tr>
@@ -1947,7 +1947,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label><?php esc_html_e('Max characters', 'woo-notification') ?></label>
                             </th>
                             <td>
-                                <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         <tr>
@@ -1955,7 +1955,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label><?php esc_html_e('Writing style', 'woo-notification') ?></label>
                             </th>
                             <td>
-                                <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         <tr>
@@ -1963,7 +1963,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                 <label><?php esc_html_e('Writing tone', 'woo-notification') ?></label>
                             </th>
                             <td>
-                                <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                             </td>
                         </tr>
                         </tbody>
@@ -1980,7 +1980,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label><?php esc_html_e('API key', 'woo-notification') ?></label>
                                     </th>
                                     <td>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 										    printf('<strong>%s</strong>', esc_html__( 'Follow these steps to get API:',  'woo-notification' ) );
@@ -2023,7 +2023,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                             <option value="v1"><?php esc_attr_e('V1', 'woo-notification') ?></option>
                                             <option value="v1beta"><?php esc_attr_e('V1 Beta', 'woo-notification') ?></option>
                                         </select>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											printf( '%1$s <a href="%2$s">%3$s</a>',
@@ -2041,7 +2041,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     </th>
                                     <td>
                                         <a class="vi-ui button" target="_blank"
-                                           href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                           href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											printf( '%1$s <a href="%2$s">%3$s</a>',
@@ -2058,7 +2058,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label><?php esc_html_e('"Message purchased" prompt', 'woo-notification') ?></label>
                                     </th>
                                     <td>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											esc_html_e('Provide your prompt or specific instructions for the AI to generate messages in the \'Message Purchased\' input field under Messages. Ex:', 'woo-notification');
@@ -2079,7 +2079,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label><?php esc_html_e('"Virtual First Name" prompt', 'woo-notification') ?></label>
                                     </th>
                                     <td>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											esc_html_e('Provide your prompt or specific instructions for the AI to generate customers\' names in the \'Virtual First Name\' input field under Products', 'woo-notification');
@@ -2098,7 +2098,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label><?php esc_html_e('"Virtual City" prompt', 'woo-notification') ?></label>
                                     </th>
                                     <td>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											esc_html_e('Provide your prompt or specific instructions for the AI to generate cities in the \'Virtual City\' input field under Products', 'woo-notification');
@@ -2126,7 +2126,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label><?php esc_html_e('API key', 'woo-notification') ?></label>
                                     </th>
                                     <td>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											printf('<strong>%s</strong>', esc_html__( 'Follow these steps to get API:', 'woo-notification' ) );
@@ -2162,7 +2162,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label><?php esc_html_e('API model list', 'woo-notification') ?></label>
                                     </th>
                                     <td>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											printf( '%1$s <a href="%2$s">%3$s</a>',
@@ -2179,7 +2179,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label><?php esc_html_e('"Message purchased" prompt', 'woo-notification') ?></label>
                                     </th>
                                     <td>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											esc_html_e('Provide your prompt or specific instructions for the AI to generate messages in the \'Message Purchased\' input field under Messages. Ex:', 'woo-notification' );
@@ -2200,7 +2200,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label><?php esc_html_e('"Virtual First Name" prompt', 'woo-notification') ?></label>
                                     </th>
                                     <td>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											esc_html_e('Provide your prompt or specific instructions for the AI to generate customers\' names in the \'Virtual First Name\' input field under Products', 'woo-notification' );
@@ -2219,7 +2219,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                         <label><?php esc_html_e('"Virtual City" prompt', 'woo-notification') ?></label>
                                     </th>
                                     <td>
-                                        <a class="vi-ui button" target="_blank" href="https://1.envato.market/djEZj"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
+                                        <a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e('Update This Feature', 'woo-notification') ?></a>
                                         <p class="description">
 											<?php
 											esc_html_e('Provide your prompt or specific instructions for the AI to generate cities in the \'Virtual City\' input field under Products', 'woo-notification' );
