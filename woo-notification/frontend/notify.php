@@ -6,6 +6,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Historical VI_WNOTIFICATION_F_ / woonotification_ / wcn_ / wpml_ prefixes.
 
 class VI_WNOTIFICATION_F_Frontend_Notify {
 
@@ -50,7 +51,12 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 		if ( empty( $_COOKIE['woocommerce_recently_viewed'] ) ) { // @codingStandardsIgnoreLine.
 			$viewed_products = array();
 		} else {
-			$viewed_products = wp_parse_id_list( (array) explode( '|', wp_unslash( $_COOKIE['woocommerce_recently_viewed'] ) ) ); // @codingStandardsIgnoreLine.
+			$viewed_products = wp_parse_id_list(
+				(array) explode(
+					'|',
+					sanitize_text_field( wp_unslash( $_COOKIE['woocommerce_recently_viewed'] ) )
+				)
+			);
 		}
 
 		// Unset if already in viewed products list.
@@ -203,14 +209,16 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
 	// phpcs:disable WordPress.DB.DirectDatabaseQuery
 	protected function get_orders_by_product( $product_id ) {
-		if ( is_array( $product_id ) ) {
-			$product_id = implode( ',', $product_id );
+		$product_ids = array_filter( array_map( 'absint', (array) $product_id ) );
+		if ( empty( $product_ids ) ) {
+			return array();
 		}
+
 		$order_threshold_num  = $this->settings->get_order_threshold_num();
 		$order_threshold_time = $this->settings->get_order_threshold_time();
-		$order_statuses       = $this->settings->get_order_statuses();
+		$timestamp            = '1970-01-01 00:00:00';
 		if ( $order_threshold_num ) {
-			switch ( $order_threshold_time ) {
+			switch ( (int) $order_threshold_time ) {
 				case 1:
 					$time_type = 'days';
 					break;
@@ -220,13 +228,14 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 				default:
 					$time_type = 'hours';
 			}
-			$current_time = strtotime( "-" . $order_threshold_num . " " . $time_type );
-			$timestamp    = gmdate( 'Y-m-d G:i:s', $current_time );
+			$current_time = strtotime( '-' . absint( $order_threshold_num ) . ' ' . $time_type );
+			$timestamp    = gmdate( 'Y-m-d G:i:s', $current_time ? $current_time : time() );
 		}
 
 		global $wpdb;
 
-		$raw = "
+		$id_placeholders = implode( ',', array_fill( 0, count( $product_ids ), '%d' ) );
+		$raw             = "
         SELECT items.order_id,
           MAX(CASE
               WHEN itemmeta.meta_key = '_product_id' THEN itemmeta.meta_value
@@ -236,19 +245,19 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
         INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS itemmeta ON items.order_item_id = itemmeta.order_item_id
         INNER JOIN {$wpdb->prefix}posts AS post ON post.ID = items.order_id
         
-        WHERE items.order_item_type IN('line_item') AND itemmeta.meta_key IN('_product_id','_variation_id') AND post.post_date >= '%s'
+        WHERE items.order_item_type IN('line_item') AND itemmeta.meta_key IN('_product_id','_variation_id') AND post.post_date >= %s
         
         GROUP BY items.order_item_id
         
-        HAVING product_id IN (%s)";
+        HAVING product_id IN ({$id_placeholders})";
 
-		$sql     = $wpdb->prepare( $raw, $timestamp, $product_id );
-		$results = $wpdb->get_results( $sql, ARRAY_A );
-		$return  = array();
-		if ( count( $results ) ) {
+		$prepare_args = array_merge( array( $timestamp ), $product_ids );
+		$sql          = $wpdb->prepare( $raw, $prepare_args ); // phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
+		$results      = $wpdb->get_results( $sql, ARRAY_A );
+		$return       = array();
+		if ( is_array( $results ) && count( $results ) ) {
 			foreach ( $results as $result ) {
-				$order_id = $result['order_id'];
-				$order    = wc_get_order( $order_id );
+				$order = wc_get_order( $result['order_id'] );
 				if ( $order ) {
 					$return[] = $order;
 				}
@@ -279,8 +288,12 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 			$prefix       .= $current_lang;
 		}
 		/*Check Single Product page*/
-		if ( $enable_single_product && is_product() ) {
-			$product_id = get_the_ID();
+		if ( $enable_single_product && ( is_product() || isset( $_POST['viwn_pd_id'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( is_product() ) {
+				$product_id = get_the_ID();
+			} else {
+				$product_id = isset( $_POST['viwn_pd_id'] ) ? absint( wp_unslash( $_POST['viwn_pd_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			}
 			if ( ! $product_id ) {
 				return;
 			}
@@ -290,13 +303,16 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 			}
 			$products = [];
 			$product  = wc_get_product( $product_id );
+			if ( ! $product ) {
+				return false;
+			}
 
 			/* Only show current product*/
 			if ( ! $notification_product_show_type ) {
 				/*Show variation products*/
 				$enable_variable = $this->settings->show_variation();
 				if ( $product->get_type() == 'variable' && $enable_variable ) {
-					$temp_p = delete_transient( 'wn_product_child' . $product_id );
+					$temp_p = get_transient( $prefix . 'wn_product_child' . $product_id );
 
 					if ( is_array( $temp_p ) && count( $temp_p ) ) {
 						return $temp_p;
@@ -338,26 +354,32 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 												if ( is_a( $order, 'WC_Order_Refund' ) ) {
 													$order = wc_get_order( $order->get_parent_id() );
 												}
+												if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+													continue;
+												}
 												$order_date_created = $order->get_date_created();
-												if ($mask_customer_info) {
+												if ( ! $order_date_created ) {
+													continue;
+												}
+												if ( $mask_customer_info ) {
 													$order_infor = [
-														'time' => $this->time_substract($order_date_created->date_i18n("Y-m-d H:i:s")),
-														'time_org' => $order_date_created->date_i18n("Y-m-d H:i:s"),
-														'first_name' => base64_encode($this->mask_random($order->get_billing_first_name())),
-														'last_name' => base64_encode($this->mask_random($order->get_billing_last_name())),
-														'city' => base64_encode($this->mask_random($order->get_billing_city())),
-														'state' => base64_encode($this->mask_random($order->get_billing_state())),
-														'country' => base64_encode($this->mask_random(WC()->countries->countries[$order->get_billing_country()] ?? '')),
+														'time' => $this->time_substract( $order_date_created->date_i18n( 'Y-m-d H:i:s' ) ),
+														'time_org' => $order_date_created->date_i18n( 'Y-m-d H:i:s' ),
+														'first_name' => base64_encode( $this->mask_random( $order->get_billing_first_name() ) ),
+														'last_name' => base64_encode( $this->mask_random( $order->get_billing_last_name() ) ),
+														'city' => base64_encode( $this->mask_random( $order->get_billing_city() ) ),
+														'state' => base64_encode( $this->mask_random( $order->get_billing_state() ) ),
+														'country' => base64_encode( $this->mask_random( $this->get_country_name( $order->get_billing_country() ) ) ),
 													];
 												} else {
 													$order_infor = [
-														'time' => $this->time_substract($order_date_created->date_i18n("Y-m-d H:i:s")),
-														'time_org' => $order_date_created->date_i18n("Y-m-d H:i:s"),
-														'first_name' => base64_encode(($order->get_billing_first_name())),
-														'last_name' => base64_encode(($order->get_billing_last_name())),
-														'city' => base64_encode(($order->get_billing_city())),
-														'state' => base64_encode(($order->get_billing_state())),
-														'country' => base64_encode((WC()->countries->countries[$order->get_billing_country()] ?? '')),
+														'time' => $this->time_substract( $order_date_created->date_i18n( 'Y-m-d H:i:s' ) ),
+														'time_org' => $order_date_created->date_i18n( 'Y-m-d H:i:s' ),
+														'first_name' => base64_encode( ( $order->get_billing_first_name() ) ),
+														'last_name' => base64_encode( ( $order->get_billing_last_name() ) ),
+														'city' => base64_encode( ( $order->get_billing_city() ) ),
+														'state' => base64_encode( ( $order->get_billing_state() ) ),
+														'country' => base64_encode( $this->get_country_name( $order->get_billing_country() ) ),
 													];
 												}
 												$products[]         = array_merge( $product_tmp, $order_infor );
@@ -400,27 +422,33 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 									if ( is_a( $order, 'WC_Order_Refund' ) ) {
 										$order = wc_get_order( $order->get_parent_id() );
 									}
+									if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+										continue;
+									}
 									$order_date_created = $order->get_date_created();
-										if ($mask_customer_info) {
+									if ( ! $order_date_created ) {
+										continue;
+									}
+										if ( $mask_customer_info ) {
 
 											$order_infor = [
-												'time' => $this->time_substract($order_date_created->date_i18n("Y-m-d H:i:s")),
-												'time_org' => $order_date_created->date_i18n("Y-m-d H:i:s"),
-												'first_name' => base64_encode($this->mask_random($order->get_billing_first_name())),
-												'last_name' => base64_encode($this->mask_random($order->get_billing_last_name())),
-												'city' => base64_encode($this->mask_random($order->get_billing_city())),
-												'state' => base64_encode($this->mask_random($order->get_billing_state())),
-												'country' => base64_encode($this->mask_random(WC()->countries->countries[$order->get_billing_country()] ?? '')),
+												'time' => $this->time_substract( $order_date_created->date_i18n( 'Y-m-d H:i:s' ) ),
+												'time_org' => $order_date_created->date_i18n( 'Y-m-d H:i:s' ),
+												'first_name' => base64_encode( $this->mask_random( $order->get_billing_first_name() ) ),
+												'last_name' => base64_encode( $this->mask_random( $order->get_billing_last_name() ) ),
+												'city' => base64_encode( $this->mask_random( $order->get_billing_city() ) ),
+												'state' => base64_encode( $this->mask_random( $order->get_billing_state() ) ),
+												'country' => base64_encode( $this->mask_random( $this->get_country_name( $order->get_billing_country() ) ) ),
 											];
 										} else {
 											$order_infor = [
-												'time' => $this->time_substract($order_date_created->date_i18n("Y-m-d H:i:s")),
-												'time_org' => $order_date_created->date_i18n("Y-m-d H:i:s"),
-												'first_name' => base64_encode(($order->get_billing_first_name())),
-												'last_name' => base64_encode(($order->get_billing_last_name())),
-												'city' => base64_encode(($order->get_billing_city())),
-												'state' => base64_encode(($order->get_billing_state())),
-												'country' => base64_encode((WC()->countries->countries[$order->get_billing_country()] ?? '')),
+												'time' => $this->time_substract( $order_date_created->date_i18n( 'Y-m-d H:i:s' ) ),
+												'time_org' => $order_date_created->date_i18n( 'Y-m-d H:i:s' ),
+												'first_name' => base64_encode( ( $order->get_billing_first_name() ) ),
+												'last_name' => base64_encode( ( $order->get_billing_last_name() ) ),
+												'city' => base64_encode( ( $order->get_billing_city() ) ),
+												'state' => base64_encode( ( $order->get_billing_state() ) ),
+												'country' => base64_encode( $this->get_country_name( $order->get_billing_country() ) ),
 											];
 										}
 									$products[]         = array_merge( $product_tmp, $order_infor );
@@ -469,6 +497,9 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 						$the_query->the_post();
 						$same_cate_product_id = get_the_ID();
 						$same_cate_product    = wc_get_product( $same_cate_product_id );
+						if ( ! $same_cate_product ) {
+							continue;
+						}
 						if ( $same_cate_product->get_catalog_visibility() == 'hidden' ) {
 							continue;
 						}
@@ -832,7 +863,7 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 							if ( $p_data->get_status() != 'publish' ) {
 								continue;
 							}
-							if ( ! empty( $product_visibility ) && ! in_array( $p_data->get_catalog_visibility(), $product_visibility ) ) {
+							if ( $p_data->get_catalog_visibility() === 'hidden' ) {
 								continue;
 							}
 							// do stuff for everything else
@@ -842,18 +873,37 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 								$line_variation_id  = apply_filters( 'wpml_object_id', $item['variation_id'], 'product', false, $current_lang );
 								$line_product_title = get_the_title( $line_variation_id );
 							}
-							$product_tmp = [
-								'title'      => apply_filters( 'wcn_product_title', $line_product_title, $line_product_id ),
-								'url'        => $link,
-								'thumb'      => has_post_thumbnail( $line_product_id ) ? get_the_post_thumbnail_url( $line_product_id, $product_thumb ) : '',
-								'time'       => $this->time_substract( $order->get_date_created()->date_i18n( "Y-m-d H:i:s" ) ),
-								'time_org'   => $order->get_date_created()->date_i18n( "Y-m-d H:i:s" ),
-								'first_name' => base64_encode( ucfirst( $order->get_billing_first_name() ) ),
-								'last_name'  => base64_encode( ucfirst( $order->get_billing_last_name() ) ),
-								'city'       => base64_encode( ucfirst( $order->get_billing_city() ) ),
-								'state'      => base64_encode( ucfirst( $order->get_billing_state() ) ),
-								'country'    => base64_encode( ucfirst( WC()->countries->countries[ $order->get_billing_country() ] ) ),
-							];
+							$order_date_created = $order->get_date_created();
+							if ( ! $order_date_created ) {
+								continue;
+							}
+							if ( $mask_customer_info ) {
+								$product_tmp = [
+									'title'      => apply_filters( 'wcn_product_title', $line_product_title, $line_product_id ),
+									'url'        => $link,
+									'thumb'      => has_post_thumbnail( $line_product_id ) ? get_the_post_thumbnail_url( $line_product_id, $product_thumb ) : '',
+									'time'       => $this->time_substract( $order_date_created->date_i18n( 'Y-m-d H:i:s' ) ),
+									'time_org'   => $order_date_created->date_i18n( 'Y-m-d H:i:s' ),
+									'first_name' => base64_encode( $this->mask_random( ucfirst( $order->get_billing_first_name() ) ) ),
+									'last_name'  => base64_encode( $this->mask_random( ucfirst( $order->get_billing_last_name() ) ) ),
+									'city'       => base64_encode( $this->mask_random( ucfirst( $order->get_billing_city() ) ) ),
+									'state'      => base64_encode( $this->mask_random( ucfirst( $order->get_billing_state() ) ) ),
+									'country'    => base64_encode( $this->mask_random( $this->get_country_name( $order->get_billing_country() ) ) ),
+								];
+							} else {
+								$product_tmp = [
+									'title'      => apply_filters( 'wcn_product_title', $line_product_title, $line_product_id ),
+									'url'        => $link,
+									'thumb'      => has_post_thumbnail( $line_product_id ) ? get_the_post_thumbnail_url( $line_product_id, $product_thumb ) : '',
+									'time'       => $this->time_substract( $order_date_created->date_i18n( 'Y-m-d H:i:s' ) ),
+									'time_org'   => $order_date_created->date_i18n( 'Y-m-d H:i:s' ),
+									'first_name' => base64_encode( ucfirst( $order->get_billing_first_name() ) ),
+									'last_name'  => base64_encode( ucfirst( $order->get_billing_last_name() ) ),
+									'city'       => base64_encode( ucfirst( $order->get_billing_city() ) ),
+									'state'      => base64_encode( ucfirst( $order->get_billing_state() ) ),
+									'country'    => base64_encode( $this->get_country_name( $order->get_billing_country() ) ),
+								];
+							}
 							if ( ! $product_tmp['thumb'] && $p_data->is_type( 'variation' ) ) {
 								$parent_id = $p_data->get_parent_id();
 								if ( $parent_id ) {
@@ -949,143 +999,37 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 	 */
 	protected function get_custom_shortcode() {
 		$message_shortcode = $this->settings->get_custom_shortcode();
-		$min_number        = $this->settings->get_min_number();
-		$max_number        = $this->settings->get_max_number();
+		$min_number        = absint( $this->settings->get_min_number() );
+		$max_number        = absint( $this->settings->get_max_number() );
+		if ( $max_number < $min_number ) {
+			$max_number = $min_number;
+		}
 
 		$number  = wp_rand( $min_number, $max_number );
-		$message = preg_replace( '/\{number\}/i', $number, $message_shortcode );
+		$message = preg_replace( '/\{number\}/i', (string) $number, $message_shortcode );
 
 		return $message;
 	}
 
-	/**Deprecated
-	 * check woo-notification.js
+	/**
+	 * Resolve a WooCommerce country code to a display name.
 	 *
+	 * @param string $country_code ISO country code.
 	 * @return string
 	 */
-	protected function message_purchased() {
-		$message_purchased     = $this->settings->get_message_purchased();
-		$show_close_icon       = $this->settings->show_close_icon();
-		$archive_page          = $this->settings->archive_page();
-		$product_link          = $this->settings->product_link();
-		$image_redirect        = $this->settings->image_redirect();
-		$image_redirect_target = $this->settings->image_redirect_target();
-		if ( is_array( $message_purchased ) ) {
-			$index             = wp_rand( 0, count( $message_purchased ) - 1 );
-			$message_purchased = $message_purchased[ $index ];
+	protected function get_country_name( $country_code ) {
+		$country_code = (string) $country_code;
+		if ( '' === $country_code ) {
+			return '';
 		}
-		$messsage = '';
-		$keys     = array(
-			'{first_name}',
-			'{last_name}',
-			'{city}',
-			'{state}',
-			'{country}',
-			'{product}',
-			'{product_with_link}',
-			'{time_ago}',
-			'{custom}',
-		);
-
-		$product = $this->get_product();
-		
-		if ( $product ) {
-			$product_id = $product['id'];
-		} else {
-			return false;
-		}
-
-		$first_name = trim( $product['first_name'] );
-		$last_name  = trim( $product['last_name'] );
-
-		$city    = trim( $product['city'] );
-		$state   = trim( $product['state'] );
-		$country = trim( $product['country'] );
-		$time    = trim( $product['time'] );
-		if ( ! $archive_page ) {
-			$time = $this->time_substract( $time );
-		}
-
-		$_product      = wc_get_product( $product_id );
-		$prd_var_title = $_product->post->post_title;
-		if ( $_product->get_type() == 'variation' ) {
-			$prd_var_attr = $_product->get_variation_attributes();
-			$attr_name1   = array_values( $prd_var_attr )[0];
-			$product      = $prd_var_title . ' - ' . $attr_name1;
-		} else {
-			$product = $prd_var_title;
-		}
-
-		$product = wp_strip_all_tags( $product );
-
-		if ( $_product->is_type( 'external' ) && $product_link ) {
-			// do stuff for simple products
-			$link = get_post_meta( $product_id, '_product_url', '#' );
-			if ( ! $link ) {
-				$link = get_permalink( $product_id );
-				$link = wp_nonce_url( $link, 'wocommerce_notification_click', 'link' );
-			}
-		} else {
-			// do stuff for everything else
-			$link = get_permalink( $product_id );
-			$link = wp_nonce_url( $link, 'wocommerce_notification_click', 'link' );
-		}
-		ob_start();
-		?>
-        <a <?php if ( $image_redirect_target ) {
-			echo 'target="_blank"';
-		} ?> href="<?php echo esc_url( $link ) ?>"><?php echo esc_html( $product ) ?></a>
-		<?php
-		$product_with_link = ob_get_clean();
-
-		ob_start();
-		?>
-        <small><?php echo esc_html__( 'About', 'woo-notification' ) . ' ' . esc_html( $time ) . ' ' . esc_html__( 'ago', 'woo-notification' ) ?></small>
-		<?php
-		$time_ago      = ob_get_clean();
-		$product_thumb = $this->settings->get_product_sizes();
-		if ( has_post_thumbnail( $product_id ) ) {
-			if ( $image_redirect ) {
-				$messsage .= '<a ' . ( $image_redirect_target ? 'target="_blank"' : '' ) . ' href="' . esc_url( $link ) . '">';
-				$messsage .= get_the_post_thumbnail( $product_id, $product_thumb, [ 'class' => 'wcn-product-image' ] );
-				$messsage .= '</a>';
-			} else {
-				$messsage .= get_the_post_thumbnail( $product_id, $product_thumb, [ 'class' => 'wcn-product-image' ] );
-			}
-		} elseif ( $_product->get_type() == 'variation' ) {
-			$parent_id = $_product->get_parent_id();
-			if ( $image_redirect && $parent_id ) {
-				$messsage .= '<a ' . ( $image_redirect_target ? 'target="_blank"' : '' ) . ' href="' . esc_url( $link ) . '">';
-				$messsage .= get_the_post_thumbnail( $parent_id, $product_thumb, [ 'class' => 'wcn-product-image' ] );
-				$messsage .= '</a>';
-			} else {
-				$messsage .= get_the_post_thumbnail( $parent_id, $product_thumb, [ 'class' => 'wcn-product-image' ] );
+		if ( function_exists( 'WC' ) && WC() && WC()->countries ) {
+			$countries = WC()->countries->get_countries();
+			if ( isset( $countries[ $country_code ] ) ) {
+				return (string) $countries[ $country_code ];
 			}
 		}
 
-		//Get custom shortcode
-		$custom_shortcode = $this->get_custom_shortcode();
-		$replaced         = array(
-			$first_name,
-			$last_name,
-			$city,
-			$state,
-			$country,
-			$product,
-			$product_with_link,
-			$time_ago,
-			$custom_shortcode,
-		);
-		$messsage         .= str_replace( $keys, $replaced, '<p>' . wp_strip_all_tags( $message_purchased ) . '</p>' );
-		ob_start();
-		if ( $show_close_icon ) {
-			?>
-            <span id="notify-close"></span>
-			<?php
-		}
-		$messsage .= ob_get_clean();
-
-		return $messsage;
+		return $country_code;
 	}
 
 	/**
@@ -1224,9 +1168,11 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 			set_transient( $prefix . '_head' . $this->lang, $options_array, 86400 );
 		}
 		if ( $notification_product_show_type && is_product() && $enable_single_product ) {
-			$options_array['billing'] = 0;
+			$options_array['in_the_same_cate'] = 1;
+			$options_array['billing']          = 0;
 		} else {
-			$options_array['billing'] = 1;
+			$options_array['in_the_same_cate'] = 0;
+			$options_array['billing']          = 1;
 		}
 		if ( $archive ) {
 			$options_array['billing'] = 0;
@@ -1234,19 +1180,26 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 			$options_array['billing'] = 1;
 		}
 
+		$change_virtual_time = (int) $this->settings->get_params( 'change_virtual_time_enable' );
+		$options_array['change_virtual_time'] = $change_virtual_time;
+		if ( $change_virtual_time ) {
+			$options_array['start_virtual_time'] = $this->get_start_virtual_time();
+			$options_array['end_virtual_time']   = $this->get_end_virtual_time();
+		}
+
 		/*Process products, address, time */
 		/*Load products*/
-		if (  $non_ajax && ($archive || is_product()) ) {
+		if ( $non_ajax && ( $archive || is_product() ) ) {
 			$products = apply_filters( 'woonotification_get_products', $this->get_product() );
-			
 		} else {
-			$options_array['ajax_url'] = admin_url( 'admin-ajax.php' );
-			$products                  = array();
+			$options_array['ajax_url']   = admin_url( 'admin-ajax.php' );
+			$options_array['viwn_pd_id'] = ( $enable_single_product && is_product() ) ? get_the_ID() : '';
+			$products                    = array();
 		}
 		if ( is_array( $products ) && count( $products ) ) {
 			$options_array['products'] = $products;
 		}
-		$options_array['nonce'] = apply_filters('woonotification_get_product_nonce',1)?wp_create_nonce( 'viwn_nonce' ):'';
+		$options_array['nonce'] = apply_filters( 'woonotification_get_product_nonce', 1 ) ? wp_create_nonce( 'viwn_nonce' ) : '';
 		
 		wp_localize_script( 'woo-notification', '_woocommerce_notification_params', $options_array );
 		/*Custom*/
@@ -1307,15 +1260,47 @@ class VI_WNOTIFICATION_F_Frontend_Notify {
 
 
 	/**
+	 * Virtual time window start (hours) when timezone matching is enabled.
+	 *
+	 * @return int
+	 */
+	protected function get_start_virtual_time() {
+		$current_hour = (int) gmdate( 'H', current_time( 'timestamp' ) );
+		if ( $current_hour >= 0 && $current_hour < 9 ) {
+			return $current_hour + 2;
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Virtual time window end (hours) when timezone matching is enabled.
+	 *
+	 * @return int
+	 */
+	protected function get_end_virtual_time() {
+		$time         = (int) $this->settings->get_virtual_time();
+		$current_hour = (int) gmdate( 'H', current_time( 'timestamp' ) );
+		if ( $current_hour >= 0 && $current_hour < 9 ) {
+			return $current_hour > $time ? $current_hour + $time + 2 : $time + 2;
+		}
+		if ( $current_hour > $time ) {
+			return ( $current_hour - $time ) > 7 ? $time : $current_hour - 7;
+		}
+
+		return $time;
+	}
+
+	/**
 	 * Mask a string with random characters.
 	 * Masking is done by leaving the first two characters and the last one,
 	 * and replacing the rest with asterisks.
 	 * If the string is too short, it will be completely masked.
-	 * @param string $text
+	 *
+	 * @param string $text Raw text.
 	 * @return string
 	 */
-	public function mask_random($text)
-	{
+	public function mask_random( $text ) {
 		$text = trim($text);
 		$length = strlen($text);
 		if ($length <= 3) {

@@ -9,6 +9,7 @@ Copyright 2015-2018 villatheme.com. All rights reserved.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Historical VI_WNOTIFICATION_F_ prefix.
 
 class VI_WNOTIFICATION_F_Admin_Report {
 
@@ -19,10 +20,12 @@ class VI_WNOTIFICATION_F_Admin_Report {
 	/**
 	 * HTML Reporting
 	 */
-	public function page_callback() { ?>
-		<h2><?php esc_html_e( 'Notification for WooCommerce Reporting', 'woo-notification' ) ?></h2>
-		<a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e( 'Update This Feature', 'woo-notification' ) ?></a>
-	<?php }
+	public function page_callback() {
+		?>
+		<h2><?php esc_html_e( 'Notification for WooCommerce Reporting', 'woo-notification' ); ?></h2>
+		<a class="vi-ui button" target="_blank" href="https://villatheme.com/extensions/woocommerce-notification-boost-sales"><?php esc_html_e( 'Update This Feature', 'woo-notification' ); ?></a>
+		<?php
+	}
 
 	/**
 	 * Register a custom menu page.
@@ -36,8 +39,5 @@ class VI_WNOTIFICATION_F_Admin_Report {
 			'woo-notification-report',
 			array( $this, 'page_callback' )
 		);
-
 	}
 }
-
-?>

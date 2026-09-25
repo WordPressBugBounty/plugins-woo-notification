@@ -9,6 +9,7 @@ Copyright 2016-2018 villatheme.com. All rights reserved.
 if (!defined('ABSPATH')) {
 	exit;
 }
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Historical VI_WNOTIFICATION_F_ / wcn_ / woonotification_ / $woocommerce_notification_settings.
 
 class VI_WNOTIFICATION_F_Admin_Settings {
 
@@ -89,6 +90,9 @@ class VI_WNOTIFICATION_F_Admin_Settings {
 			while ($the_query->have_posts()) {
 				$the_query->the_post();
 				$prd = wc_get_product(get_the_ID());
+				if ( ! $prd ) {
+					continue;
+				}
 
 				if ($prd->has_child() && $prd->is_type('variable')) {
 					$product_children = $prd->get_children();
@@ -101,8 +105,11 @@ class VI_WNOTIFICATION_F_Admin_Settings {
 								);
 							} else {
 								$child_wc  = wc_get_product($product_child);
+								if ( ! $child_wc ) {
+									continue;
+								}
 								$get_atts  = $child_wc->get_variation_attributes();
-								$attr_name = array_values($get_atts)[0];
+								$attr_name = array_values($get_atts)[0] ?? '';
 								$product   = array(
 									'id'   => $product_child,
 									'text' => get_the_title() . ' - ' . $attr_name,
@@ -114,8 +121,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
 				} else {
 					$product_id    = get_the_ID();
 					$product_title = get_the_title();
-					$the_product   = new WC_Product($product_id);
-					if (!$the_product->is_in_stock()) {
+					if (!$prd->is_in_stock()) {
 						$product_title .= ' (out-of-stock)';
 					}
 					$product          = array(
@@ -125,6 +131,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
 					$found_products[] = $product;
 				}
 			}
+			wp_reset_postdata();
 		}
 		wp_send_json($found_products);
 		die;
@@ -137,55 +144,74 @@ class VI_WNOTIFICATION_F_Admin_Settings {
 	 *
 	 * @return array|bool
 	 */
-	static private function scan_dir( $dir ) {
-		$ignored = array('.', '..', '.svn', '.htaccess', 'test-log.log');
-
-		$files = array();
-		foreach (scandir($dir) as $file) {
-			if (in_array($file, $ignored)) {
-				continue;
-			}
-			$files[$file] = filemtime($dir . '/' . $file);
-		}
-		arsort($files);
-		$files = array_keys($files);
-
-		return ($files) ? $files : false;
-	}
-
 	private function stripslashes_deep( $value ) {
-		$value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
+		if ( is_array( $value ) ) {
+			return array_map( array( $this, 'stripslashes_deep' ), $value );
+		}
 
-		return $value;
+		return is_string( $value ) ? stripslashes( $value ) : $value;
 	}
 
 	/**
 	 * Save post meta
 	 *
-	 * @param $post
-	 *
 	 * @return bool
 	 */
 	public function save_meta_boxes() {
 		global $woocommerce_notification_settings;
-		if (!isset($_POST['_wnotification_nonce']) || !isset($_POST['wnotification_params'])) {
+		if ( ! isset( $_POST['_wnotification_nonce'] ) || ! isset( $_POST['wnotification_params'] ) ) {
 			return false;
 		}
-		if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wnotification_nonce'])), 'wnotification_save_email_settings')) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wnotification_nonce'] ) ), 'wnotification_save_email_settings' ) ) {
 			return false;
 		}
-		if (!current_user_can('manage_options')) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			return false;
 		}
 
-		update_option('_woocommerce_notification_prefix', substr(md5(gmdate("YmdHis")), 0, 10));
+		$raw = ( isset( $_POST['wnotification_params'] ) && is_array( $_POST['wnotification_params'] ) )
+			? wp_unslash( $_POST['wnotification_params'] ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized via map_deep / field handlers below.
+			: array();
 
-		$data                    = wc_clean( $_POST['wnotification_params'] );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		$data['enable']          = $data['enable'] ?? 0;
-		$data['enable_mobile']   = $data['enable_mobile'] ?? 0;
-		$data['non_ajax']        = $data['non_ajax'] ?? 0;
-		$data['show_close_icon'] = $data['show_close_icon'] ?? 0;
-		/* Because name contain slashes, need to handle separately*/
+		$data = map_deep( $raw, 'sanitize_text_field' );
+		$data = is_array( $data ) ? $data : array();
+
+		$data['enable']                       = isset( $raw['enable'] ) ? 1 : 0;
+		$data['enable_mobile']                = isset( $raw['enable_mobile'] ) ? 1 : 0;
+		$data['non_ajax']                     = isset( $raw['non_ajax'] ) ? 1 : 0;
+		$data['show_close_icon']              = isset( $raw['show_close_icon'] ) ? 1 : 0;
+		$data['mask_customer_info']           = isset( $raw['mask_customer_info'] ) ? 1 : 0;
+		$data['enable_out_of_stock_product']  = isset( $raw['enable_out_of_stock_product'] ) ? 1 : 0;
+		$data['product_link']                 = isset( $raw['product_link'] ) ? 1 : 0;
+		$data['change_virtual_time_enable']   = isset( $raw['change_virtual_time_enable'] ) ? 1 : 0;
+		$data['enable_single_product']        = isset( $raw['enable_single_product'] ) ? 1 : 0;
+		$data['show_variation']               = isset( $raw['show_variation'] ) ? 1 : 0;
+		$data['rounded_corner']               = isset( $raw['rounded_corner'] ) ? 1 : 0;
+		$data['image_redirect']               = isset( $raw['image_redirect'] ) ? 1 : 0;
+		$data['image_redirect_target']        = isset( $raw['image_redirect_target'] ) ? 1 : 0;
+
+		$empty_array_keys = array(
+			'select_categories',
+			'cate_exclude_products',
+			'exclude_products',
+			'archive_products',
+			'order_statuses',
+			'message_purchased',
+		);
+		foreach ( $empty_array_keys as $empty_key ) {
+			if ( ! isset( $raw[ $empty_key ] ) ) {
+				$data[ $empty_key ] = array();
+			}
+		}
+
+		if ( isset( $raw['message_purchased'] ) ) {
+			$data['message_purchased'] = map_deep( $this->stripslashes_deep( $raw['message_purchased'] ), 'wp_kses_post' );
+		}
+		if ( isset( $raw['custom_shortcode'] ) ) {
+			$data['custom_shortcode'] = wp_kses_post( $this->stripslashes_deep( $raw['custom_shortcode'] ) );
+		}
+
+		/* Because name contain slashes / newlines, handle separately */
 		$args = array(
 			'virtual_name',
 			'conditional_tags',
@@ -193,44 +219,67 @@ class VI_WNOTIFICATION_F_Admin_Settings {
 			'custom_css',
 			'virtual_country',
 		);
-		if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
-			$languages = $langs = icl_get_languages('skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str');
+		if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+			$languages = icl_get_languages( 'skip_missing=N&orderby=KEY&order=DIR&link_empty_to=str' );
 
-			if (count($languages)) {
-				foreach ($languages as $key => $language) {
-					if ($language['active']) {
+			if ( is_array( $languages ) && count( $languages ) ) {
+				foreach ( $languages as $key => $language ) {
+					if ( ! empty( $language['active'] ) ) {
 						continue;
 					}
 					$args[] = 'virtual_name_' . $key;
 					$args[] = 'virtual_city_' . $key;
 					$args[] = 'virtual_country_' . $key;
+					if ( isset( $raw[ 'message_purchased_' . $key ] ) ) {
+						$data[ 'message_purchased_' . $key ] = map_deep(
+							$this->stripslashes_deep( $raw[ 'message_purchased_' . $key ] ),
+							'wp_kses_post'
+						);
+					}
 				}
 			}
-		} /*Polylang*/ elseif (class_exists('Polylang')) {
+		} elseif ( class_exists( 'Polylang' ) ) {
 			$languages = pll_languages_list();
 
-			foreach ($languages as $language) {
-				$default_lang = pll_default_language('slug');
+			foreach ( $languages as $language ) {
+				$default_lang = pll_default_language( 'slug' );
 
-				if ($language == $default_lang) {
+				if ( $language == $default_lang ) {
 					continue;
 				}
 				$args[] = 'virtual_name_' . $language;
 				$args[] = 'virtual_city_' . $language;
 				$args[] = 'virtual_country_' . $language;
+				if ( isset( $raw[ 'message_purchased_' . $language ] ) ) {
+					$data[ 'message_purchased_' . $language ] = map_deep(
+						$this->stripslashes_deep( $raw[ 'message_purchased_' . $language ] ),
+						'wp_kses_post'
+					);
+				}
 			}
 		}
 
-		foreach ($args as $field) {
-			$data[$field] = isset($_POST['wnotification_params'][$field]) ? $this->stripslashes_deep($_POST['wnotification_params'][$field]) : "";// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+		foreach ( $args as $field ) {
+			if ( ! isset( $raw[ $field ] ) ) {
+				continue;
+			}
+			$value = $this->stripslashes_deep( $raw[ $field ] );
+			if ( 'custom_css' === $field ) {
+				$data[ $field ] = wp_strip_all_tags( $value );
+			} else {
+				$data[ $field ] = sanitize_textarea_field( $value );
+			}
 		}
 
-		update_option('wnotification_params', $data);
-		if (is_plugin_active('wp-fastest-cache/wpFastestCache.php')) {
+		update_option( '_woocommerce_notification_prefix', substr( md5( gmdate( 'YmdHis' ) ), 0, 10 ) );
+		update_option( 'wnotification_params', $data );
+		if ( is_plugin_active( 'wp-fastest-cache/wpFastestCache.php' ) ) {
 			$cache = new WpFastestCache();
-			$cache->deleteCache(true);
+			$cache->deleteCache( true );
 		}
 		$woocommerce_notification_settings = $data;
+
+		return true;
 	}
 
 	/**
@@ -369,7 +418,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
 
                         <tr>
                             <th scope="row">
-                                <label><?php esc_html_e( 'Mask Customer Info', 'woocommerce-notification' ) ?></label>
+                                <label><?php esc_html_e( 'Mask Customer Info', 'woo-notification' ) ?></label>
                             </th>
                             <td>
                                 <div class="vi-ui toggle checkbox">
@@ -380,7 +429,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                     <label></label>
                                 </div>
                                 <p class="description">
-                                    <?php esc_html_e( 'Enable this option to partially mask sensitive order information such as customer name and address using the * character. Example: admin => ad**n.', 'woocommerce-notification' ); ?>
+                                    <?php esc_html_e( 'Enable this option to partially mask sensitive order information such as customer name and address using the * character. Example: admin => ad**n.', 'woo-notification' ); ?>
                                 </p>
                             </td>
                         </tr>
@@ -959,7 +1008,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                                            name="<?php echo esc_attr(self::set_field('non_ajax')) ?>"/>
                                     <label></label>
                                 </div>
-                                <p class="description"><?php esc_html_e('Load popup will not use ajax. Your site will be load faster. It creates cache. It is not working with Get product from Billing feature and options of Product detail tab.', 'woo-notification') ?></p>
+                                <p class="description"><?php esc_html_e( 'Load popup without ajax (creates page cache of products). With Non Ajax off, Product Detail still works via AJAX when a product ID is passed. Non Ajax does not load products from Billing.', 'woo-notification' ); ?></p>
                             </td>
                         </tr>
                         </tbody>
@@ -2238,7 +2287,7 @@ class VI_WNOTIFICATION_F_Admin_Settings {
                         </div>
                     </div>
                 </div>
-                <p style="position: relative;margin-bottom: 70px; display: inline-block;">
+                <p style="position: relative; display: inline-block;">
                     <button class="vi-ui button labeled icon primary wn-submit">
                         <i class="send icon"></i> <?php esc_html_e('Save', 'woo-notification') ?>
                     </button>

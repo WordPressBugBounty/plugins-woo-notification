@@ -1,10 +1,11 @@
-=== Notification for WooCommerce | Boost Your Sales - Recent Sales Popup - Live Feed Sales - Upsells ===
+=== Notivo Notification for WooCommerce ===
 Contributors: villatheme, mrt3vn
 Donate link: https://www.villatheme.com/donate
 Tags: boost sales ,recent sales popup,live sales, woocommerce notification, up sell
 Requires at least: 5.0
-Tested up to: 7.0
-WC tested up to: 11.0
+Requires PHP: 7.4
+Tested up to: 7.1
+WC tested up to: 11.1
 WC requires at least: 7.0
 Stable tag: trunk
 License: GPL v2 or later
@@ -14,7 +15,7 @@ Display recent orders as popup notifications, boosting conversion rates by showi
 
 == Description ==
 
-Notification for WooCommerce is a WooCommerce extension that helps you create social proof about a busy store. WooCommerce Notification displays recent orders on your storefront. It's the online equivalent of a busy store and shows prospective customers that other people are buying your products.
+Notivo Notification for WooCommerce is a WooCommerce extension that helps you create social proof about a busy store. WooCommerce Notification displays recent orders on your storefront. It's the online equivalent of a busy store and shows prospective customers that other people are buying your products.
 
 - Increase conversion rate by highlighting other customers that have bought products.
 
@@ -22,7 +23,7 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 - Create a sense of urgency for visitors, and expose new products!
 
->[Try the Demo](https://new2new.com/?item=woocommerce-notification "Demo Notification for WooCommerce") | [Documents](https://docs.villatheme.com/?item=woocommerce-notification "Documents") | [Pro Version](https://villatheme.com/extensions/woocommerce-notification-boost-sales "Premium Version") | [Facebook group](https://www.facebook.com/groups/villatheme "VillaTheme")
+>[Try the Demo](https://new2new.com/?item=woocommerce-notification "Demo Notivo Notification for WooCommerce") | [Documents](https://docs.villatheme.com/?item=woocommerce-notification "Documents") | [Pro Version](https://villatheme.com/extensions/woocommerce-notification-boost-sales "Premium Version") | [Facebook group](https://www.facebook.com/groups/villatheme "VillaTheme")
 
 ### Preview WooCommerce Notification plugin.
 
@@ -124,8 +125,6 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 - **Assign pages**: select pages where you want to display the sale pop-ups.
 
 - **Report**: the report option helps the system stores information when visitors click on the notification. Then the admin site could be a statistic of number clicks and analysis fluctuation sales. Report system allows to statistic number clicks by date or by-product.
-
-- **Auto update**: with purchase code from Envato you can set the plugin to auto-update.
 
 - [GET PRO VERSION](https://villatheme.com/extensions/woocommerce-notification-boost-sales)
 
@@ -237,7 +236,7 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 
 [Free Shipping Bar for WooCommerce](https://wordpress.org/plugins/woo-free-shipping-bar)
 
-[Notification for WooCommerce](https://wordpress.org/plugins/woo-notification)
+[Notivo Notification for WooCommerce](https://wordpress.org/plugins/woo-notification)
 
 [CURCY - Multi Currency for WooCommerce](https://wordpress.org/plugins/woo-multi-currency)
 
@@ -273,6 +272,11 @@ Notification for WooCommerce is a WooCommerce extension that helps you create so
 5. Notification on single product page
 
 == Changelog ==
+
+2026.09.25 - version 1.4.3
+- Updated: Compatible WooCommerce 11.1
+- Fix: Apply "Mask Customer Info" setting when fetching real billing data to prevent customer name and location disclosure via AJAX.
+- Updated: Security
 
 2026.08.17 - version 1.4.2
 - Updated: Compatible WooCommerce 11.0

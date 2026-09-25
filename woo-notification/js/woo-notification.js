@@ -93,12 +93,21 @@ jQuery(window).on('load', function () {
     notify.time_close = _woocommerce_notification_params.time_close
     notify.show_close = _woocommerce_notification_params.show_close
     notify.nonce = _woocommerce_notification_params.nonce
+    notify.in_the_same_cate = _woocommerce_notification_params.in_the_same_cate
+    notify.id = _woocommerce_notification_params.viwn_pd_id || ''
+    notify.change_virtual_time = _woocommerce_notification_params.change_virtual_time
+    notify.start_virtual_time = _woocommerce_notification_params.start_virtual_time
+    notify.end_virtual_time = _woocommerce_notification_params.end_virtual_time
     if (_woocommerce_notification_params.billing == 0 && _woocommerce_notification_params.detect == 0) {
         notify.cities = [notify.getCookie('wn_city')]
         notify.country = [notify.getCookie('wn_country')]
         var check_ip = notify.getCookie('wn_ip')
         if (check_ip && check_ip != 'undefined') {
             notify.init()
+        } else {
+            // First visit: wait for detect_address(), then init (or fall back if lookup fails).
+            notify.pending_detect_init = true
+            notify.detect_address()
         }
     } else {
         notify.cities = _woocommerce_notification_params.cities
@@ -135,6 +144,10 @@ var woo_notification = {
     detect: 0,
     time_close: 0,
     show_close: 0,
+    pending_detect_init: false,
+    change_virtual_time: '',
+    start_virtual_time: '',
+    end_virtual_time: '',
 
     shortcodes: ['{first_name}', '{city}', '{state}', '{country}', '{product}', '{product_with_link}', '{time_ago}', '{custom}'],
     init: function () {
@@ -154,7 +167,6 @@ var woo_notification = {
     detect_address: function () {
         var ip_address = this.getCookie('wn_ip')
         if (!ip_address) {
-
             jQuery.getJSON('https://extreme-ip-lookup.com/json/', function (data) {
                 if (data.query) {
                     woo_notification.setCookie('wn_ip', data.query, 86400)
@@ -165,17 +177,28 @@ var woo_notification = {
                 if (data.country) {
                     woo_notification.setCookie('wn_country', data.country, 86400)
                 }
+                woo_notification.after_detect_address()
+            }).fail(function () {
+                woo_notification.after_detect_address()
             })
+        } else if (this.pending_detect_init) {
+            this.after_detect_address()
         }
-
+    },
+    after_detect_address: function () {
+        if (!this.pending_detect_init) {
+            return
+        }
+        this.pending_detect_init = false
+        this.cities = [this.getCookie('wn_city')]
+        this.country = [this.getCookie('wn_country')]
+        this.init()
     },
     ajax_get_data: function () {
         if (this.ajax_url) {
-            var str_data
+            var str_data = ''
             if (this.id) {
-                str_data = '&id=' + this.id
-            } else {
-                str_data = ''
+                str_data = '&viwn_pd_id=' + this.id
             }
             jQuery.ajax({
                 type: 'POST',
@@ -251,8 +274,16 @@ var woo_notification = {
             window.clearInterval(this.intel)
         }
     },
+    get_time_cal: function () {
+        var start = parseInt(this.start_virtual_time, 10)
+        var end = parseInt(this.end_virtual_time, 10)
+        if (this.change_virtual_time && !isNaN(start) && !isNaN(end) && end >= start) {
+            return this.random(start * 3600, end * 3600)
+        }
+        return this.random(0, this.time * 3600)
+    },
     get_time_string: function () {
-        var time_cal = this.random(0, this.time * 3600)
+        var time_cal = this.get_time_cal()
         /*Check day*/
         var check_time = parseFloat(time_cal / 86400)
         if (check_time > 1) {
@@ -331,7 +362,11 @@ var woo_notification = {
                 }
 
                 data_state = ''
-                data_country = this.country
+                if (Array.isArray(this.country)) {
+                    data_country = this.country[0] || ''
+                } else {
+                    data_country = this.country || ''
+                }
 
                 time_str = this.get_time_string()
             }
@@ -390,8 +425,14 @@ var woo_notification = {
         })
     },
     random: function (min, max) {
-        min = parseInt(min)
-        max = parseInt(max)
+        min = parseInt(min, 10)
+        max = parseInt(max, 10)
+        if (isNaN(min)) {
+            min = 0
+        }
+        if (isNaN(max) || max < min) {
+            max = min
+        }
         var rand_number = Math.random() * (max - min)
         return Math.round(rand_number) + min
     },

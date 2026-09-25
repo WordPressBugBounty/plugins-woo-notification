@@ -1,4 +1,9 @@
-*** Notification for WooCommerce Changelog ***
+*** Notivo Notification for WooCommerce Changelog ***
+
+2026.09.25 - version 1.4.3
+- Updated: Compatible WooCommerce 11.1
+- Fix: Apply "Mask Customer Info" setting when fetching real billing data to prevent customer name and location disclosure via AJAX.
+- Updated: Security
 
 2026.08.17 - version 1.4.2
 - Updated: Compatible WooCommerce 11.0

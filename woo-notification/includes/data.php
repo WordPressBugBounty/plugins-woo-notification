@@ -3,6 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Historical VI_WNOTIFICATION_F_ / woonotification_ / $woocommerce_notification_settings.
 
 /**
  * Get Notification for WooCommerce Data Setting
@@ -83,6 +84,8 @@ class VI_WNOTIFICATION_F_Data {
 			'image_padding'                  => 0,
 			'close_icon_color'               => '#000000',
 			'notification_product_show_type' => '0',
+			'change_virtual_time_enable'     => 0,
+			'show_variation'                 => 0,
 		);
 		$this->params = apply_filters( 'woonotification_settings_args', wp_parse_args( $woocommerce_notification_settings, $args ) );
 	}
@@ -271,7 +274,7 @@ class VI_WNOTIFICATION_F_Data {
 	 * @return mixed|void
 	 */
 	public function show_close_icon() {
-		return apply_filters( 'woonotification_image_redirect', $this->params['show_close_icon'] );
+		return apply_filters( 'woonotification_show_close_icon', $this->params['show_close_icon'] );
 	}
 
 	/**
@@ -409,15 +412,6 @@ class VI_WNOTIFICATION_F_Data {
 	 */
 	public function get_cate_exclude_products() {
 		return apply_filters( 'woonotification_get_cate_exclude_products', $this->params['cate_exclude_products'] );
-	}
-
-	/**
-	 * Get limit products
-	 *
-	 * @return mixed|void
-	 */
-	public function get_limit_product() {
-		return apply_filters( 'woonotification_get_limit_product', $this->params['limit_product'] );
 	}
 
 	/**
@@ -616,15 +610,6 @@ class VI_WNOTIFICATION_F_Data {
 
 	public function enable_out_of_stock_product() {
 		return apply_filters( 'woonotification_enable_out_of_stock_product', $this->params['enable_out_of_stock_product'] );
-	}
-
-	/**
-	 * Get purchased code
-	 *
-	 * @return mixed|void
-	 */
-	public function get_geo_api() {
-		return apply_filters( 'woonotification_get_key', $this->params['key'] );
 	}
 
 }

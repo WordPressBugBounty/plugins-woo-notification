@@ -9,6 +9,7 @@ Copyright 2015-2018 villatheme.com. All rights reserved.
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- Historical VI_WNOTIFICATION_F_ / woo-notification prefixes.
 
 class VI_WNOTIFICATION_F_Admin_Admin {
     
@@ -142,7 +143,7 @@ class VI_WNOTIFICATION_F_Admin_Admin {
 	        wp_localize_script( 'woo-notification-admin', 'woo_notifi_admin_params', array(
 		        'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
 		        'nonce'     => wp_create_nonce( 'woo_notifi_admin_nonce' ),
-				'warning_mask_customer_info' => __( 'Are you sure you want to disable this option? . Disabling it may expose customer names and cities to the public.', 'woocommerce-notification' )
+				'warning_mask_customer_info' => __( 'Are you sure you want to disable this option? Disabling it may expose customer names and cities to the public.', 'woo-notification' )
 	        ) );
         }
     }
@@ -165,9 +166,6 @@ class VI_WNOTIFICATION_F_Admin_Admin {
      * Function init when run plugin+
      */
     function init() {
-        /*Register post type*/
-        
-//        load_plugin_textdomain( 'woo-notification' );
         $this->load_plugin_textdomain();
         if ( class_exists( 'VillaTheme_Support' ) ) {
             new VillaTheme_Support( array(
@@ -186,18 +184,14 @@ class VI_WNOTIFICATION_F_Admin_Admin {
     }
     
     /**
-     * load Language translate
+     * Load shipped translations when present (WordPress.org auto-loads otherwise).
      */
     public function load_plugin_textdomain() {
-        $locale = apply_filters( 'plugin_locale', get_locale(), 'woo-notification' );
-        // Admin Locale
-        if ( is_admin() ) {
-            load_textdomain( 'woo-notification', VI_WNOTIFICATION_F_LANGUAGES . "woo-notification-$locale.mo" );
+        $locale = determine_locale();
+        $mofile = VI_WNOTIFICATION_F_LANGUAGES . 'woo-notification-' . $locale . '.mo';
+        if ( is_readable( $mofile ) ) {
+            load_textdomain( 'woo-notification', $mofile );
         }
-        
-        // Global + Frontend Locale
-        load_textdomain( 'woo-notification', VI_WNOTIFICATION_F_LANGUAGES . "woo-notification-$locale.mo" );
-//        load_plugin_textdomain( 'woo-notification', false, VI_WNOTIFICATION_F_LANGUAGES );
     }
     
     /**
